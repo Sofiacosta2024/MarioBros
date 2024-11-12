@@ -2,8 +2,6 @@ package Vista;
 
 import Mario.*;
 import java.util.ArrayList;
-import javax.swing.JFrame;
-
 import Enemigo.Spiny;
 import Logica.*;
 import Sonido.*;
@@ -15,7 +13,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	protected PantallaPartida panelPartida;
 	protected PantallaFinJuego panelFinJuego;
 	protected PantallaRanking panelRanking;
-	protected PantallaIngresoNombre panelIngreso;
+	protected PantallaIngresoNombre panelIngresoNombre;
 	protected PantallaModoJuego panelModoJuego;
 	protected PantallaVictoria panelVictoria;
 	protected ControladorEntradas controladorEntradas;
@@ -29,7 +27,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 		panelInicial = new PantallaInicial(this);
 		panelPartida = new PantallaPartida(this,juego);
 		panelFinJuego = new PantallaFinJuego(this);
-		panelIngreso= new PantallaIngresoNombre(this,juego);
+		panelIngresoNombre= new PantallaIngresoNombre(this,juego);
 		panelRanking = new PantallaRanking(this);
 		panelModoJuego = new PantallaModoJuego(this);
 		panelVictoria=new PantallaVictoria(this);
@@ -98,7 +96,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void mostrarPantallaIngreso() {
-		ventana.setContentPane(panelIngreso);
+		ventana.setContentPane(panelIngresoNombre);
 		refrescar();
 	}
 
@@ -128,8 +126,8 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	private void guardarRanking() {
-		panelRanking.agregarJugador(juego.getJugador());
-		panelRanking.guardarPuntajes();
+		Ranking.getInstancia().agregarJugador(panelIngresoNombre.getJugadorRanking());
+		Ranking.getInstancia().guardarPuntajes();
 	}
 
 	public void accionarInicioJuego() {

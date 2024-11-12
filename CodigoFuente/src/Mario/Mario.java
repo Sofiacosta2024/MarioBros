@@ -36,7 +36,9 @@ public class Mario extends Entidad implements EntidadMario{
 	protected int factorVelocidad;
 	private Juego juego;
 	protected int limiteDerecha, limiteIzquierda; 
-
+	protected String nombre;
+	protected int puntaje;
+	protected Mario personaje;
 	public Mario(int x, int y, int velocidad, Sprite sprite, Juego juego) {
 		super(x,y, velocidad, sprite,16,16);
 		rutaImagen = sprite.getModo();
@@ -49,16 +51,15 @@ public class Mario extends Entidad implements EntidadMario{
 		this.velocidad=velocidad;
 		puedeDerecha=true;
 		puedeIzquierda=true;
+		puntaje=0;
 		cambioEstado=false;
 		cayendoVacio=false;
 		posInicialSalto = getPosicionY();
 		progreso = 0;
 		saltando = false;
 		factorVelocidad = 0;
-
 		limiteDerecha=5000;
 		limiteIzquierda=0;
-
 		this.juego = juego;
 		ultimoLanzamientoBola = 0;
 	}
@@ -398,5 +399,31 @@ public class Mario extends Entidad implements EntidadMario{
 
 	public Juego getJuego() {
 		return juego;
+	}
+	
+	public void setPuntaje(int puntaje) {
+		this.puntaje = puntaje;
+		if(this.puntaje < 0)
+			this.puntaje = 0;
+	}
+	
+	public void setPersonaje(Mario m) {
+		personaje = m;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre=nombre;
+	}
+	
+	public int getPuntaje() {
+		return puntaje;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public Mario getPersonaje() {
+		return personaje;
 	}
 }

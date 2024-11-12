@@ -23,7 +23,7 @@ public class Juego {
 	protected Nivel nivelActual;
 	protected FabricaSprite fabricaSprite;
 	protected FabricaEntidades fabricaEntidades;
-	protected Jugador jugador;
+	protected Mario mario;;
 	protected Parser parser;
 	protected MoverMario hiloMario;
 	protected MoverEnemigo hiloMundo;
@@ -32,14 +32,13 @@ public class Juego {
 	protected String rutaModo;
 
 	public Juego() {
-		jugador = new Jugador(null,0);
 		player=Sonido.obtenerInstancia();
 		numeroDeNivel = 1;
 		nivelActual = new Nivel(numeroDeNivel);
 	}
 
 	public void iniciarPartida() {
-		player.reproducirSonidoFondo();
+		Sonido.obtenerInstancia().reproducirSonidoFondo();;
 		juegoTerminado = false;
 		controladorVistas.registarControladorEntradas();
 		registrarObservers();
@@ -51,7 +50,7 @@ public class Juego {
 	}
 
 	public void iniciarHilos() {
-		hiloMario= new MoverMario(this, jugador.getPersonaje());
+		hiloMario= new MoverMario(this, nivelActual.getMario());
 		hiloMundo = new MoverEnemigo(this);
 		hiloMario.iniciarHilo();
 		hiloMundo.iniciarHilo();
@@ -87,7 +86,6 @@ public class Juego {
 		parser.setFabrica(fabricaEntidades);
 		nivelActual = new Nivel(numeroDeNivel);
 		parser.parsearNivel(nivelActual);
-		jugador.setPersonaje(nivelActual.getMario());
 	}
 
 	public void reiniciarNivel() {
@@ -136,8 +134,8 @@ public class Juego {
 		}
 		else {
 			player.reproducirSonidoGanar();
-			controladorVistas.getPantallaVictoria().setPuntajeLabel(getJugador().getPuntaje());
-			controladorVistas.getPantallaVictoria().setNombreGanador(getJugador().getNombre());
+			controladorVistas.getPantallaVictoria().setPuntajeLabel(nivelActual.getMario().getPuntaje());
+			controladorVistas.getPantallaVictoria().setNombreGanador(nivelActual.getMario().getNombre());
 			controladorVistas.mostrarPantallaVictoria();
 			juegoTerminado = true;
 		}
@@ -307,11 +305,6 @@ public class Juego {
 	public void setControladorVista(ControladorVistas controladorVistas) {
 		this.controladorVistas= controladorVistas;
 	}
-
-	public Jugador getJugador() {
-		return jugador;
-	}
-	
 	public int getTiempoActual() {
 		return controladorVistas.getPantallaPartida().getTiempoNivel();
 	}

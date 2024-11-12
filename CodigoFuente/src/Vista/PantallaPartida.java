@@ -75,7 +75,7 @@ public class PantallaPartida extends JPanel {
 	}
 	
 	protected void actualizarLabelsInformacion(EntidadMario mario) {
-		labelPuntaje.setText(textoConCantidadDigitos(juego.getJugador().getPuntaje() , 5)+" ");
+		labelPuntaje.setText(textoConCantidadDigitos(juego.getNivelActual().getMario().getPuntaje() , 5)+" ");
 		labelTimer.setText( textoConCantidadDigitos(tiempoNivel,3)+"  ");
 		labelVidas.setText( textoConCantidadDigitos(mario.getVidas(), 2)+"   ");
 		labelNivel.setText(textoConCantidadDigitos(juego.getNivelActual().getNivel(),1));
