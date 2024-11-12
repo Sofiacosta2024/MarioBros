@@ -26,7 +26,6 @@ public class Mario extends Entidad implements EntidadMario{
 	protected double gravedad;
 	protected int velocidadSalto;
 	protected boolean puedeDerecha,puedeIzquierda,cambioEstado;
-	protected long ultimoLanzamientoBola;
 	protected char sentidoMovimientoMario;
 	protected double progreso;
 	protected boolean saltando;
@@ -42,7 +41,7 @@ public class Mario extends Entidad implements EntidadMario{
 	
 	public Mario(int x, int y, int velocidad, Juego juego, Sprite[] sprites) {
 		super(x,y, velocidad,16,16);
-		estado = new EstadoNormal(rutaImagen);
+		estado = new EstadoNormal();
 		anterior=estado;
 		vidas = 3;
 		enSuelo = true;
@@ -61,7 +60,6 @@ public class Mario extends Entidad implements EntidadMario{
 		limiteDerecha=5000;
 		limiteIzquierda=0;
 		this.juego = juego;
-		ultimoLanzamientoBola = 0;
 		this.sprites = sprites;
 	}
 
@@ -230,29 +228,16 @@ public class Mario extends Entidad implements EntidadMario{
 		return sprite;
 	}
 
-	public BolaFuego lanzarBolaFuego() {
-		boolean agregar = true;
+	public void lanzarBolaFuego() {
 		if(estado.lanzarBolaFuego()) {
-			int posicionXBola = posicionX + 65; 
+			int posicionXBola = posicionX + 45; 
 			int posicionYBola = posicionY + 15;
 			Sprite spriteBola = new Sprite(rutaImagen+ "/FireBall.gif",rutaImagen);
 			BolaFuego bolaFuego = new BolaFuego(posicionXBola, posicionYBola,5,spriteBola,sentidoMovimientoMario,direccionMovimientoAnterior);
-			for(BolaFuego proyectil : juego.getNivelActual().getProyectiles()) {
-				agregar = !proyectil.colisionable();
-				proyectil.retirar();
-				proyectil.notificarObservador();
-			}
-			if(agregar || (System.currentTimeMillis() - ultimoLanzamientoBola >= 3000)) {
-				ultimoLanzamientoBola = System.currentTimeMillis();
-				juego.getNivelActual().agregarProyectil(bolaFuego);
-				juego.registrarObserverProyectiles(juego.getNivelActual().getProyectiles());
-				bolaFuego.notificarObservador();
-				Thread hiloBola = new Thread(bolaFuego);
-				hiloBola.start();
-				Sonido.obtenerInstancia().reproducirSonidoBolaFuego();
-			}
+			juego.getNivelActual().agregarProyectil(bolaFuego);
+			juego.registrarObserverProyectiles(bolaFuego);
+			bolaFuego.setEnMovimiento(true);
 		}
-		return null;
 	}
 
 	public void decrementarVida() {

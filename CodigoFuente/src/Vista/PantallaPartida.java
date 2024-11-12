@@ -88,7 +88,7 @@ public class PantallaPartida extends JPanel {
 	
 	public void iniciarActualizacionInformacion() {
         timerActualizacionInformacion = new Timer(500, e -> {
-            if (juego != null && juego.getJugador() != null) {
+            if (juego != null && juego.getNivelActual().getMario() != null) {
                 actualizarLabelsInformacion(juego.getNivelActual().getMario());
             }
         });
