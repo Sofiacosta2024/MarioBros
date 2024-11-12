@@ -146,14 +146,23 @@ public abstract class FabricaSprite {
 		spritesBloquePregunta[0] = new Sprite(rutaImagen+"/QuestionBlock.gif");
 		return spritesBloquePregunta;
 	}
+	
 	public Sprite[] getPrincesa() {
 		Sprite[] spritesPrincesa = new Sprite[1];
 		spritesPrincesa[0] = new Sprite(rutaImagen+"/Princesa.png");
 		return spritesPrincesa;
 	}
+	
 	public Sprite[] getBandera() {
 		Sprite[] spritesBandera = new Sprite[1];
 		spritesBandera[0] = new Sprite(rutaImagen+"/Bandera.png");
 		return spritesBandera;
 	}
+	
+	public Sprite[] getBolaFuego() {
+		Sprite[] spritesBolaFuego = new Sprite[1];
+		spritesBolaFuego[0] = new Sprite(rutaImagen+"/FireBall.gif");
+		return spritesBolaFuego;		
+	}
+	
 }

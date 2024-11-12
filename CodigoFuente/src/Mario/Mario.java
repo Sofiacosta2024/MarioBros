@@ -37,9 +37,9 @@ public class Mario extends Entidad implements EntidadMario{
 	protected String nombre;
 	protected int puntaje;
 	protected Mario personaje;
-	protected Sprite sprites[];
+	protected Sprite sprites[], spritesBolaFuego[];
 	
-	public Mario(int x, int y, int velocidad, Juego juego, Sprite[] sprites) {
+	public Mario(int x, int y, int velocidad, Juego juego, Sprite[] sprites, Sprite[] spritesBolaFuego) {
 		super(x,y, velocidad,16,16);
 		estado = new EstadoNormal();
 		anterior=estado;
@@ -61,6 +61,7 @@ public class Mario extends Entidad implements EntidadMario{
 		limiteIzquierda=0;
 		this.juego = juego;
 		this.sprites = sprites;
+		this.spritesBolaFuego = spritesBolaFuego;
 	}
 
 	public void actualizarMovimientoMario(char direccion) {
@@ -232,7 +233,7 @@ public class Mario extends Entidad implements EntidadMario{
 		if(estado.lanzarBolaFuego()) {
 			int posicionXBola = posicionX + 45; 
 			int posicionYBola = posicionY + 15;
-			Sprite spriteBola = new Sprite(rutaImagen+ "/FireBall.gif",rutaImagen);
+			Sprite spriteBola = spritesBolaFuego[0];
 			BolaFuego bolaFuego = new BolaFuego(posicionXBola, posicionYBola,5,spriteBola,sentidoMovimientoMario,direccionMovimientoAnterior);
 			juego.getNivelActual().agregarProyectil(bolaFuego);
 			juego.registrarObserverProyectiles(bolaFuego);

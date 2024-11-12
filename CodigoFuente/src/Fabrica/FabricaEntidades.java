@@ -134,7 +134,8 @@ public class FabricaEntidades{
 	}
 	
 	public Mario getMario(int x, int y, int velocidad, Sprite[] sprites, Juego juego) {
-		Mario mario = new Mario(x, y, velocidad, juego, sprites);
+		Sprite[] spritesBolaFuego = fabricaSprites.getBolaFuego();
+		Mario mario = new Mario(x, y, velocidad, juego, sprites, spritesBolaFuego);
 		mario.setSprite(sprites[0]);
 		return mario;
 	}
