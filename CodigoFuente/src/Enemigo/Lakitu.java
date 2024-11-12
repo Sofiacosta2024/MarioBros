@@ -13,12 +13,13 @@ public class Lakitu extends Enemigo implements Runnable{
 	protected Sprite spinySprite;
 	protected ArrayList<Spiny> spinyssLanzados;
 
-	public Lakitu(int x, int y, int velocidad, Sprite sprite,Juego juego) {
-		super(x,y, velocidad, sprite,16,24);
+	public Lakitu(int x, int y, int velocidad, Juego juego, Sprite[] spriteSpiny) {
+		super(x,y, velocidad,16,24);
 		puntaje = 60;
 		puntajeMatarAMario = 0;
 		this.juego = juego;
 		spinyssLanzados = new  ArrayList<Spiny>();
+		spinySprite = spriteSpiny[0];
 		new Thread(this).start();
 	}
 	
@@ -31,8 +32,8 @@ public class Lakitu extends Enemigo implements Runnable{
 	}
 
 	public void lanzarSpinyss(int x, int y) {
-		spinySprite = new Sprite(sprite.getModo()+"/Spiny.gif",sprite.getModo());
-		Spiny spiny= new Spiny(x,y, velocidad, spinySprite);
+		Spiny spiny= new Spiny(x,y, velocidad);
+		spiny.setSprite(spinySprite);
 		spiny.setLakituLanzador(this);
 		Observer observadorEntidad =  juego.getControladorVista().registrarEntidadLogicaSpinyLanzado(spiny);
 		spiny.setObserver(observadorEntidad);

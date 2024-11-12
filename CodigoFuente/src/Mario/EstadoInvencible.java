@@ -51,33 +51,27 @@ public class EstadoInvencible extends EstadoMario {
 		return 10;
 	}
 	
-	public Sprite getSpriteDetenidoDerecha() {
-		Sprite invencibleDetenido = new Sprite(rutaImagen +"/Mario-invencible.gif", rutaImagen);
-		return invencibleDetenido;
+	public Sprite getSpriteDetenidoDerecha(Sprite[] sprites) {
+		return sprites[12];
 	}
 	
-	public Sprite getSpriteDetenidoIzquierda() {
-		Sprite invencibleDetenido = new Sprite(rutaImagen +"/Mario-invencible-aizq.gif", rutaImagen);
-		return invencibleDetenido;
+	public Sprite getSpriteDetenidoIzquierda(Sprite[] sprites) {
+		return sprites[13];
 	}
 											
-	public Sprite getSpriteDerecha() {
-		Sprite invencibleDetenido = new Sprite(rutaImagen +"/Invencible-caminandoderecha.gif", rutaImagen);
-		return invencibleDetenido;
+	public Sprite getSpriteDerecha(Sprite[] sprites) {
+		return sprites[14];
 	}
 	
-	public Sprite getSpriteIzquierda() {
-		Sprite invencibleDetenido = new Sprite(rutaImagen +"/Invencible-caminandoizquierda.gif", rutaImagen);
-		return invencibleDetenido;
+	public Sprite getSpriteIzquierda(Sprite[] sprites) {
+		return sprites[15];
 	}
 	
-	public Sprite getSpriteSaltandoADerecha() {
-		Sprite invencibleDetenido = new Sprite(rutaImagen +"/Invencible-saltandoder.gif", rutaImagen);
-		return invencibleDetenido;
+	public Sprite getSpriteSaltandoADerecha(Sprite[] sprites) {
+		return sprites[16];
 	}
 	
-	public Sprite getSpriteSaltandoAIzquierda() {
-		Sprite invencibleDetenido = new Sprite(rutaImagen +"/Invencible-saltandoizq.gif", rutaImagen);
-		return invencibleDetenido;
+	public Sprite getSpriteSaltandoAIzquierda(Sprite[] sprites) {
+		return sprites[17];
 	}
 }

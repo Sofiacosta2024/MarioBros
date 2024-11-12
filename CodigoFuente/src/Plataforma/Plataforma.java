@@ -9,8 +9,8 @@ import Mario.Mario;
 
 public abstract class Plataforma extends Entidad{
 
-	public Plataforma(int x, int y, int velocidad, Sprite sprite, int anchoHitBox, int altoHitBox) {
-		super(x,y, velocidad, sprite, anchoHitBox, altoHitBox);
+	public Plataforma(int x, int y, int velocidad, int anchoHitBox, int altoHitBox) {
+		super(x,y, velocidad,anchoHitBox, altoHitBox);
 	}
 
 	public void interactuar(Mario mario, String direccionColision) {

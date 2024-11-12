@@ -10,12 +10,16 @@ public class BloquePregunta extends BloqueSolido {
 	protected PowerUp powerUp;
 	protected boolean hayPowerUp;
 	protected long mostrarPowerUp;
+	protected Sprite bloqueVacio;
+	protected Sprite bloqueConPowerUp;
 	
-	public BloquePregunta(int x, int y, PowerUp powerUp, int velocidad, Sprite sprite) {
-		super(x,y, velocidad, sprite);
+	public BloquePregunta(int x, int y, PowerUp powerUp, int velocidad, Sprite[] sprites) {
+		super(x,y, velocidad);
 		this.powerUp = powerUp;
 		hayPowerUp = true;
 		mostrarPowerUp = -1;
+		bloqueConPowerUp = sprite;
+		bloqueVacio = sprites[0];
 	}
 
 	public void interactuar(Mario mario, String direccionColision) {

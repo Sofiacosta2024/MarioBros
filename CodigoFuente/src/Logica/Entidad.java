@@ -16,11 +16,10 @@ public abstract class Entidad implements EntidadLogica{
 	protected boolean  esColisionable;
 	protected Rectangle areaColision; 
 
-	public Entidad(int x, int y, int velocidad, Sprite sprite, int anchoHitBox, int altoHitBox) {
+	public Entidad(int x, int y, int velocidad, int anchoHitBox, int altoHitBox) {
 		posicionX = x;
 		posicionY = y;
 		this.velocidad = velocidad;
-		this.sprite = sprite;
 		alto = altoHitBox;
 		ancho = anchoHitBox;
 		areaColision = new Rectangle(getPosicionX(),getPosicionY(), anchoHitBox, altoHitBox);

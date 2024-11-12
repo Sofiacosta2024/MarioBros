@@ -8,8 +8,8 @@ public abstract class PowerUp extends Entidad {
 	
 	protected int puntaje, posicionInicialX, posicionInicialY;
 	
-	public PowerUp(int x, int y, int velocidad, Sprite sprite, int anchoHitBox, int altoHitBox) {
-		super(x,y, velocidad, sprite,anchoHitBox,altoHitBox);
+	public PowerUp(int x, int y, int velocidad, int anchoHitBox, int altoHitBox) {
+		super(x,y, velocidad,anchoHitBox,altoHitBox);
 		posicionInicialX = x;
 		posicionInicialY = y;
 	}

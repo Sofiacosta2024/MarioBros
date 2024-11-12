@@ -6,8 +6,8 @@ import Fabrica.Sprite;
 import Mario.Mario;
 public class Vacio extends Plataforma{
 
-	public Vacio(int x, int y, int velocidad, Sprite sprite) {
-		super(x,y, velocidad, sprite,16,32);
+	public Vacio(int x, int y, int velocidad) {
+		super(x,y, velocidad,16,32);
 	}
 
 	public void interactuar(Mario m, String direccionColisionable) {

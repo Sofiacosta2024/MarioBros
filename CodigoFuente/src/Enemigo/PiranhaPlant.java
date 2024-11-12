@@ -14,8 +14,8 @@ public class PiranhaPlant extends Enemigo{
 	protected int limiteSuperiorY;
 	protected Timer temporizador;
 
-	public PiranhaPlant(int x, int y, int velocidad, Sprite sprite) {
-		super(x,y, velocidad, sprite,16,32);
+	public PiranhaPlant(int x, int y, int velocidad) {
+		super(x,y, velocidad,16,32);
 		puntaje = 30;
 		puntajeMatarAMario = -30;
 		posicionInicialY = y-15;

@@ -8,8 +8,8 @@ public class EstadoCaminando extends EstadoKoopaTroopa{
 		this.koopaTroopa = koopaTroopa;
 	}
 
-	public void afectado(KoopaTroopa koopaTroopa) {
-		koopaTroopa.setSprite(new Sprite(koopaTroopa.getSprite().getModo()+ "/KoopaTroopaProyectil.png",koopaTroopa.getSprite().getModo()));
+	public void afectado(KoopaTroopa koopaTroopa, Sprite[] spritesKoopa) {
+		koopaTroopa.setSprite(spritesKoopa[1]);
 		koopaTroopa.movilidad();
 		koopaTroopa.setEstado(new EstadoProyectil(koopaTroopa));
 		koopaTroopa.notificarObservador();

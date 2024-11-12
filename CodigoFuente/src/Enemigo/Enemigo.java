@@ -19,8 +19,8 @@ public abstract class Enemigo extends Entidad{
 	protected float gravedad;
 	protected Sonido player;
 	
-	public Enemigo(int x, int y, int velocidad, Sprite sprite, int anchoHitBox, int altoHitBox) {
-		super(x, y, velocidad, sprite,anchoHitBox,altoHitBox);
+	public Enemigo(int x, int y, int velocidad, int anchoHitBox, int altoHitBox) {
+		super(x, y, velocidad, anchoHitBox,altoHitBox);
 		movimiento = "IZQUIERDA";
 		posicionXInicial = x;
 		posicionYInicial = y;

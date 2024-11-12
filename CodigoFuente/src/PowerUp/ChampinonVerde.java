@@ -6,8 +6,8 @@ import Mario.Mario;
 
 public class ChampinonVerde extends PowerUp{
 	
-	public ChampinonVerde(int x, int y, int velocidad, Sprite sprite) {
-		super(x,y, velocidad, sprite,16,16);
+	public ChampinonVerde(int x, int y, int velocidad) {
+		super(x,y, velocidad,16,16);
 		puntaje = 100;
 	}
 	
