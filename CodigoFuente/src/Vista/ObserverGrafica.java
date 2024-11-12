@@ -55,4 +55,12 @@ public abstract class ObserverGrafica extends JLabel implements Observer {
 		int y = AdaptadorPosicionPixel.transformarY(entidadObservada.getPosicionY()) - alto;
 		setBounds(x, y, ancho, alto);
 	}
+	
+	public void actualizarPorMuerte() {
+		setVisible(false);
+		this.setIcon(null);
+		revalidate();
+		repaint();
+		System.out.println("Lo saco de la pantalla");
+	}
 }

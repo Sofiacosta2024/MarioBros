@@ -4,17 +4,16 @@ import Colisionador.ColisionadorVisitorMario;
 import Fabrica.Sprite;
 import Logica.Entidad;
 
-public class BolaFuego extends Entidad implements Runnable {
-	
-	private boolean enMovimiento;
+public class BolaFuego extends Entidad {
 	private char direccionMovimiento;
 	private char direccionMovimientoAnterior;
+	private boolean enMovimiento;
 
 	public BolaFuego(int x, int y, int velocidad, Sprite sprite, char direccionMovimiento, char direccionMovimientoAnterior) {
 		super(x, y, velocidad, sprite, 16, 16);
-		enMovimiento = true;
 		this.direccionMovimiento = direccionMovimiento;
 		this.direccionMovimientoAnterior = direccionMovimientoAnterior;
+		enMovimiento = false;
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
@@ -22,37 +21,35 @@ public class BolaFuego extends Entidad implements Runnable {
 	}
 	
 	public void notificarObservador() {
-		if(observador != null) {
-			observador.actualizar();
-		}
+		observador.actualizar();
 	}
 	
 	public void retirar() {
-		esColisionable = false;
-		detener();
-	}
-
-	public void run() {
-        while (enMovimiento) {
-            mover();
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
-    }
-	
-	public synchronized void detener() {
-		enMovimiento = false;
+		observador.actualizarPorMuerte();
+		System.out.println("Entro a retirar");
 	}
 	
-	private synchronized void mover() {
-		if(direccionMovimiento == 'd' || direccionMovimiento == 'q' && direccionMovimientoAnterior == 'd')
-			posicionX += velocidad*2;
-		else
-			posicionX -= velocidad*2;
+	public void mover(int nuevaX, int nuevaY) {
+		posicionX = posicionX + nuevaX;
+		if(posicionX <= -65)
+			retirar();
 		actualizarAreaColision();
 		observador.actualizarPosicionTamano();
+	}
+	
+	public void setEnMovimiento(boolean enMovimiento) {
+		this.enMovimiento = enMovimiento;
+	}
+	
+	public char getDireccionMovimiento() {
+		return direccionMovimiento;
+	}
+	
+	public char getDireccionMovimientoAnterior() {
+		return direccionMovimientoAnterior;
+	}
+	
+	public boolean enMovimiento() {
+		return enMovimiento;
 	}
 }
