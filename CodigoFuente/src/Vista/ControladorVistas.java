@@ -164,7 +164,55 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	public void accionarPantallaVictoria() {
 		mostrarPantallaModoJuego();
 	}
-
+	
+	public void iniciarTemporizadorPantallaPartida() {
+		panelPartida.iniciarTemporizador();
+	}
+	
+	public void iniciarActualizarInformacionPantallaPartida() {
+		panelPartida.iniciarActualizacionInformacion();
+	}
+	
+	public void limpiezaDeEntidadesGraficas() {
+		panelPartida.limpiarEntidadesGraficas();
+	}
+	
+	public void seleccionarImagenFondo() {
+		panelPartida.agregarImagenFondo();
+	}
+	
+	public void setTiempoNivel() {
+		panelPartida.setTiempoNivel(panelPartida.getTiempoNivelInicial());
+	}
+	
+	public void actualizarPantallaPasajeDeNivel(int numeroDeNivel) {
+		panelPartida.limpiarEntidadesGraficas();
+		panelPartida.resetearScroll();
+		if(numeroDeNivel == 2) {
+			panelPartida.setTiempoNivel(300);
+		   }
+		else
+			if(numeroDeNivel == 3) {
+				panelPartida.setTiempoNivel(200);
+			  }
+	}
+	
+	public void setPuntajeLabel(int puntaje) {
+		panelVictoria.setPuntajeLabel(puntaje);
+	}
+	
+	public void setNombreJugadorGanador(String nombre) {
+		panelVictoria.setNombreGanador(nombre);
+	}
+	
+	public void detenerActualizacionPantallaPartida() {
+		panelPartida.detenerActualizacion();
+	}
+	
+	public void getTiempoNivelActual() {
+		panelPartida.getTiempoNivel();
+	}
+	
 	protected void refrescar() {	
 		for(Observer observers : new ArrayList<>(lista)) {
 	        observers.actualizar();
