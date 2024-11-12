@@ -23,22 +23,14 @@ public class Parser {
 	protected FabricaEntidades fabricaEntidad;
 	private Juego juego;
 
-	private Parser(Juego juego) throws Exception {
-		if (parser != null) {
-			throw new Exception("usar getInstancia() para obtener un objeto parser");
-		}
+	private Parser(Juego juego){
 		this.juego = juego;
 		nivel = new Nivel(juego.getNumeroDeNivel());
 	}
 
 	public static Parser getInstancia(Juego juego) {
 		if (parser == null)
-			try {
 				parser = new Parser(juego);
-			}
-		catch(Exception e) {
-			System.out.println("se usó el constructor cuando ya había una instancia de parser");
-		}
 		return parser;
 	}
 
@@ -104,7 +96,7 @@ public class Parser {
 			nivel.agregarEnemigo(fabricaEntidad.getLakitu(posicionX, posicionY, velocidadNuevaEntidad, fSprite.getLakitu(),juego));
 			break;
 		case "24":
-			nivel.agregarEnemigo(fabricaEntidad.getSpinny(posicionX, posicionY, velocidadNuevaEntidad, fSprite.getSpinny()));  
+			nivel.agregarEnemigo(fabricaEntidad.getSpiny(posicionX, posicionY, velocidadNuevaEntidad, fSprite.getSpinny()));  
 			break;
 		case "25":
 			nivel.agregarEnemigo(fabricaEntidad.getBuzzyBeetle(posicionX, posicionY, velocidadNuevaEntidad, fSprite.getBuzzyBeetle()));    

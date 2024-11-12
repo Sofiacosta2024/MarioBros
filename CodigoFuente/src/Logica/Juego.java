@@ -24,7 +24,7 @@ public class Juego {
 	protected Nivel nivelActual;
 	protected FabricaSprite fabricaSprite;
 	protected FabricaEntidades fabricaEntidades;
-	protected Jugador jugador;
+	protected Mario mario;;
 	protected Parser parser;
 	protected MoverMario hiloMario;
 	protected MoverEnemigo hiloMundo;
@@ -33,14 +33,13 @@ public class Juego {
 	protected String rutaModo;
 
 	public Juego() {
-		jugador = new Jugador(null,0);
-		player=new Sonido();
+		player=Sonido.obtenerInstancia();
 		numeroDeNivel = 1;
 		nivelActual = new Nivel(numeroDeNivel);
 	}
 
 	public void iniciarPartida() {
-		player.playSonidoFondo();
+		Sonido.obtenerInstancia().reproducirSonidoFondo();;
 		juegoTerminado = false;
 		controladorVistas.registarControladorEntradas();
 		registrarObservers();
@@ -48,11 +47,11 @@ public class Juego {
 		iniciarHilos();
 		controladorVistas.getPantallaPartida().iniciarTemporizador();
 		controladorVistas.getPantallaPartida().iniciarActualizacionInformacion();
-		player.reproducirClip("/Sonido/Sounds/herewego.wav");
+		player.reproducirSonidoComienzaPartida();
 	}
 
 	public void iniciarHilos() {
-		hiloMario= new MoverMario(this, jugador.getPersonaje());
+		hiloMario= new MoverMario(this, nivelActual.getMario());
 		hiloMundo = new MoverEnemigo(this);
 		hiloMario.iniciarHilo();
 		hiloMundo.iniciarHilo();
@@ -88,7 +87,6 @@ public class Juego {
 		parser.setFabrica(fabricaEntidades);
 		nivelActual = new Nivel(numeroDeNivel);
 		parser.parsearNivel(nivelActual);
-		jugador.setPersonaje(nivelActual.getMario());
 	}
 
 	public void reiniciarNivel() {
@@ -133,12 +131,12 @@ public class Juego {
 			iniciarPartida();
 			getNivelActual().getMario().setMarioEstadoNivel();
 			if(numeroDeNivel!=1)
-				player.reproducirClip("/Sonido/Sounds/yahoo.wav");
+				player.reproducirSonidoPasoNivel();
 		}
 		else {
-			player.reproducirClip("/Sonido/Sounds/ganar.wav");
-			controladorVistas.getPantallaVictoria().setPuntajeLabel(getJugador().getPuntaje());
-			controladorVistas.getPantallaVictoria().setNombreGanador(getJugador().getNombre());
+			player.reproducirSonidoGanar();
+			controladorVistas.getPantallaVictoria().setPuntajeLabel(nivelActual.getMario().getPuntaje());
+			controladorVistas.getPantallaVictoria().setNombreGanador(nivelActual.getMario().getNombre());
 			controladorVistas.mostrarPantallaVictoria();
 			juegoTerminado = true;
 		}
@@ -155,7 +153,7 @@ public class Juego {
 
 	public void finalizarPartida() {
 		juegoTerminado = true;
-		player.reproducirClip("/Sonido/Sounds/gameover.wav");
+		player.reproducirSonidoGameOver();
 		controladorVistas.mostrarPantallaFinJuego();
 		for(Spiny spiny : nivelActual.getSpinyssLanzados()) {
 			spiny.retirar();
@@ -316,14 +314,11 @@ public class Juego {
 	public void setControladorVista(ControladorVistas controladorVistas) {
 		this.controladorVistas= controladorVistas;
 	}
-
-	public Jugador getJugador() {
-		return jugador;
-	}
-
+	
 	public int getTiempoActual() {
 		return controladorVistas.getPantallaPartida().getTiempoNivel();
 	}
+	
 	public Nivel getNivelActual() {
 		return nivelActual;
 	}

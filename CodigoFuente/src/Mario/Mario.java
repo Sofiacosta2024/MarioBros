@@ -27,7 +27,6 @@ public class Mario extends Entidad implements EntidadMario{
 	protected int velocidadSalto;
 	protected String rutaImagen;
 	protected boolean puedeDerecha,puedeIzquierda,cambioEstado;
-	protected Sonido player;
 	protected char sentidoMovimientoMario;
 	protected double progreso;
 	protected boolean saltando;
@@ -36,10 +35,12 @@ public class Mario extends Entidad implements EntidadMario{
 	protected int factorVelocidad;
 	private Juego juego;
 	protected int limiteDerecha, limiteIzquierda; 
-
+	protected String nombre;
+	protected int puntaje;
+	protected Mario personaje;
 	public Mario(int x, int y, int velocidad, Sprite sprite, Juego juego) {
 		super(x,y, velocidad, sprite,16,16);
-		rutaImagen = sprite.getModo();
+		//rutaImagen = sprite.getModo();
 		estado = new EstadoNormal(rutaImagen);
 		anterior=estado;
 		vidas = 3;
@@ -49,17 +50,15 @@ public class Mario extends Entidad implements EntidadMario{
 		this.velocidad=velocidad;
 		puedeDerecha=true;
 		puedeIzquierda=true;
+		puntaje=0;
 		cambioEstado=false;
-		player=new Sonido();
 		cayendoVacio=false;
 		posInicialSalto = getPosicionY();
 		progreso = 0;
 		saltando = false;
 		factorVelocidad = 0;
-
 		limiteDerecha=5000;
 		limiteIzquierda=0;
-
 		this.juego = juego;
 	}
 
@@ -135,7 +134,7 @@ public class Mario extends Entidad implements EntidadMario{
 
 	public void saltar() {
 		if(progreso == 0){
-			player.reproducirClip("/Sonido/Sounds/jump.wav");
+			Sonido.obtenerInstancia().reproducirSonidoSaltar();
 			saltando = true;
 			posInicialSalto = getPosicionY();
 			sentidoMovimientoMario = 'w';
@@ -154,7 +153,7 @@ public class Mario extends Entidad implements EntidadMario{
 	}
 
 	public void morirPorVacio() {
-		player.reproducirClip("/Sonido/Sounds/mariofalling.wav");
+		Sonido.obtenerInstancia().reproducirSonidoCaeAlVacio();
 		saltando=true;
 		progreso=Math.PI/2;
 		cayendoVacio=true;
@@ -241,7 +240,7 @@ public class Mario extends Entidad implements EntidadMario{
 	}
 
 	public void decrementarVida() {
-		player.reproducirClip("/Sonido/Sounds/Mariodie.wav");
+		Sonido.obtenerInstancia().reproducirSonidoMorir();
 		vidas--;
 	}
 	public void resetearPosicion() {
@@ -385,5 +384,31 @@ public class Mario extends Entidad implements EntidadMario{
 
 	public Juego getJuego() {
 		return juego;
+	}
+	
+	public void setPuntaje(int puntaje) {
+		this.puntaje = puntaje;
+		if(this.puntaje < 0)
+			this.puntaje = 0;
+	}
+	
+	public void setPersonaje(Mario m) {
+		personaje = m;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre=nombre;
+	}
+	
+	public int getPuntaje() {
+		return puntaje;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public Mario getPersonaje() {
+		return personaje;
 	}
 }

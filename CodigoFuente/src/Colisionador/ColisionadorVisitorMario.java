@@ -24,7 +24,7 @@ public class ColisionadorVisitorMario{
 		if(entidadColisionable.colisionable()) {
 			direccionColision = detectarDireccion( goomba);
 			if(direccionColision.equals("ARRIBA")) {
-				player.reproducirClip("/Sonido/Sounds/enemigodie.wav");
+				player.reproducirSonidoMorir();
 				goomba.retirar();
 				juego.getJugador().setPuntaje(goomba.getPuntaje() + juego.getJugador().getPuntaje());
 			} else
@@ -39,7 +39,7 @@ public class ColisionadorVisitorMario{
 		direccionColision = detectarDireccion(koopa);
 		if(!koopa.estaEnEnfriamiento()) {
 			if(direccionColision.equals("ARRIBA")) {
-				player.reproducirClip("/Sonido/Sounds/killenemy.wav");
+				Sonido.obtenerInstancia().reproducirSonidoMuereKoopa();
 				koopa.atacado();
 				juego.getJugador().setPuntaje(koopa.getPuntaje() + juego.getJugador().getPuntaje());
 			}
@@ -61,7 +61,7 @@ public class ColisionadorVisitorMario{
 		if(entidadColisionable.colisionable()) {
 			direccionColision = detectarDireccion(lakitu);
 			if(direccionColision.equals("ARRIBA")) {
-				player.reproducirClip("/Sonido/Sounds/enemigodie.wav");
+				Sonido.obtenerInstancia().reproducirSonidoMuereEnemigo();
 				lakitu.retirar();
 				juego.getJugador().setPuntaje(lakitu.getPuntaje() + juego.getJugador().getPuntaje());
 			}
@@ -75,7 +75,7 @@ public class ColisionadorVisitorMario{
 		if(entidadColisionable.colisionable()) {
 			direccionColision = detectarDireccion( buzzy);
 			if(direccionColision.equals("ARRIBA")) {
-				player.reproducirClip("/Sonido/Sounds/enemigodie.wav");
+				Sonido.obtenerInstancia().reproducirSonidoMuereEnemigo();
 				retirarEntidad(buzzy);
 				juego.getJugador().setPuntaje(buzzy.getPuntaje() + juego.getJugador().getPuntaje());
 			}
@@ -150,7 +150,7 @@ public class ColisionadorVisitorMario{
 
 	public void visitarChampinonVerde(ChampinonVerde champinon) {
 		if (champinon.colisionable() && champinon.getAreaColision().intersects(champinon.getAreaColision())) {
-			player.reproducirClip("/Sonido/Sounds/vida.wav");
+			Sonido.obtenerInstancia().reproducirSonidoObtuvoVida();
 			champinon.afectar(entidadColisionable);
 			juego.getJugador().setPuntaje(champinon.getPuntaje() + juego.getJugador().getPuntaje());
 			retirarEntidad(champinon);
@@ -158,7 +158,7 @@ public class ColisionadorVisitorMario{
 	}
 
 	public void visitarEstrella(Estrella estrella) {
-		player.reproducirClip("/Sonido/Sounds/powerup.wav");
+		Sonido.obtenerInstancia().reproducirSonidoPowerUp();
 		estrella.afectar(entidadColisionable);
 		entidadColisionable.setAlto(32);
 		entidadColisionable.actualizarAreaColision();
@@ -168,7 +168,7 @@ public class ColisionadorVisitorMario{
 	}
 
 	public void visitarFlorFuego(FlorFuego flor) {
-		player.reproducirClip("/Sonido/Sounds/flordefuego.wav");
+		Sonido.obtenerInstancia().reproducirSonidoFlorDeFuego();
 		flor.afectar(entidadColisionable);
 		entidadColisionable.setAlto(32);
 		entidadColisionable.actualizarAreaColision();
@@ -177,19 +177,19 @@ public class ColisionadorVisitorMario{
 	}
 
 	public void visitarMoneda(Moneda moneda) {
-		player.reproducirClip("/Sonido/Sounds/Coin.wav");
+		Sonido.obtenerInstancia().reproducirSonidoMoneda();
 		moneda.afectar(entidadColisionable);
 		juego.getJugador().setPuntaje(moneda.getPuntaje() + juego.getJugador().getPuntaje());
 		retirarEntidad(moneda);
 	}
 
 	public void visitarSuperChampinon(SuperChampinon champinon) {
+		Sonido.obtenerInstancia().reproducirSonidoSuperChampinon();
 		champinon.afectar(entidadColisionable);
 		entidadColisionable.setCambioEstado(true);
 		entidadColisionable.setAlto(32);
 		entidadColisionable.actualizarAreaColision();
 		juego.getJugador().setPuntaje(entidadColisionable.getEstadoMario().puntajeSuperChampinon() + juego.getJugador().getPuntaje());
-		player.reproducirClip("/Sonido/Sounds/superchampinon.wav");
 		retirarEntidad(champinon);
 	}
 

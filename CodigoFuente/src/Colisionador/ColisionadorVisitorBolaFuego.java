@@ -35,6 +35,5 @@ public class ColisionadorVisitorBolaFuego {
 	
 	private void retirarBolaFuego() {
 		entidadColisionable.retirar();
-		entidadColisionable = null;
 	}
 }

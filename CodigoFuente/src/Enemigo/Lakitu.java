@@ -1,13 +1,12 @@
 package Enemigo;
 import java.util.ArrayList;
-
 import Colisionador.ColisionadorVisitorEnemigo;
 import Colisionador.ColisionadorVisitorMario;
 import Fabrica.Sprite;
 import Logica.*;
 import Mario.Mario;
 import Vista.Observer;
-
+import Sonido.*;
 public class Lakitu extends Enemigo implements Runnable{
 
 	protected Juego juego;
@@ -40,7 +39,7 @@ public class Lakitu extends Enemigo implements Runnable{
 		juego.getNivelActual().agregarSpinyLanzado(spiny);
 		spinyssLanzados.add(spiny);
 		spiny.notificarObservador();
-		player.reproducirClip("/Sonido/Sounds/lanzaspiny.wav");
+		Sonido.obtenerInstancia().reproducirSonidoLakituLanzaSpinyss();
 	}
 
 	public void run() {
