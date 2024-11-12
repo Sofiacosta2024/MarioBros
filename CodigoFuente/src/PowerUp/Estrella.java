@@ -14,8 +14,7 @@ public class Estrella extends PowerUp {
 	}
 	
 	public void afectar(Mario mario) {
-		String rutaImagen = mario.getRutaImagen();
-		EstadoInvencible estadoNuevo = new EstadoInvencible(rutaImagen);
+		EstadoInvencible estadoNuevo = new EstadoInvencible();
 		mario.getEstadoMario().aplicarEfecto(mario, estadoNuevo);
 		mario.setAlto(32);
 		mario.setAncho(24);

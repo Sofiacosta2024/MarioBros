@@ -13,8 +13,7 @@ public class SuperChampinon extends PowerUp {
 	}
 	
 	public void afectar(Mario mario) {
-		String rutaImagen = mario.getRutaImagen();
-		EstadoSuperMario estadoNuevo = new EstadoSuperMario(rutaImagen);
+		EstadoSuperMario estadoNuevo = new EstadoSuperMario();
 		mario.getEstadoMario().aplicarEfecto(mario, estadoNuevo);
 		mario.setAlto(32);
 		mario.setAncho(24);

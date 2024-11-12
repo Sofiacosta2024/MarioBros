@@ -12,8 +12,7 @@ public class FlorFuego extends PowerUp {
 	}
 	
 	public void afectar(Mario mario) {
-		String rutaImagen = mario.getRutaImagen();
-		EstadoFlorFuego estadoNuevo = new EstadoFlorFuego(rutaImagen);
+		EstadoFlorFuego estadoNuevo = new EstadoFlorFuego();
 		mario.getEstadoMario().aplicarEfecto(mario, estadoNuevo);
 		mario.setAlto(32);
 		mario.setAncho(24);
