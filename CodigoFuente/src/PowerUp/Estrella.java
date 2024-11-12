@@ -8,14 +8,13 @@ import Mario.Mario;
 public class Estrella extends PowerUp {
 	
 	public Estrella(int x, int y, int velocidad) {
-		super(x,y, velocidad,14,16);
+		super(x,y, velocidad,22,30);
 		ancho = 14;
 		alto = 16;
 	}
 	
 	public void afectar(Mario mario) {
-		String rutaImagen = mario.getRutaImagen();
-		EstadoInvencible estadoNuevo = new EstadoInvencible(rutaImagen);
+		EstadoInvencible estadoNuevo = new EstadoInvencible();
 		mario.getEstadoMario().aplicarEfecto(mario, estadoNuevo);
 		mario.setAlto(32);
 		mario.setAncho(24);
