@@ -40,7 +40,7 @@ public class Lakitu extends Enemigo implements Runnable{
 		juego.getNivelActual().agregarSpinyLanzado(spiny);
 		spinyssLanzados.add(spiny);
 		spiny.notificarObservador();
-		player.playClip("/Sonido/Sounds/lanzaspiny.wav");
+		player.reproducirClip("/Sonido/Sounds/lanzaspiny.wav");
 	}
 
 	public void run() {

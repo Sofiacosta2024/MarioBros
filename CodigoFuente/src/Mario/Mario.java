@@ -28,7 +28,6 @@ public class Mario extends Entidad implements EntidadMario{
 	protected String rutaImagen;
 	protected boolean puedeDerecha,puedeIzquierda,cambioEstado;
 	protected Sonido player;
-	protected long ultimoLanzamientoBola;
 	protected char sentidoMovimientoMario;
 	protected double progreso;
 	protected boolean saltando;
@@ -62,7 +61,6 @@ public class Mario extends Entidad implements EntidadMario{
 		limiteIzquierda=0;
 
 		this.juego = juego;
-		ultimoLanzamientoBola = 0;
 	}
 
 	public void actualizarMovimientoMario(char direccion) {
@@ -137,7 +135,7 @@ public class Mario extends Entidad implements EntidadMario{
 
 	public void saltar() {
 		if(progreso == 0){
-			player.playClip("/Sonido/Sounds/jump.wav");
+			player.reproducirClip("/Sonido/Sounds/jump.wav");
 			saltando = true;
 			posInicialSalto = getPosicionY();
 			sentidoMovimientoMario = 'w';
@@ -156,7 +154,7 @@ public class Mario extends Entidad implements EntidadMario{
 	}
 
 	public void morirPorVacio() {
-		player.playClip("/Sonido/Sounds/mariofalling.wav");
+		player.reproducirClip("/Sonido/Sounds/mariofalling.wav");
 		saltando=true;
 		progreso=Math.PI/2;
 		cayendoVacio=true;
@@ -230,32 +228,20 @@ public class Mario extends Entidad implements EntidadMario{
 		return sprite;
 	}
 
-	public BolaFuego lanzarBolaFuego() {
-		boolean agregar = true;
+	public void lanzarBolaFuego() {
 		if(estado.lanzarBolaFuego()) {
-			int posicionXBola = posicionX + 65; 
+			int posicionXBola = posicionX + 45; 
 			int posicionYBola = posicionY + 15;
 			Sprite spriteBola = new Sprite(rutaImagen+ "/FireBall.gif",rutaImagen);
 			BolaFuego bolaFuego = new BolaFuego(posicionXBola, posicionYBola,5,spriteBola,sentidoMovimientoMario,direccionMovimientoAnterior);
-			for(BolaFuego proyectil : juego.getNivelActual().getProyectiles()) {
-				agregar = !proyectil.colisionable();
-				proyectil.retirar();
-				proyectil.notificarObservador();
-			}
-			if(agregar || (System.currentTimeMillis() - ultimoLanzamientoBola >= 3000)) {
-				ultimoLanzamientoBola = System.currentTimeMillis();
-				juego.getNivelActual().agregarProyectil(bolaFuego);
-				juego.registrarObserverProyectiles(juego.getNivelActual().getProyectiles());
-				bolaFuego.notificarObservador();
-				Thread hiloBola = new Thread(bolaFuego);
-				hiloBola.start();
-			}
+			juego.getNivelActual().agregarProyectil(bolaFuego);
+			juego.registrarObserverProyectiles(bolaFuego);
+			bolaFuego.setEnMovimiento(true);
 		}
-		return null;
 	}
 
 	public void decrementarVida() {
-		player.playClip("/Sonido/Sounds/Mariodie.wav");
+		player.reproducirClip("/Sonido/Sounds/Mariodie.wav");
 		vidas--;
 	}
 	public void resetearPosicion() {

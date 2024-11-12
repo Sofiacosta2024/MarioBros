@@ -16,6 +16,7 @@ public class ColisionadorVisitorBolaFuego {
 	}
 
 	public void visitarPlataforma(Plataforma plataforma) {
+		juego.getNivelActual().getProyectiles().remove(entidadColisionable);
 		retirarBolaFuego();
 	}
 
@@ -34,6 +35,6 @@ public class ColisionadorVisitorBolaFuego {
 	
 	private void retirarBolaFuego() {
 		entidadColisionable.retirar();
-		entidadColisionable.notificarObservador();
+		entidadColisionable = null;
 	}
 }

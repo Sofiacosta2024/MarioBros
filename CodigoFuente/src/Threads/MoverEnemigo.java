@@ -1,9 +1,12 @@
 package Threads;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+
 import Enemigo.Enemigo;
 import Enemigo.Spiny;
 import Logica.*;
+import Mario.BolaFuego;
 
 public class MoverEnemigo extends Thread{
 
@@ -57,24 +60,43 @@ public class MoverEnemigo extends Thread{
 	}
 
 	private void actualizar() {
-		for (Enemigo enemigo : juego.getNivelActual().getEnemigos()) {
-			if (!enemigo.estaEnEnfriamiento() && enemigo.colisionable()) {
-				String direccionEnemigo = enemigo.getMovimiento();
-				if(direccionEnemigo.equals("IZQUIERDA"))
-					enemigo.mover(-1, 0);
-				else
-					enemigo.mover(1, 0);  
+		try {
+			for (Enemigo enemigo : juego.getNivelActual().getEnemigos()) {
+				if (!enemigo.estaEnEnfriamiento() && enemigo.colisionable()) {
+					String direccionEnemigo = enemigo.getMovimiento();
+					if(direccionEnemigo.equals("IZQUIERDA"))
+						enemigo.mover(-1, 0);
+					else
+						enemigo.mover(1, 0);  
+				}
+			}
+			ArrayList<Spiny> spinyss = new ArrayList<>(juego.getNivelActual().getSpinyssLanzados());
+			for (Spiny spiny : spinyss) {
+				if (!spiny.estaEnEnfriamiento() && spiny.colisionable()) {
+					String direccionEnemigo = spiny.getMovimiento();
+					if(direccionEnemigo.equals("IZQUIERDA"))
+						spiny.mover(-1, 0);
+					else
+						spiny.mover(1, 0);  
+				}
+			}
+			ArrayList<BolaFuego> bolasFuego = new ArrayList<>(juego.getNivelActual().getProyectiles());
+			for (BolaFuego bolaFuego : bolasFuego) {
+				if(bolaFuego.enMovimiento()) {
+					char direccion = bolaFuego.getDireccionMovimiento();
+					char direccionAnterior = bolaFuego.getDireccionMovimientoAnterior();
+					if (direccion == 'd' || (direccion == 'q' && direccionAnterior == 'd')) {
+						bolaFuego.mover(1, 0);
+					}
+					else { 
+						bolaFuego.mover(-1, 0);
+					}
+				}
 			}
 		}
-		ArrayList<Spiny> spinyss = new ArrayList<>(juego.getNivelActual().getSpinyssLanzados());
-		for (Spiny spiny : spinyss) {
-			if (!spiny.estaEnEnfriamiento() && spiny.colisionable()) {
-				String direccionEnemigo = spiny.getMovimiento();
-				if(direccionEnemigo.equals("IZQUIERDA"))
-					spiny.mover(-1, 0);
-				else
-					spiny.mover(1, 0);  
-			}
+		catch(ConcurrentModificationException excepcion) {
+			System.out.println("CONCURRENNNTTT EN MOVERENEMIGO");
+			actualizar();
 		}
 	}
 }
