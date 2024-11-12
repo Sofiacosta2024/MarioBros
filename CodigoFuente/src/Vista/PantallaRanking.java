@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import javax.swing.Icon;
-
 public class PantallaRanking extends JPanel{
 
 	private static final long serialVersionUID = 1L;
@@ -32,17 +31,13 @@ public class PantallaRanking extends JPanel{
 	private JLabel labelRanking;
 	private JLabel labelJugadores;
 	private JLabel labelMejores;
-	protected List<Jugador> ranking;
 	private JLabel[] labelsRank;
 	
 	public PantallaRanking(ControladorVistas controladorVistas) {
 		this.controladorVistas=controladorVistas;
 		setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
 		setLayout(null);
-		ranking = new ArrayList<>();
 		agregarPanelInformacion();
-		leerPuntajes();
-		organizarPuntajes();
 		actualizarRanking();
 		agregarBotonVolver();
 		agregarImagenFondo();
@@ -111,8 +106,9 @@ public class PantallaRanking extends JPanel{
 	}
 	
 	public void actualizarRanking() {
+		List<Puntuacion> ranking = Ranking.getInstancia().getRanking();
 		int i=0;
-		for (Jugador jugador: ranking) {
+		for (Puntuacion jugador: ranking) {
 	        if (i < ranking.size()) {
 	            labelsRank[i].setText((i + 1) + ". " + jugador.getNombre() + " - " + jugador.getPuntaje());
 	        } else {
@@ -144,83 +140,6 @@ public class PantallaRanking extends JPanel{
 		labelMejores.setFont(fuente.deriveFont(24f));
 		labelJugadores.setFont(fuente.deriveFont(24f));
 	}
-	
-	private void leerPuntajes() {
-		 String rutaArchivo = "src/Parser/Ranking.txt";
-
-		    try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
-		        String linea;
-		        int numeroLinea = 0;
-		        while ((linea = br.readLine()) != null) {
-		            String[] partes = linea.split(" ");
-		            if (partes.length < 2) {
-		                continue;
-		            }
-		            String nombre = partes[0];
-		            int puntaje = Integer.parseInt(partes[1]);
-		            Jugador ju=new Jugador(nombre,puntaje);
-		            ju.setNombre(nombre);
-		            ju.setPuntaje(puntaje);
-		            ranking.add(numeroLinea, ju);
-		            numeroLinea++;
-		        }
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		    } catch (NumberFormatException e) {
-		        System.err.println("Error al convertir puntaje: " + e.getMessage());
-		    }
-	}
-	
-	private void organizarPuntajes() {
-	    for (int i = 0; i < ranking.size() - 1; i++) {
-	        for (int j = 0; j < ranking.size() - 1 - i; j++) {
-	            if (ranking.get(j).getPuntaje() < ranking.get(j + 1).getPuntaje()) {
-	                Jugador temporal = ranking.get(j);
-	                ranking.set(j, ranking.get(j + 1));
-	                ranking.set(j + 1, temporal);
-	            }
-	        }
-	    obtenerMejoresPuntajes();
-	}
-	}
-	
-	private void obtenerMejoresPuntajes() {
-		List<Jugador> mejores = new ArrayList<>();
-        for (int i = 0; i < Math.min(5, ranking.size()); i++) {
-            mejores.add(ranking.get(i));
-        }
-        ranking = mejores;
-	}
-	
-	public void guardarPuntajes() {
-	    String rutaArchivo = "src/Parser/Ranking.txt";
-	    try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaArchivo))) {
-	        for (Jugador jugador : ranking) {
-	            bw.write(jugador.getNombre() + " " + jugador.getPuntaje());
-	            bw.newLine();
-	        }
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	}
-	
-	public void agregarJugador(Jugador jugador) {
-		boolean jugadorExiste = false;
-	    for (Jugador j : ranking) {
-	        if (j.getNombre().equals(jugador.getNombre())) {
-	            jugadorExiste = true;
-	            if (jugador.getPuntaje() > j.getPuntaje()) {
-	                j.setPuntaje(jugador.getPuntaje());
-	            }
-	            break;
-	        }
-	    }
-	    if (!jugadorExiste) {
-	        ranking.add(jugador);
-	    }
-	    organizarPuntajes(); 
-	}
-	
 	protected Font cargarFuente() {
 		File fuenteFile = new File("src/Fuente/fuentejuego.ttf");
 		try {
