@@ -9,7 +9,7 @@ public class SuperChampinon extends PowerUp {
 	protected boolean visible;
 	
 	public SuperChampinon(int x, int y, int velocidad) {
-		super(x,y, velocidad,16,16);
+		super(x,y, velocidad,24,24);
 	}
 	
 	public void afectar(Mario mario) {
