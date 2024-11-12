@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import Mario.*;
 public class Ranking {
 	private static Ranking instancia;
 	protected List<Puntuacion> ranking;

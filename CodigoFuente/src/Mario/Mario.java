@@ -343,6 +343,21 @@ public class Mario extends Entidad implements EntidadMario{
 	public void setLimiteIzquierda(int i) {
 		limiteIzquierda = i;
 	}
+	
+	public void setPuntaje(int puntaje) {
+		this.puntaje = puntaje;
+		if(this.puntaje < 0)
+			this.puntaje = 0;
+	}
+	
+	public void setPersonaje(Mario m) {
+		personaje = m;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre=nombre;
+	}
+	
 
 	public EstadoMario getEstadoMario() {
 		return estado;
@@ -382,20 +397,6 @@ public class Mario extends Entidad implements EntidadMario{
 
 	public Juego getJuego() {
 		return juego;
-	}
-	
-	public void setPuntaje(int puntaje) {
-		this.puntaje = puntaje;
-		if(this.puntaje < 0)
-			this.puntaje = 0;
-	}
-	
-	public void setPersonaje(Mario m) {
-		personaje = m;
-	}
-	
-	public void setNombre(String nombre) {
-		this.nombre=nombre;
 	}
 	
 	public int getPuntaje() {
