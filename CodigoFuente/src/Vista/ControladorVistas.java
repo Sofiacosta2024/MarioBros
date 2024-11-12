@@ -210,8 +210,8 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 		panelPartida.detenerActualizacion();
 	}
 	
-	public void getTiempoNivelActual() {
-		panelPartida.getTiempoNivel();
+	public int getTiempoNivelActual() {
+		return panelPartida.getTiempoNivel();
 	}
 	
 	protected void refrescar() {	
@@ -220,10 +220,6 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	    }
 		ventana.revalidate();
 		ventana.repaint();
-	}
-
-	public PantallaPartida getPantallaPartida() {	
-		return panelPartida;
 	}
 
 	public PantallaVictoria getPantallaVictoria() {

@@ -45,8 +45,8 @@ public class Juego {
 		registrarObservers();
 		controladorVistas.mostrarPantallaPartida();
 		iniciarHilos();
-		controladorVistas.getPantallaPartida().iniciarTemporizador();
-		controladorVistas.getPantallaPartida().iniciarActualizacionInformacion();
+		controladorVistas.iniciarTemporizadorPantallaPartida();
+		controladorVistas.iniciarActualizarInformacionPantallaPartida();
 		player.reproducirSonidoComienzaPartida();
 	}
 
@@ -64,21 +64,21 @@ public class Juego {
 
 	public void seleccionarModoOriginal() {
 		if(rutaModo == "/Imagenes/Sprites/Especial")
-			this.getControladorVista().getPantallaPartida().limpiarEntidadesGraficas();
+			this.getControladorVista().limpiezaDeEntidadesGraficas();
 		fabricaSprite = new FabricaOriginal();
 		rutaModo="/Imagenes/Sprites/Original";
 		fabricaEntidades = new FabricaEntidades(fabricaSprite);
-		this.getControladorVista().getPantallaPartida().agregarImagenFondo();
+		this.getControladorVista().seleccionarImagenFondo();
 		cargarNivel();
 	}
 
 	public void seleccionarModoEspecial() {
 		if(rutaModo == "/Imagenes/Sprites/Original")
-			this.getControladorVista().getPantallaPartida().limpiarEntidadesGraficas();
+			this.getControladorVista().limpiezaDeEntidadesGraficas();
 		fabricaSprite = new FabricaEspecial();
 		rutaModo="/Imagenes/Sprites/Especial";
 		fabricaEntidades = new FabricaEntidades(fabricaSprite);
-		this.getControladorVista().getPantallaPartida().agregarImagenFondo();
+		this.getControladorVista().seleccionarImagenFondo();
 		cargarNivel();
 	}
 
@@ -113,7 +113,7 @@ public class Juego {
 			bola.notificarObservador();
 		}
 		nivelActual.getMario().resetearPosicion();
-		controladorVistas.getPantallaPartida().setTiempoNivel(controladorVistas.getPantallaPartida().getTiempoNivelInicial());
+		controladorVistas.setTiempoNivel();
 	}
 
 	public void jugadorPasaDeNivel() {
@@ -121,7 +121,7 @@ public class Juego {
 			numeroDeNivel++;
 			detenerHilos();
 			player.detenerSonidoFondo();
-			actualizarPantallaPasajeDeNivel();
+			controladorVistas.actualizarPantallaPasajeDeNivel(numeroDeNivel);
 			getNivelActual().getMario().setPosicionX(50);
 			int vidas = getNivelActual().getMario().getVidas();
 			EstadoMario estado = getNivelActual().getMario().getEstadoMario();
@@ -135,20 +135,11 @@ public class Juego {
 		}
 		else {
 			player.reproducirSonidoGanar();
-			controladorVistas.getPantallaVictoria().setPuntajeLabel(nivelActual.getMario().getPuntaje());
-			controladorVistas.getPantallaVictoria().setNombreGanador(nivelActual.getMario().getNombre());
+			controladorVistas.setPuntajeLabel(nivelActual.getMario().getPuntaje());
+			controladorVistas.setNombreJugadorGanador(nivelActual.getMario().getNombre());
 			controladorVistas.mostrarPantallaVictoria();
 			juegoTerminado = true;
 		}
-	}
-
-	public void actualizarPantallaPasajeDeNivel() {
-		controladorVistas.getPantallaPartida().limpiarEntidadesGraficas();
-		controladorVistas.getPantallaPartida().resetearScroll();
-		if(numeroDeNivel == 2)
-			controladorVistas.getPantallaPartida().setTiempoNivel(300);
-		else
-			controladorVistas.getPantallaPartida().setTiempoNivel(200);
 	}
 
 	public void finalizarPartida() {
@@ -164,7 +155,7 @@ public class Juego {
 			bola.notificarObservador();
 		}
 		numeroDeNivel = 1;
-		controladorVistas.getPantallaPartida().detenerActualizacion();
+		controladorVistas.detenerActualizacionPantallaPartida();
 	}
 
 	public void salirDelJuego() {
@@ -316,7 +307,8 @@ public class Juego {
 	}
 	
 	public int getTiempoActual() {
-		return controladorVistas.getPantallaPartida().getTiempoNivel();
+		int tiempo = controladorVistas.getTiempoNivelActual();
+		return tiempo;
 	}
 	
 	public Nivel getNivelActual() {

@@ -34,9 +34,13 @@ public class MoverMario extends Thread{
 				detenerHilo();
 				return;
 			}
-			if(juego.getTiempoActual()==0) {
-				mario.decrementarVida();
-				juego.reiniciarNivel();
+			if(juego.getTiempoActual() == 0) {
+				if(mario.getVidas() > 1) {
+					mario.decrementarVida();
+					juego.reiniciarNivel();
+				}
+				else
+					mario.decrementarVida();
 			}
 			if(mario.getPosicionX()>=4150) {
 				mario.detenerMario();
