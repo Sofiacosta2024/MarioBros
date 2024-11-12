@@ -27,7 +27,6 @@ public class Mario extends Entidad implements EntidadMario{
 	protected int velocidadSalto;
 	protected String rutaImagen;
 	protected boolean puedeDerecha,puedeIzquierda,cambioEstado;
-	protected Sonido player;
 	protected long ultimoLanzamientoBola;
 	protected char sentidoMovimientoMario;
 	protected double progreso;
@@ -51,7 +50,6 @@ public class Mario extends Entidad implements EntidadMario{
 		puedeDerecha=true;
 		puedeIzquierda=true;
 		cambioEstado=false;
-		player=new Sonido();
 		cayendoVacio=false;
 		posInicialSalto = getPosicionY();
 		progreso = 0;
@@ -137,7 +135,7 @@ public class Mario extends Entidad implements EntidadMario{
 
 	public void saltar() {
 		if(progreso == 0){
-			player.reproducirSonidoSaltar();
+			Sonido.obtenerInstancia().reproducirSonidoSaltar();
 			saltando = true;
 			posInicialSalto = getPosicionY();
 			sentidoMovimientoMario = 'w';
@@ -156,7 +154,7 @@ public class Mario extends Entidad implements EntidadMario{
 	}
 
 	public void morirPorVacio() {
-		player.reproducirSonidoCaeAlVacio();
+		Sonido.obtenerInstancia().reproducirSonidoCaeAlVacio();
 		saltando=true;
 		progreso=Math.PI/2;
 		cayendoVacio=true;
@@ -249,14 +247,14 @@ public class Mario extends Entidad implements EntidadMario{
 				bolaFuego.notificarObservador();
 				Thread hiloBola = new Thread(bolaFuego);
 				hiloBola.start();
-				player.reproducirSonidoBolaFuego();
+				Sonido.obtenerInstancia().reproducirSonidoBolaFuego();
 			}
 		}
 		return null;
 	}
 
 	public void decrementarVida() {
-		player.reproducirSonidoMorir();
+		Sonido.obtenerInstancia().reproducirSonidoMorir();
 		vidas--;
 	}
 	public void resetearPosicion() {

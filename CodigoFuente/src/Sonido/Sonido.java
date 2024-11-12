@@ -43,6 +43,30 @@ public class Sonido {
     public void reproducirSonidoMorir() {
     	reproducirClip("/Sonido/Sounds/Mariodie.wav");
     }
+    public void reproducirSonidoMuereEnemigo() {
+    	reproducirClip("/Sonido/Sounds/enemigodie.wav");
+    }
+    public void reproducirSonidoLakituLanzaSpinyss() {
+    	reproducirClip("/Sonido/Sounds/lanzaspiny.wav");
+    }
+    public void reproducirSonidoMuereKoopa() {
+    	reproducirClip("/Sonido/Sounds/killenemy.wav");
+    }
+    public void reproducirSonidoObtuvoVida() {
+    	reproducirClip("/Sonido/Sounds/vida.wav");
+    }
+    public void reproducirSonidoPowerUp() {
+    	reproducirClip("/Sonido/Sounds/powerup.wav");
+    }
+    public void reproducirSonidoFlorDeFuego(){
+    	reproducirClip("/Sonido/Sounds/flordefuego.wav");
+    }
+    public void reproducirSonidoMoneda(){
+    	reproducirClip("/Sonido/Sounds/Coin.wav");
+    }
+    public void reproducirSonidoSuperChampinon(){
+    	reproducirClip("/Sonido/Sounds/superchampinon.wav");
+    }
     private void cargarSonidoFondo() {
     	String rutaArchivo="/Sonido/Sounds/fondo.wav";
         try {
