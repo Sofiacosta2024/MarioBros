@@ -83,7 +83,8 @@ public class Ranking {
 	    }
 	}
 	
-	public void agregarJugador(Puntuacion nuevoJugador) {
+	public void agregarJugador(String nombre,int puntaje) {
+		Puntuacion nuevoJugador=new Puntuacion(nombre, puntaje);
 		boolean jugadorExiste = false;
 	    for (Puntuacion jugador : ranking) {
 	        if (nuevoJugador.getNombre().equals(jugador.getNombre())) {

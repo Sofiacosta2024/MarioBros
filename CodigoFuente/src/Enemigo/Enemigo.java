@@ -30,7 +30,6 @@ public abstract class Enemigo extends Entidad{
 		else
 			sobreSuelo = true;
 		gravedad = 1.0f;
-		player=new Sonido();
 	}
 
 	public abstract void atacar(Mario m);

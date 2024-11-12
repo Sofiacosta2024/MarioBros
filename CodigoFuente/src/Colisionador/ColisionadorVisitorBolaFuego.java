@@ -28,7 +28,7 @@ public class ColisionadorVisitorBolaFuego {
 	public void visitarEnemigo(Enemigo enemigo) {
 		enemigo.retirar();
 		enemigo.notificarObservador();
-		juego.getJugador().setPuntaje(juego.getJugador().getPuntaje() + enemigo.getPuntaje());
+		juego.getNivelActual().getMario().setPuntaje(juego.getNivelActual().getMario().getPuntaje() + enemigo.getPuntaje());
 		retirarBolaFuego();
 	}
 	

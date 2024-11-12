@@ -17,4 +17,7 @@ public class Puntuacion {
 	public void setPuntaje(int puntaje) {
 		this.puntaje=puntaje;
 	}
+	public void setNombre(String nombre) {
+		this.nombre=nombre;
+	}
 }

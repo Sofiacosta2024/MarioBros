@@ -126,7 +126,9 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	private void guardarRanking() {
-		Ranking.getInstancia().agregarJugador(panelIngresoNombre.getJugadorRanking());
+		String nombre=juego.getNivelActual().getMario().getNombre();
+		int puntaje=juego.getNivelActual().getMario().getPuntaje();
+		Ranking.getInstancia().agregarJugador(nombre,puntaje);
 		Ranking.getInstancia().guardarPuntajes();
 	}
 
