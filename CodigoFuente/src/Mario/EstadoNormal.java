@@ -40,27 +40,27 @@ public class EstadoNormal extends EstadoMario {
 		return 10;
 	}
 	
-	public Sprite getSpriteDetenidoDerecha() {
-		return new Sprite(rutaImagen+"/Marioquieto.png", rutaImagen);
+	public Sprite getSpriteDetenidoDerecha(Sprite[] sprites) {
+		return sprites[0];
 	}
 	
-	public Sprite getSpriteDetenidoIzquierda() {
-		return new Sprite(rutaImagen+"/Marioquietoizq.png",rutaImagen);
+	public Sprite getSpriteDetenidoIzquierda(Sprite[] sprites) {
+		return sprites[1];
 	}
 	
-	public Sprite getSpriteDerecha() {
-		return new Sprite(rutaImagen+"/Mariocaminando.gif", rutaImagen);
+	public Sprite getSpriteDerecha(Sprite[] sprites)  {
+		return sprites[2];
 	}
 	
-	public Sprite getSpriteIzquierda() {
-		return new Sprite(rutaImagen+"/Mariocaminandoizq.gif", rutaImagen);
+	public Sprite getSpriteIzquierda(Sprite[] sprites) {
+		return sprites[3];
 	}
 	
-	public Sprite getSpriteSaltandoADerecha() {
-		return new Sprite(rutaImagen+"/MarioJumping.png", rutaImagen);
+	public Sprite getSpriteSaltandoADerecha(Sprite[] sprites) {
+		return sprites[4];
 	}
 	
-	public Sprite getSpriteSaltandoAIzquierda() {
-		return new Sprite(rutaImagen+"/MarioJumpingizq.png", rutaImagen);
+	public Sprite getSpriteSaltandoAIzquierda(Sprite[] sprites) {
+		return sprites[5];
 	}
 }

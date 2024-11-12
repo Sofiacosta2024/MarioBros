@@ -50,32 +50,26 @@ public class EstadoSuperMario extends EstadoMario {
 		return 50;
 	}
 	
-	public Sprite getSpriteDetenidoDerecha() {
-		Sprite superDetenido = new Sprite(rutaImagen +"/Supermario-quieto.png", rutaImagen);
-		return superDetenido;
+	public Sprite getSpriteDetenidoDerecha(Sprite[] sprites) {
+		return sprites[6];
 	}
-	public Sprite getSpriteDetenidoIzquierda() {
-		Sprite superDetenido = new Sprite(rutaImagen +"/Supermario-quietoizq.png", rutaImagen);
-		return superDetenido;
+	public Sprite getSpriteDetenidoIzquierda(Sprite[] sprites) {
+		return sprites[7];
 	}
 	
-	public Sprite getSpriteDerecha() {
-		Sprite superDerecha = new Sprite(rutaImagen +"/Supermario-caminandoderecha.gif", rutaImagen);
-		return superDerecha;
+	public Sprite getSpriteDerecha(Sprite[] sprites) {
+		return sprites[8];
 	}
 	
-	public Sprite getSpriteIzquierda() {	
-		Sprite superDerecha = new Sprite(rutaImagen +"/Supermario-caminandoizquierda.gif", rutaImagen);
-		return superDerecha;
+	public Sprite getSpriteIzquierda(Sprite[] sprites) {	
+		return sprites[9];
 	}
 
-	public Sprite getSpriteSaltandoADerecha() {
-		Sprite superSaltandoDerecha = new Sprite(rutaImagen +"/Supermario-saltando.png", rutaImagen);
-		return superSaltandoDerecha;
+	public Sprite getSpriteSaltandoADerecha(Sprite[] sprites) {
+		return sprites[10];
 	}
 	
-	public Sprite getSpriteSaltandoAIzquierda() { 
-		Sprite superSaltandoIzquierda = new Sprite(rutaImagen +"/Supermario-saltandoaizq.png", rutaImagen);
-		return superSaltandoIzquierda;
+	public Sprite getSpriteSaltandoAIzquierda(Sprite[] sprites) { 
+		return sprites[11];
 	}
 }

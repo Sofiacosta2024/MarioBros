@@ -9,21 +9,23 @@ public class KoopaTroopa extends Enemigo{
 	protected EstadoKoopaTroopa estado;
 	protected boolean detener;
 	protected int contadorColisiones;
+	protected Sprite[] spritesKoopa;
 	
-	public KoopaTroopa(int x, int y, int velocidad, Sprite sprite) {
-		super(x,y, velocidad, sprite,32,48);
+	public KoopaTroopa(int x, int y, int velocidad, Sprite[] sprites) {
+		super(x,y, velocidad,32,48);
 		puntaje = 90;
 		puntajeMatarAMario = -45;
 		estado = new EstadoCaminando(this);
 		TIEMPO_ENFRIAMIENTO = 1000;
 		detener = false;
 		contadorColisiones = 0;
+		spritesKoopa = sprites;
 	}
 	
 	public void setPosicionInicial() {
 		super.setPosicionInicial();
 		estado = new EstadoCaminando(this);
-		sprite = new Sprite(sprite.getModo() + "/Koopagreen.gif", sprite.getModo());
+		sprite = spritesKoopa[0];
 		detener = false;
 		contadorColisiones = 0;
 	}
@@ -54,7 +56,7 @@ public class KoopaTroopa extends Enemigo{
 	}
 	
 	public void atacado() {
-		estado.afectado(this);
+		estado.afectado(this, spritesKoopa);
 	}
 	
 	public void setEstado(EstadoKoopaTroopa estado) {

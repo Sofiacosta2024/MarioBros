@@ -9,8 +9,8 @@ public class TuberiaConPiranha extends Tuberia{
 
 	protected PiranhaPlant piranha;
 	
-	public TuberiaConPiranha(int x, int y, int velocidad, Sprite sprite, PiranhaPlant piranhaPlant) {
-		super(x,y, velocidad, sprite);
+	public TuberiaConPiranha(int x, int y, int velocidad, PiranhaPlant piranhaPlant) {
+		super(x,y, velocidad);
 		piranha = piranhaPlant;
 	}
 

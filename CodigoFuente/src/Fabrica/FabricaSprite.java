@@ -57,7 +57,7 @@ public abstract class FabricaSprite {
 		return spritesGoomba;
 	}
 	
-	public Sprite[] getSpinny() {
+	public Sprite[] getSpiny() {
 		Sprite[] spritesSpiny = new Sprite[1];
 		spritesSpiny[0] = new  Sprite(rutaImagen+"/Spiny.gif");
 		return spritesSpiny;

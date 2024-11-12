@@ -1,5 +1,7 @@
 package Enemigo;
 
+import Fabrica.Sprite;
+
 public class EstadoProyectil extends EstadoKoopaTroopa{
 	
 	public EstadoProyectil(KoopaTroopa koopaTroopa) {
@@ -14,7 +16,7 @@ public class EstadoProyectil extends EstadoKoopaTroopa{
         koopaTroopa.getObserver().actualizarPosicionTamano();
 	    }
 
-	public void afectado(KoopaTroopa koopaTroopa) {
+	public void afectado(KoopaTroopa koopaTroopa, Sprite[] spritesKoopa) {
 		koopaTroopa.retirar();
 		koopaTroopa.notificarObservador();
 	}

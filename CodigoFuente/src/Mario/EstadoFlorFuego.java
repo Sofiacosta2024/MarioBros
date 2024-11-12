@@ -15,33 +15,27 @@ public class EstadoFlorFuego extends EstadoSuperMario{
 		return 50;
 	}
 	
-	public Sprite getSpriteDetenidoDerecha() {
-		Sprite florDetenido = new Sprite(rutaImagen +"/Marioflor-quieto.png", rutaImagen);
-		return florDetenido;
+	public Sprite getSpriteDetenidoDerecha(Sprite[] sprites) {
+		return sprites[18];
 	}
 	
-	public Sprite getSpriteDetenidoIzquierda() {
-		Sprite florDetenido = new Sprite(rutaImagen +"/Marioflor-quietoizq.png", rutaImagen);
-		return florDetenido;
+	public Sprite getSpriteDetenidoIzquierda(Sprite[] sprites) {
+		return sprites[19];
 	}
 	
-	public Sprite getSpriteDerecha() {
-		Sprite florDerecha = new Sprite(rutaImagen +"/Marioflor-caminandoderecha.gif", rutaImagen);
-		return florDerecha;
+	public Sprite getSpriteDerecha(Sprite[] sprites) {
+		return sprites[20];
 	}
 	
-	public Sprite getSpriteIzquierda() {
-		Sprite florIzquierda = new Sprite(rutaImagen +"/Marioflor-caminandoizquierda.gif", rutaImagen);
-		return florIzquierda;
+	public Sprite getSpriteIzquierda(Sprite[] sprites) {
+		return sprites[21];
 	}
 
-	public Sprite getSpriteSaltandoADerecha() {
-		Sprite florSaltandoDerecha = new Sprite(rutaImagen +"/Marioflor-saltando.png", rutaImagen);
-		return florSaltandoDerecha;
+	public Sprite getSpriteSaltandoADerecha(Sprite[] sprites) {
+		return sprites[22];
 	}
 
-	public Sprite getSpriteSaltandoAIzquierda() {
-		Sprite florSaltandoIzquierda = new Sprite(rutaImagen +"/Marioflor-saltandoaizq.png", rutaImagen);
-		return florSaltandoIzquierda;
+	public Sprite getSpriteSaltandoAIzquierda(Sprite[] sprites) {
+		return sprites[23];
 	}
 }

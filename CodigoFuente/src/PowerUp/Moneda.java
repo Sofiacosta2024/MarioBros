@@ -6,8 +6,8 @@ import Mario.Mario;
 
 public class Moneda extends PowerUp {
 	
-	public Moneda(int x, int y, int velocidad, Sprite sprite) {
-		super(x,y, velocidad, sprite,10,14);
+	public Moneda(int x, int y, int velocidad) {
+		super(x,y, velocidad,10,14);
 		puntaje = 5;
 	}
 	

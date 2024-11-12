@@ -7,8 +7,8 @@ import Mario.Mario;
 
 public class LadrilloSolido extends BloqueSolido{
 
-	public LadrilloSolido(int x, int y, int velocidad, Sprite sprite) {
-		super(x,y, velocidad, sprite);
+	public LadrilloSolido(int x, int y, int velocidad) {
+		super(x,y, velocidad);
 	}
 
 	public void interactuar(Mario mario,String direccionColision) {

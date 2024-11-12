@@ -40,10 +40,10 @@ public abstract class EstadoMario {
 	public abstract int puntajeEstrella();
 	public abstract int puntajeFlorFuego();
 	public abstract int puntajeSuperChampinon();
-	public abstract Sprite getSpriteDetenidoDerecha();
-	public abstract Sprite getSpriteDerecha();
-	public abstract Sprite getSpriteIzquierda();
-	public abstract Sprite getSpriteSaltandoADerecha();
-	public abstract Sprite getSpriteSaltandoAIzquierda();
-	public abstract Sprite getSpriteDetenidoIzquierda();
+	public abstract Sprite getSpriteDetenidoDerecha(Sprite[] sprites);
+	public abstract Sprite getSpriteDerecha(Sprite[] sprites);
+	public abstract Sprite getSpriteIzquierda(Sprite[] sprites);
+	public abstract Sprite getSpriteSaltandoADerecha(Sprite[] sprites);
+	public abstract Sprite getSpriteSaltandoAIzquierda(Sprite[] sprites);
+	public abstract Sprite getSpriteDetenidoIzquierda(Sprite[] sprites);
 }

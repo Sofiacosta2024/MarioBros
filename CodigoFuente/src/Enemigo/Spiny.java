@@ -7,8 +7,8 @@ import Mario.Mario;
 public class Spiny extends Enemigo{
 	private Lakitu lakituLanzador;
 	
-	public Spiny(int x, int y, int velocidad, Sprite sprite) {
-		super(x,y, velocidad, sprite,16,24);
+	public Spiny(int x, int y, int velocidad) {
+		super(x,y, velocidad,16,24);
 		puntaje = 60;
 		puntajeMatarAMario = -30;
 	}
