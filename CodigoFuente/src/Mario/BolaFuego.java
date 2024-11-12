@@ -10,7 +10,7 @@ public class BolaFuego extends Entidad {
 	private boolean enMovimiento;
 
 	public BolaFuego(int x, int y, int velocidad, Sprite sprite, char direccionMovimiento, char direccionMovimientoAnterior) {
-		super(x, y, velocidad, sprite, 16, 16);
+		super(x, y, velocidad, 16, 16);
 		this.direccionMovimiento = direccionMovimiento;
 		this.direccionMovimientoAnterior = direccionMovimientoAnterior;
 		enMovimiento = false;

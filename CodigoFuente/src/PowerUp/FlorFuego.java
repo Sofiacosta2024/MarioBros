@@ -8,7 +8,7 @@ import Mario.Mario;
 public class FlorFuego extends PowerUp {
 	
 	public FlorFuego(int x, int y, int velocidad) {
-		super(x,y, velocidad,16,16);
+		super(x,y, velocidad,24,24);
 	}
 	
 	public void afectar(Mario mario) {

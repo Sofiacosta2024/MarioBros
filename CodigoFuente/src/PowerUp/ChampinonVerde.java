@@ -7,7 +7,7 @@ import Mario.Mario;
 public class ChampinonVerde extends PowerUp{
 	
 	public ChampinonVerde(int x, int y, int velocidad) {
-		super(x,y, velocidad,16,16);
+		super(x,y, velocidad,24,24);
 		puntaje = 100;
 	}
 	

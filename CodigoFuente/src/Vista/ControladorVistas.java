@@ -2,6 +2,7 @@ package Vista;
 
 import Mario.*;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import Enemigo.Spiny;
 import Logica.*;
 import Sonido.*;

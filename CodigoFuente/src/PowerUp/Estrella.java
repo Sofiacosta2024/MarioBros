@@ -8,7 +8,7 @@ import Mario.Mario;
 public class Estrella extends PowerUp {
 	
 	public Estrella(int x, int y, int velocidad) {
-		super(x,y, velocidad,14,16);
+		super(x,y, velocidad,22,30);
 		ancho = 14;
 		alto = 16;
 	}
