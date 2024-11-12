@@ -1,0 +1,23 @@
+package Plataforma;
+
+import java.awt.Rectangle;
+
+import Colisionador.ColisionadorVisitorMario;
+import Fabrica.Sprite;
+
+public class Tuberia extends Plataforma {
+	
+	public Tuberia(int x, int y, int velocidad, Sprite sprite) {
+		super(x,y, velocidad, sprite, 24,70);
+		areaColision = new Rectangle(getPosicionX(),getPosicionY(), 24, 70);
+	}
+	
+	public void aceptarVisita(ColisionadorVisitorMario visitor) {
+		visitor.visitarTuberia(this);	
+	}
+
+	public void retirar() {
+		
+	}
+	
+}

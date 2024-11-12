@@ -1,0 +1,122 @@
+[33mf04dc01[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Solucionando problemas finales, revisando
+[33me8eef3b[m limpio carpetas
+[33m904d741[m Agrego todos los sonidos faltantes al juego
+[33mef709fa[m Agrego cosas en los niveles
+[33m26bb74c[m Limpio el codigo de tuberia
+[33m56f3f5f[m Nivel 3 listo
+[33mcb61242[m Nivel 1 y 2 completos
+[33maf031fe[m Merge
+[33m299d27c[m Refactorización del código, Clean Code
+[33mf199076[m elimino doc que no se usa
+[33m3baad9c[m Re-organizo imagenes en carpetas, cambio todas las rutas
+[33m72a7572[m Agrego sonido cuando esta en estado invencible
+[33m710545d[m Modifico formateo de niveles
+[33m39cb13f[m Agrego la bandera y la princesa al parser y al formateo de niveles, agrego sprites y metodos
+[33mdb50d1f[m Añado tiempo al temporizador de Mario Invencible, organizo paquetes y hago Clean Code
+[33m7532bb8[m Arreglamos con Brian el bug del Bloque de Pregunta y hacemos Clean Code
+[33m0ed8d5e[m CLEAN CODE
+[33me398a3f[m Arreglo terminar por temporizador
+[33m482d21b[m Juego termina cuando se acaba el tiempo
+[33ma04450d[m Ajuste en la deteccion por abajo para solucionar bug de quedar atrapado y trepar
+[33m4e01c69[m detectarDireccion BIEN HECHO
+[33mae273a8[m Enemigos caen de plataformas, busco solución a un bug del Spiny
+[33m5a21de9[m Power up en bloque
+[33m6ea75ef[m Resolviendo merge
+[33m6218e95[m Power up dentro de bloque
+[33m052ba85[m Modifico pantalla partida, agrego labels para todos los labels de informacion
+[33madbcf34[m Alargo la duracion de la caida al vacio
+[33m49dfcc0[m Arreglada la colision con la tuberia
+[33m9d340f9[m Re-implemento solucion ranking, encontre un caso que no entra
+[33mda14cdc[m Modifico falla en ranking, el jugador solo se agregaba cuando perdia
+[33m8440b51[m Modifico ranking, para que cuando un jugador juegue dos o más veces, se guarde la jugada con mayor puntaje una sola vez
+[33m41dbf4d[m Modifico ranking, para que cuando un jugador juegue dos veces o más, se guarde una sola vez con el mejor puntaje
+[33m95d3703[m Reiniciar el tiempo cuando mario pierde una vida
+[33mdae75ce[m Mario colisiona correctamente con los enemigos
+[33m7fb7bc7[m MERGE
+[33mc61ee7e[m Resuelvo un bug al reiniciar nivel después de perder las vidas
+[33m70f158c[m Merge branch 'master' of https://github.com/2024-Proyectos-TdP-2C/p-comision-37
+[33me0126f1[m Tratando de resolver colisión
+[33mdaec671[m Mario tira bola de Fuego hacia ambos lados
+[33md3a02a0[m Mantener estado en el siguiente nivel
+[33m7b5f5c8[m Arregaldo conflicto mario sprite quieto :)
+[33m764f240[m MERGE
+[33m42aefa1[m Arreflo bug de los Spinys colisionando
+[33mb6cc58a[m Vuelvo nivel a su normalidad
+[33md3212d1[m Modifico label victoria
+[33m96005da[m Hago visible el nivel en la pantalla partida
+[33md60bf89[m Modifico ControladorVistas, se guarda el ranking cuando se gana o se pierde
+[33m9c55ec0[m Agrego pantalla victoria, muestra el nombre y puntaje al finalizar los tres niveles
+[33me096418[m Probando con otros fondos
+[33m1d449bc[m Añado fondo victoria
+[33m572b4e1[m agrego sprites faltantes especiales
+[33md798ee5[m Subo sprites  faltantes originales
+[33m22ceb71[m Clean Code
+[33m9424a07[m Solucion bug cambio de sprites con los modos al reiniciar
+[33m6ad6cf0[m Merge branch 'master' of https://github.com/2024-Proyectos-TdP-2C/p-comision-37
+[33mfd6c2a5[m Sprite mario
+[33mbaa91eb[m Hago merge
+[33m319fc6b[m Clean Code e intento resolver un bug con los modos
+[33m44a9e46[m Resolviendo merge
+[33m42b183a[m Estado mario al pasar de nivel
+[33mc703a49[m Termino de pulir al estado proyectil del Koopa
+[33md70aca3[m Reconfiguro tiempo y corrigo código
+[33mafaef31[m Mario retiene sus vidas del nivel anterior y se setea un nuevo tiempo en el nuevo nivel
+[33m0fc2ee8[m Koopa mata enemigos
+[33m6da5fd2[m Resuelvo bug del Bloque de Pregunta
+[33m81d9adb[m Resuelvo el merge
+[33m33ab07d[m Soluciono bugs con la Bola de Fuego y con las colisiones con los Spinys lanzados por el Lakitu
+[33md64dcf5[m Arreglando colisión
+[33m248a7e8[m Colisión con tubería
+[33m2133724[m Arreglado scroll en los nuevos niveles y agregado la totalidad de puntajes en las colisiones
+[33m3722a39[m Completando un minimo detalle que faltaba con la caida
+[33m391b11c[m Mario habilitado a lanzar bola de fuego cuando esta colisiona o luego de 3 segundos
+[33me1c57e7[m Agregando puntaje powerUps
+[33m8e3e045[m Modifico nivel
+[33m29a78a2[m Modifico sprites
+[33m39ac86d[m Modifico moneda
+[33m513bee6[m Modifico vacio
+[33maec87cc[m Añado todas las sprites especiales editadas, ademas modifico codigo para que se actualice la pantalla de fondo segun el modo
+[33ma5d2fb1[m Sigo con pasaje de nivel y puntaje de powerups
+[33m5083a35[m El pasaje de nivel va queriendo, falta poco :)
+[33m259d39c[m CLEAN CODE con mis panas y 30 grados de calor, y una tortuga que ahora se pone loca
+[33m6849828[m Modifico pantalla ranking para manejar la situacion de que haya menos de 5 jugadores
+[33m9b03c26[m Logre que se guarde el nombre del usuario en el ranking :)
+[33ma5464f0[m Elimino clase puntaje, no es necesaria, re-implemento pantalla ranking
+[33m8150244[m Elimino clase puntaje, no es necesaria, re-implemento pantalla ranking
+[33mb99fa20[m Añado método para actualizar la información de la partida a medida que avanza la partida
+[33m82d7df3[m Merge branch 'master' of github.com:2024-Proyectos-TdP-2C/p-comision-37
+[33m5334e5b[m agrego un log que muestra los valores de cada plataforma cuando se agrega, noten que para la tubería el producto es negativo, pero cada uno sonpositivos
+[33m50aeb23[m Configuro sincronizacion del nivel del juego en los hilos
+[33m84724f3[m Caida al vacio solucionada pero podria ser mas elegante
+[33m47c59b2[m Ranking se actualiza correctamente, debo lograr setear el nombre bien
+[33m443c782[m Añado jugador al ranking, cuando finaliza la partida
+[33mce4f1c8[m Merge branch 'master' of https://github.com/2024-Proyectos-TdP-2C/p-comision-37
+[33mf913642[m Re-implemento ranking
+[33m36a52ee[m agrego primeros cambios para poder ver las hitbox de los elementos, aunque no scrollea. Si se quiere desactivar, comentar las lineas 71 y 72 de Juego
+[33mc1b040f[m Agrego archivo para guardar los puntajes
+[33m4eaeba8[m Agregando txt para ranking
+[33me93d8ed[m Permito que se guarde el nombre del usuario en jugador, al ingresarlo
+[33me59d9ad[m Modifico detalles de lógica y de gráfica con respecto al último commit
+[33mcc8e2d7[m Lakitu lanza Spyniss
+[33m5b946c8[m Tratando de arreglar colisión con la tubería
+[33m6d8f104[m Mario Invencible mata enemgios de un toque, soluciono un pequeño bug
+[33m507a432[m Merge branch 'master' of https://github.com/2024-Proyectos-TdP-2C/p-comision-37
+[33m9a52efb[m Resuelvo detalles de la implementación de distintos métodos de Mario y Bloque de Pregunta
+[33m69ef7c4[m Modifico diagrama extendido
+[33m5c4098f[m Modificando hitbox de la tubería
+[33mfde8eb3[m Arreglando colisión entre mario y la piranha
+[33mfcf9450[m Modifico un if para colisionar correctamente
+[33m31d04c5[m Merge branch 'master' of https://github.com/2024-Proyectos-TdP-2C/p-comision-37
+[33m124e12f[m Agrego pantalla donde el usuario agrega el nombre, y luego va a la del modo juego que permite acceder a la nueva pantalla ranking
+[33mcca8a78[m Caida al suelo desde plataformas arreglada pero se puede pulir
+[33m786705e[m Agrego inicio sesion imagen
+[33mb64bd7f[m Agrego nuevo fondo mas claro
+[33mede234a[m Agrego imagenes
+[33ma5077c9[m Añado fuente
+[33m8058ade[m Añado fondo
+[33m086fea4[m Agrego imagen fondo
+[33mf8bcf37[m Añado fondo ranking
+[33me79aa3f[m elimino condicionales que hacian que no entrara al metodo detenerSaltio() y agrego deteccion de sentido de movimento anterior al salto para poder saltar de manera dirigida
+[33m9ff11e6[m corrijo llamada erronea al detenerSalto que impedía que mario saltara mas de una vez
+[33m2c849cc[m Merge branch 'master' of https://github.com/2024-Proyectos-TdP-2C/p-comision-37
+[33m85
