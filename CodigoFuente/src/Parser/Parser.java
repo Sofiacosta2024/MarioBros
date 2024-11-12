@@ -96,7 +96,7 @@ public class Parser {
 			nivel.agregarEnemigo(fabricaEntidad.getLakitu(posicionX, posicionY, velocidadNuevaEntidad, fSprite.getLakitu(),juego));
 			break;
 		case "24":
-			nivel.agregarEnemigo(fabricaEntidad.getSpiny(posicionX, posicionY, velocidadNuevaEntidad, fSprite.getSpinny()));  
+			nivel.agregarEnemigo(fabricaEntidad.getSpiny(posicionX, posicionY, velocidadNuevaEntidad, fSprite.getSpiny()));  
 			break;
 		case "25":
 			nivel.agregarEnemigo(fabricaEntidad.getBuzzyBeetle(posicionX, posicionY, velocidadNuevaEntidad, fSprite.getBuzzyBeetle()));    

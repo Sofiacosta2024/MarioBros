@@ -5,8 +5,7 @@ import Fabrica.Sprite;
 
 public class EstadoNormal extends EstadoMario {
 	
-	public EstadoNormal(String rutaImagen) {
-		this.rutaImagen = rutaImagen;
+	public EstadoNormal() {
 		lanzarBola = false;
 	}
 	

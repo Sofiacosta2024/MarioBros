@@ -4,11 +4,8 @@ import Enemigo.Enemigo;
 import Fabrica.Sprite;
 
 public class EstadoInvencible extends EstadoMario {
-	
-	protected String rutaImagen;
 
-	public EstadoInvencible(String rutaImagen) {
-		this.rutaImagen = rutaImagen;
+	public EstadoInvencible() {
 		this.lanzarBola = false;		
 	}
 	
@@ -22,7 +19,7 @@ public class EstadoInvencible extends EstadoMario {
 	
 	public void aplicarEfecto(Mario mario, EstadoInvencible estadoNuevo) {
 		mario.setEstadoAnterior(mario.getEstadoMario());
-		mario.setEstadoMario(new EstadoInvencible(rutaImagen));
+		mario.setEstadoMario(new EstadoInvencible());
 		mario.setCambioEstado(true);
 	}
 	

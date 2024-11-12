@@ -2,8 +2,8 @@ package Mario;
 
 import Fabrica.Sprite;
 public class EstadoFlorFuego extends EstadoSuperMario{
-	public EstadoFlorFuego(String rutaImagen) {
-		super(rutaImagen);
+	
+	public EstadoFlorFuego() {
 		lanzarBola = true;
 	}
 	

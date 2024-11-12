@@ -35,7 +35,7 @@ public class FabricaEntidades{
 		return goomba;
 	}
 	
-	public Spiny getSpinny(int x, int y, int velocidad, Sprite[] sprites) {
+	public Spiny getSpiny(int x, int y, int velocidad, Sprite[] sprites) {
 		Spiny spiny = new Spiny(x,y, velocidad);
 		spiny.setSprite(sprites[0]);
 		return spiny;
@@ -134,7 +134,7 @@ public class FabricaEntidades{
 	}
 	
 	public Mario getMario(int x, int y, int velocidad, Sprite[] sprites, Juego juego) {
-		Mario mario = new Mario(x, y, velocidad, sprite, juego);
+		Mario mario = new Mario(x, y, velocidad, juego, sprites);
 		mario.setSprite(sprites[0]);
 		return mario;
 	}

@@ -11,7 +11,7 @@ public abstract class EstadoMario {
 	
 	public void aplicarEfecto(Mario mario, EstadoInvencible estadoNuevo) {
 		mario.setEstadoAnterior(mario.getEstadoMario());
-		mario.setEstadoMario(new EstadoInvencible(rutaImagen));
+		mario.setEstadoMario(new EstadoInvencible());
 		mario.setCambioEstado(true);
 	}
 	
@@ -22,7 +22,7 @@ public abstract class EstadoMario {
 	
 	public void aplicarEfecto(Mario mario, EstadoNormal estadoNuevo) {
 		mario.setEstadoAnterior(mario.getEstadoMario());
-		mario.setEstadoMario(new EstadoInvencible(rutaImagen));
+		mario.setEstadoMario(new EstadoInvencible());
 		mario.setCambioEstado(true);
 	}
 	

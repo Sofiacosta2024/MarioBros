@@ -6,8 +6,7 @@ import Plataforma.LadrilloSolido;
 
 public class EstadoSuperMario extends EstadoMario {
 
-	public EstadoSuperMario(String rutaImagen) {
-		this.rutaImagen = rutaImagen;
+	public EstadoSuperMario() {
 		lanzarBola = false;
 	}
 	
@@ -16,7 +15,7 @@ public class EstadoSuperMario extends EstadoMario {
 	}
 	
 	public void recibirDaño(Mario mario, Enemigo enemigo) {
-		mario.setEstadoMario(new EstadoNormal(rutaImagen));
+		mario.setEstadoMario(new EstadoNormal());
 		mario.setCambioEstado(true);
 		mario.notificarObservador();
 		mario.setColisionable(false);
