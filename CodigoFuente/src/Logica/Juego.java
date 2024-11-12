@@ -33,13 +33,13 @@ public class Juego {
 
 	public Juego() {
 		jugador = new Jugador(null,0);
-		player=new Sonido();
+		player=Sonido.obtenerInstancia();
 		numeroDeNivel = 1;
 		nivelActual = new Nivel(numeroDeNivel);
 	}
 
 	public void iniciarPartida() {
-		player.playSonidoFondo();
+		player.reproducirSonidoFondo();
 		juegoTerminado = false;
 		controladorVistas.registarControladorEntradas();
 		registrarObservers();
@@ -47,7 +47,7 @@ public class Juego {
 		iniciarHilos();
 		controladorVistas.getPantallaPartida().iniciarTemporizador();
 		controladorVistas.getPantallaPartida().iniciarActualizacionInformacion();
-		player.playClip("/Sonido/Sounds/herewego.wav");
+		player.reproducirSonidoComienzaPartida();
 	}
 
 	public void iniciarHilos() {
@@ -132,10 +132,10 @@ public class Juego {
 			iniciarPartida();
 			getNivelActual().getMario().setMarioEstadoNivel();
 			if(numeroDeNivel!=1)
-				player.playClip("/Sonido/Sounds/yahoo.wav");
+				player.reproducirSonidoPasoNivel();
 		}
 		else {
-			player.playClip("/Sonido/Sounds/ganar.wav");
+			player.reproducirSonidoGanar();
 			controladorVistas.getPantallaVictoria().setPuntajeLabel(getJugador().getPuntaje());
 			controladorVistas.getPantallaVictoria().setNombreGanador(getJugador().getNombre());
 			controladorVistas.mostrarPantallaVictoria();
@@ -154,7 +154,7 @@ public class Juego {
 
 	public void finalizarPartida() {
 		juegoTerminado = true;
-		player.playClip("/Sonido/Sounds/gameover.wav");
+		player.reproducirSonidoGameOver();
 		controladorVistas.mostrarPantallaFinJuego();
 		for(Spiny spiny : nivelActual.getSpinyssLanzados()) {
 			spiny.retirar();

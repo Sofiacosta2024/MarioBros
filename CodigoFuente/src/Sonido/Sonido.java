@@ -15,12 +15,34 @@ public class Sonido {
             instanciaSonido = new Sonido();
         return instanciaSonido;
     }
-    
-    public void playSonidoFondo() {
-        this.cargarSonidoFondo();
-        this.reproducirSonidoFondo();
+    public void reproducirSonidoGanar() {
+    	reproducirClip("/Sonido/Sounds/ganar.wav");
     }
-
+    public void reproducirSonidoPasoNivel() {
+    	reproducirClip("/Sonido/Sounds/yahoo.wav");
+    }
+    public void reproducirSonidoComienzaPartida() {
+    	reproducirClip("/Sonido/Sounds/herewego.wav");
+    }
+    public void reproducirSonidoGameOver() {
+    	reproducirClip("/Sonido/Sounds/gameover.wav");
+    }
+    public void reproducirSonidoFondo() {
+        this.cargarSonidoFondo();
+        this.reproducirLoopSonidoFondo();
+    }
+    public void reproducirSonidoBolaFuego() {
+    	reproducirClip("/Sonido/Sounds/fireball.wav");
+    }
+    public void reproducirSonidoSaltar() {
+    	reproducirClip("/Sonido/Sounds/jump.wav");
+    }
+    public void reproducirSonidoCaeAlVacio() {
+    	reproducirClip("/Sonido/Sounds/mariofalling.wav");
+    }
+    public void reproducirSonidoMorir() {
+    	reproducirClip("/Sonido/Sounds/Mariodie.wav");
+    }
     private void cargarSonidoFondo() {
     	String rutaArchivo="/Sonido/Sounds/fondo.wav";
         try {
@@ -37,7 +59,7 @@ public class Sonido {
         }
     }  
 
-    private void reproducirSonidoFondo() {
+    private void reproducirLoopSonidoFondo() {
         if (clipFondo != null) {
             clipFondo.setFramePosition(0);
             clipFondo.loop(Clip.LOOP_CONTINUOUSLY); 
@@ -45,10 +67,6 @@ public class Sonido {
             System.out.println("Clip de fondo no está inicializado.");
         }
     }
-    public void reproducirClipMoneda() {
-    	
-    }
-    
     public void reproducirClip(String rutaArchivo) {
         try {
             InputStream audioStream = getClass().getResourceAsStream(rutaArchivo);
@@ -65,7 +83,6 @@ public class Sonido {
             System.out.println("Error al reproducir el efecto: " + e.getMessage());
         }
     }
-
     public void detenerSonidoFondo() {
         if (clipFondo != null) {
             clipFondo.stop();

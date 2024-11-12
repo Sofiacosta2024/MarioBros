@@ -137,7 +137,7 @@ public class Mario extends Entidad implements EntidadMario{
 
 	public void saltar() {
 		if(progreso == 0){
-			player.playClip("/Sonido/Sounds/jump.wav");
+			player.reproducirSonidoSaltar();
 			saltando = true;
 			posInicialSalto = getPosicionY();
 			sentidoMovimientoMario = 'w';
@@ -156,7 +156,7 @@ public class Mario extends Entidad implements EntidadMario{
 	}
 
 	public void morirPorVacio() {
-		player.playClip("/Sonido/Sounds/mariofalling.wav");
+		player.reproducirSonidoCaeAlVacio();
 		saltando=true;
 		progreso=Math.PI/2;
 		cayendoVacio=true;
@@ -249,13 +249,14 @@ public class Mario extends Entidad implements EntidadMario{
 				bolaFuego.notificarObservador();
 				Thread hiloBola = new Thread(bolaFuego);
 				hiloBola.start();
+				player.reproducirSonidoBolaFuego();
 			}
 		}
 		return null;
 	}
 
 	public void decrementarVida() {
-		player.playClip("/Sonido/Sounds/Mariodie.wav");
+		player.reproducirSonidoMorir();
 		vidas--;
 	}
 	public void resetearPosicion() {

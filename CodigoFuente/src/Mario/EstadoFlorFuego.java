@@ -1,17 +1,13 @@
 package Mario;
 
 import Fabrica.Sprite;
-import Sonido.*;
 public class EstadoFlorFuego extends EstadoSuperMario{
-private Sonido player;
 	public EstadoFlorFuego(String rutaImagen) {
 		super(rutaImagen);
 		lanzarBola = true;
-		player=new Sonido();
 	}
 	
 	public boolean lanzarBolaFuego() {
-		player.playClip("/Sonido/Sounds/fireball.wav");
 		return lanzarBola;
 	}
 	
