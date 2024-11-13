@@ -5,7 +5,6 @@ import Fabrica.Sprite;
 import Logica.*;
 import Vista.*;
 import java.lang.Math;
-
 import Colisionador.ColisionadorVisitorMario;
 import Threads.TemporizadorEstadoEstrella;
 
@@ -13,25 +12,15 @@ public class Mario extends Entidad implements EntidadMario{
 
 	protected int vidas;
 	protected int monedas;
-	protected final int MINIMOY=60;
-	protected boolean cayendoVacio;
-	protected final int suelo = 60;
+	protected boolean cayendoVacio, enSuelo,saltando,
+						puedeDerecha,puedeIzquierda,cambioEstado;
 	protected EstadoMario estado,anterior;
-	protected boolean enSuelo; 
-	protected double gravedad;
-	protected int velocidadSalto;
-	protected boolean puedeDerecha,puedeIzquierda,cambioEstado;
 	protected char sentidoMovimientoMario;
 	protected double progreso;
-	protected boolean saltando;
-	protected int posInicialSalto;
-	protected int tiempoCaida; 
-	protected int factorVelocidad;
+	protected int posInicialSalto,velocidadSalto,limiteDerecha, limiteIzquierda; 
 	private Juego juego;
-	protected int limiteDerecha, limiteIzquierda; 
 	protected String nombre;
 	protected int puntaje;
-	protected Mario personaje;
 	protected Sprite sprites[], spritesBolaFuego[];
 	protected int VELDERECHA = 5;
 	protected int VELIZQUIERDA = -5;
@@ -39,29 +28,28 @@ public class Mario extends Entidad implements EntidadMario{
 	public Mario(int x, int y, int velocidad, Juego juego, Sprite[] sprites, Sprite[] spritesBolaFuego) {
 		super(x,y, velocidad,16,16);
 		estado = new EstadoNormal();
-		anterior=estado;
+		anterior = estado;
 		vidas = 3;
 		enSuelo = true;
-		gravedad = 0.5; 
 		velocidadSalto = 30; 
-		this.velocidad=velocidad;
-		puedeDerecha=true;
-		puedeIzquierda=true;
-		puntaje=0;
-		cambioEstado=false;
-		cayendoVacio=false;
+		this.velocidad = velocidad;
+		puedeDerecha = true;
+		puedeIzquierda = true;
+		puntaje = 0;
+		cambioEstado = false;
+		cayendoVacio = false;
 		posInicialSalto = getPosicionY();
 		progreso = 0;
 		saltando = false;
-		factorVelocidad = 0;
-		limiteDerecha=5000;
-		limiteIzquierda=0;
+		limiteDerecha = 5000;
+		limiteIzquierda = 0;
 		this.juego = juego;
 		this.sprites = sprites;
 		this.spritesBolaFuego = spritesBolaFuego;
 	}
 
 	public void actualizarMovimientoMario(char direccion) {
+		int suelo=60;
 		int desplazamientoX = 0;
 		int desplazamientoY = 0;
 		posicionX += velocidad;
@@ -90,7 +78,7 @@ public class Mario extends Entidad implements EntidadMario{
 			progreso += 0.15; 		
 			saltando = progreso <= Math.PI;
 			actualizarAreaColision();
-			if(progreso > 0 && getPosicionY() < MINIMOY && !cayendoVacio){
+			if(progreso > 0 && getPosicionY() < suelo && !cayendoVacio){
 				detenerSalto();
 				setPosicionY(posInicialSalto);
 				actualizarAreaColision();
@@ -331,10 +319,6 @@ public class Mario extends Entidad implements EntidadMario{
 		this.velocidadSalto=velocidadSalto;
 	}
 
-	public void setGravedad(double gravedad) {
-		this.gravedad=gravedad;
-	}
-
 	public void setLimiteDerecha(int i) {
 		limiteDerecha = i;
 	}
@@ -351,10 +335,6 @@ public class Mario extends Entidad implements EntidadMario{
 		this.puntaje = puntaje;
 		if(this.puntaje < 0)
 			this.puntaje = 0;
-	}
-	
-	public void setPersonaje(Mario m) {
-		personaje = m;
 	}
 	
 	public void setNombre(String nombre) {
@@ -386,10 +366,6 @@ public class Mario extends Entidad implements EntidadMario{
 		return velocidadSalto;
 	}
 
-	public double getGravedad() {
-		return gravedad;
-	}
-
 	public boolean getEnSuelo() {
 		return enSuelo;
 	}
@@ -408,9 +384,5 @@ public class Mario extends Entidad implements EntidadMario{
 	
 	public String getNombre() {
 		return nombre;
-	}
-	
-	public Mario getPersonaje() {
-		return personaje;
 	}
 }
