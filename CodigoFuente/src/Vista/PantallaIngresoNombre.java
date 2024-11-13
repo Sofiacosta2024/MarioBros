@@ -18,6 +18,7 @@ public class PantallaIngresoNombre extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private ControladorDeVistas controladorVistas;
     private JLabel imagenFondo;
+	private JLabel labelIngresoNombre;
     private JButton botonEnviar;
     private JTextField campoNombre;
     private Juego juego;
@@ -28,11 +29,18 @@ public class PantallaIngresoNombre extends JPanel {
         juego=j;
         setLayout(null);
         agregarFondo();
+        agregarLabelIngresoNombre();
         agregarCampoNombre();
         agregarBotonEnviar();
     }
-
-    protected void agregarFondo() {
+    public void agregarLabelIngresoNombre() {
+        labelIngresoNombre = new JLabel("Ingrese su nombre para entrar al ranking");
+        labelIngresoNombre.setFont(new Font("Press Start 2P", Font.BOLD, 18));
+        labelIngresoNombre.setForeground(Color.WHITE);
+        labelIngresoNombre.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150, ConstantesVistas.PANEL_ALTO - 350, 300, 30);
+        imagenFondo.add(labelIngresoNombre);
+    }
+    public void agregarFondo() {
         imagenFondo = new JLabel();
         ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource("/Imagenes/Fondos/inicio.jpg")); 
         Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
@@ -42,13 +50,13 @@ public class PantallaIngresoNombre extends JPanel {
         add(imagenFondo);
     }
 
-    protected void agregarCampoNombre() {
+    public void agregarCampoNombre() {
         campoNombre = new JTextField();
         campoNombre.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 100, ConstantesVistas.PANEL_ALTO - 300, 200, 30);
         add(campoNombre);
     }
 
-    protected void agregarBotonEnviar() {
+    public void agregarBotonEnviar() {
         botonEnviar = new JButton("EMPEZAR");
         botonEnviar.setFont(new Font("Press Start 2P", Font.BOLD, 18));
         decorarBotonEnviar();
@@ -56,14 +64,14 @@ public class PantallaIngresoNombre extends JPanel {
         imagenFondo.add(botonEnviar);
     }
 
-    protected void decorarBotonEnviar() {
+    public void decorarBotonEnviar() {
     	botonEnviar.setBackground(Color.RED);
     	botonEnviar.setForeground(Color.WHITE);
         botonEnviar.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 100, ConstantesVistas.PANEL_ALTO - 250, 200, 50);
         botonEnviar.setFocusable(false);
     }
 
-    protected void registrarOyenteBotonEnviar() {
+    public void registrarOyenteBotonEnviar() {
         botonEnviar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String nombre = campoNombre.getText();

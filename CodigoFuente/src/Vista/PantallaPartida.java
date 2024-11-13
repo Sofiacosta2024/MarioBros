@@ -162,7 +162,7 @@ public class PantallaPartida extends JPanel {
 	
 	public void agregarImagenFondo() {
 		imagenFondo= new JLabel();
-		ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource(juego.getRutaModo()+"/FondoJuego.jpg"));
+		ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource(juego.getRutaModo()+"/Fondojuego.jpg"));
 		Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_PARTIDA_ANCHO*6, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
 		ImageIcon iconoImagenEscalado = new ImageIcon(imagenEscalada);
 		imagenFondo.setIcon(iconoImagenEscalado);

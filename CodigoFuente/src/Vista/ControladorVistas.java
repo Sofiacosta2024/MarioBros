@@ -178,10 +178,9 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 		panelPartida.limpiarEntidadesGraficas();
 	}
 	
-	public void seleccionarImagenFondo() {
+	public void seleccionarImagenFondoPartida() {
 		panelPartida.agregarImagenFondo();
 	}
-	
 	public void setTiempoNivel() {
 		panelPartida.setTiempoNivel(panelPartida.getTiempoNivelInicial());
 	}

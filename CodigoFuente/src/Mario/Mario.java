@@ -163,7 +163,6 @@ public class Mario extends Entidad implements EntidadMario{
 			direccionMovimiento = SALTO;
 			direccionMovimientoAnterior = direccionMovimiento;
 		}
-
 	}
 
 	public void moverDerecha() {
