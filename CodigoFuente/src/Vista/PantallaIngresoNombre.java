@@ -21,7 +21,6 @@ public class PantallaIngresoNombre extends JPanel {
     private JButton botonEnviar;
     private JTextField campoNombre;
     private Juego juego;
-    private Puntuacion jugadorRanking;
     
     public PantallaIngresoNombre(ControladorDeVistas controladorVistas,Juego j) {
         this.controladorVistas = controladorVistas;
@@ -70,14 +69,14 @@ public class PantallaIngresoNombre extends JPanel {
                 String nombre = campoNombre.getText();
                 if (!nombre.isEmpty()) {
                     mostrarMensaje("Hola, " + nombre + "!");
-                    //juego.getNivelActual().getMario().setNombre(nombre);
-                    controladorVistas.accionarPantallaAlIngresar();
+                    juego.getNivelActual().getMario().setNombre(nombre);
+                    controladorVistas.accionarPantallaAlIngresarNombre();
                 } else {
                     mostrarMensaje("Por favor, ingresa un nombre.");
                 }
+                System.out.println(nombre);
             }
         });
-        
     }
     private void mostrarMensaje(String mensaje) {
         JPanel panel = new JPanel();

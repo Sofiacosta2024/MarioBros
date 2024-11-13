@@ -1,5 +1,2 @@
-rochi 365
-A 5
-a 5
-d 0
-fg 0
+null 45
+ANGE 45

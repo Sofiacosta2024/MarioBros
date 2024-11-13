@@ -12,29 +12,25 @@ public class ControladorEntradas implements KeyListener {
 		this.mario = mario;
 	}
 
-	public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
 		int tecla = e.getKeyCode();
 		switch(tecla) {
-		case KeyEvent.VK_D:{
+		case KeyEvent.VK_D:
 			mario.moverDerecha();
 			break;
-		}
-		case KeyEvent.VK_A:{
+		case KeyEvent.VK_A:
 			mario.moverIzquierda();
 			break;
-		}
-		case KeyEvent.VK_W:{
+		case KeyEvent.VK_W:
 			mario.saltar();
 			break;
-		}
-		case KeyEvent.VK_SPACE:{
+		case KeyEvent.VK_SPACE:
 			mario.lanzarBolaFuego(); 
 			break;
 		}
-		}
 	}
-
-	public void keyReleased(KeyEvent e) {
+    
+    public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_A) {
 			mario.actualizarMovimientoMario('q');
 		}

@@ -15,12 +15,7 @@ public class Mario extends Entidad implements EntidadMario{
 	protected int monedas;
 	protected final int MINIMOY=60;
 	protected boolean cayendoVacio;
-	protected final char QUIETO = 'q';
-	protected final char DERECHA = 'd';
-	protected final char IZQUIERDA = 'a';
-	protected final char SALTO = 'w';
 	protected final int suelo = 60;
-	protected char direccionMovimiento, direccionMovimientoAnterior;
 	protected EstadoMario estado,anterior;
 	protected boolean enSuelo; 
 	protected double gravedad;

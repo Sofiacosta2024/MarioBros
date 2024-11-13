@@ -5,8 +5,7 @@ import Fabrica.Sprite;
 import Logica.Entidad;
 
 public class BolaFuego extends Entidad {
-	private char direccionMovimiento;
-	private char direccionMovimientoAnterior;
+	
 	private boolean enMovimiento;
 
 	public BolaFuego(int x, int y, int velocidad, Sprite sprite, char direccionMovimiento, char direccionMovimientoAnterior) {
