@@ -15,6 +15,11 @@ public abstract class Entidad implements EntidadLogica{
 	protected Sonido sonido;
 	protected boolean  esColisionable;
 	protected Rectangle areaColision; 
+	public final char QUIETO = 'q';
+	public final char DERECHA = 'd';
+	public final char IZQUIERDA = 'a';
+	public final char SALTO = 'w';
+	public char direccionMovimiento, direccionMovimientoAnterior;
 
 	public Entidad(int x, int y, int velocidad, int anchoHitBox, int altoHitBox) {
 		posicionX = x;

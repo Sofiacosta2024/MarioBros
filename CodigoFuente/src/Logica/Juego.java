@@ -62,21 +62,21 @@ public class Juego {
 		hiloMundo.detenerHilo();
 	}
 
-	public void seleccionarModoOriginal() {
-		if(rutaModo == "/Imagenes/Sprites/Especial")
+	public void seleccionarModo(String rutaNuevaModo) {
+		if(rutaModo != rutaNuevaModo) {
 			this.getControladorVista().limpiezaDeEntidadesGraficas();
-		fabricaSprite = new FabricaOriginal();
-		rutaModo="/Imagenes/Sprites/Original";
-		fabricaEntidades = new FabricaEntidades(fabricaSprite);
-		this.getControladorVista().seleccionarImagenFondo();
-		cargarNivel();
-	}
-
-	public void seleccionarModoEspecial() {
-		if(rutaModo == "/Imagenes/Sprites/Original")
-			this.getControladorVista().limpiezaDeEntidadesGraficas();
-		fabricaSprite = new FabricaEspecial();
-		rutaModo="/Imagenes/Sprites/Especial";
+		}
+		
+		if(rutaNuevaModo == "/Imagenes/Sprites/Original") {
+			fabricaSprite = new FabricaOriginal();
+			rutaModo = rutaNuevaModo;
+		}
+		else
+			if(rutaNuevaModo == "/Imagenes/Sprites/Especial") {
+				fabricaSprite = new FabricaEspecial();
+				rutaModo = rutaNuevaModo;
+			}
+		
 		fabricaEntidades = new FabricaEntidades(fabricaSprite);
 		this.getControladorVista().seleccionarImagenFondo();
 		cargarNivel();

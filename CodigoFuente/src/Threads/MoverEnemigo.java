@@ -63,8 +63,8 @@ public class MoverEnemigo extends Thread{
 		try {
 			for (Enemigo enemigo : juego.getNivelActual().getEnemigos()) {
 				if (!enemigo.estaEnEnfriamiento() && enemigo.colisionable()) {
-					String direccionEnemigo = enemigo.getMovimiento();
-					if(direccionEnemigo.equals("IZQUIERDA"))
+					char direccionEnemigo = enemigo.getMovimiento();
+					if(direccionEnemigo == enemigo.IZQUIERDA)
 						enemigo.mover(-1, 0);
 					else
 						enemigo.mover(1, 0);  
@@ -73,8 +73,8 @@ public class MoverEnemigo extends Thread{
 			ArrayList<Spiny> spinyss = new ArrayList<>(juego.getNivelActual().getSpinyssLanzados());
 			for (Spiny spiny : spinyss) {
 				if (!spiny.estaEnEnfriamiento() && spiny.colisionable()) {
-					String direccionEnemigo = spiny.getMovimiento();
-					if(direccionEnemigo.equals("IZQUIERDA"))
+					char direccionEnemigo = spiny.getMovimiento();
+					if(direccionEnemigo == spiny.IZQUIERDA)
 						spiny.mover(-1, 0);
 					else
 						spiny.mover(1, 0);  
@@ -85,7 +85,7 @@ public class MoverEnemigo extends Thread{
 				if(bolaFuego.enMovimiento()) {
 					char direccion = bolaFuego.getDireccionMovimiento();
 					char direccionAnterior = bolaFuego.getDireccionMovimientoAnterior();
-					if (direccion == 'd' || (direccion == 'q' && direccionAnterior == 'd')) {
+					if (direccion == bolaFuego.DERECHA || (direccion == bolaFuego.QUIETO && direccionAnterior == bolaFuego.DERECHA)) {
 						bolaFuego.mover(1, 0);
 					}
 					else { 

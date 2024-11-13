@@ -9,7 +9,6 @@ import Sonido.*;
 
 public abstract class Enemigo extends Entidad{
 	
-	protected String movimiento;
 	protected boolean enEnfriamiento = false;
 	protected long tiempoUltimaColision;
 	protected long TIEMPO_ENFRIAMIENTO = 90;
@@ -21,7 +20,7 @@ public abstract class Enemigo extends Entidad{
 	
 	public Enemigo(int x, int y, int velocidad, int anchoHitBox, int altoHitBox) {
 		super(x, y, velocidad, anchoHitBox,altoHitBox);
-		movimiento = "IZQUIERDA";
+		direccionMovimiento = IZQUIERDA;
 		posicionXInicial = x;
 		posicionYInicial = y;
 		sobrePlataforma = false;
@@ -90,16 +89,16 @@ public abstract class Enemigo extends Entidad{
 			sobreSuelo = true;
 	}
 
-	public void setMovimiento(String movimiento) {
-		this.movimiento = movimiento;
+	public void setMovimiento(char movimiento) {
+		direccionMovimiento = movimiento;
 	}
 
 	public void detenerOActivarCaida(boolean enPlataforma) {
 		sobrePlataforma = enPlataforma;
 	}
 
-	public String getMovimiento() {
-		return movimiento;
+	public char getMovimiento() {
+		return direccionMovimiento;
 	}
 
 	public int getPuntaje() {
