@@ -40,7 +40,10 @@ public class Ranking {
 		            }
 		            String nombre = partes[0];
 		            int puntaje = Integer.parseInt(partes[1]);
-		            ranking.add(numeroLinea, new Puntuacion(nombre,puntaje));
+		            Puntuacion jugador=new Puntuacion();
+		            ranking.add(numeroLinea, jugador);
+		            jugador.setNombre(nombre);
+		            jugador.setPuntaje(puntaje);
 		            numeroLinea++;
 		        }
 		    } catch (IOException e) {
@@ -84,10 +87,13 @@ public class Ranking {
 	}
 	
 	public void agregarJugador(String nombre,int puntaje) {
-		Puntuacion nuevoJugador=new Puntuacion(nombre, puntaje);
+		Puntuacion nuevoJugador=new Puntuacion();
+		nuevoJugador.setNombre(nombre);
+		nuevoJugador.setPuntaje(puntaje);
 		boolean jugadorExiste = false;
+		if(ranking.size()>0) {
 	    for (Puntuacion jugador : ranking) {
-	        if (nuevoJugador.getNombre().equals(jugador.getNombre())) {
+	        if (nombre.equals(jugador.getNombre())) {
 	            jugadorExiste = true;
 	            if (jugador.getPuntaje() > nuevoJugador.getPuntaje()) {
 	                nuevoJugador.setPuntaje(jugador.getPuntaje());
@@ -95,6 +101,7 @@ public class Ranking {
 	            break;
 	        }
 	    }
+		}
 	    if (!jugadorExiste) {
 	        ranking.add(nuevoJugador);
 	    }

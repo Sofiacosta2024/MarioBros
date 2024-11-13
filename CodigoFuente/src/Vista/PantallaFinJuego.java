@@ -39,7 +39,7 @@ public class PantallaFinJuego extends JPanel {
 		asignarImagenBoton(botonSalir, "/Imagenes/Botones/BotonFinishNuevo.png");
 		botonSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controladorVistas.accionarPantallaAlSalir();
+				controladorVistas.accionarPantallaFinDeJuegoSalir();
 			}
 		});
 		imagenFondo.add(botonSalir);

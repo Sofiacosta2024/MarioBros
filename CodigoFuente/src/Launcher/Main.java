@@ -10,6 +10,6 @@ public class Main {
 				Juego juego = new Juego();
 				ControladorVistas controladorVistas = new ControladorVistas(juego);
 				juego.setControladorVista(controladorVistas);
-				controladorVistas.mostrarPantallaIngreso();
+				controladorVistas.mostrarPantallaModoJuego();
 		}
 }

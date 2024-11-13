@@ -73,7 +73,6 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void mostrarPantallaPartida() {
-		//guardarRanking();
 		ventana.setContentPane(panelPartida);
 		panelPartida.requestFocus();
 		panelPartida.addKeyListener(controladorEntradas);
@@ -81,7 +80,6 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void mostrarPantallaFinJuego() {
-		guardarRanking();
 		ventana.setContentPane(panelFinJuego);
 		refrescar();
 	}
@@ -96,18 +94,19 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 		refrescar();
 	}
 
-	public void mostrarPantallaIngreso() {
+	public void mostrarPantallaIngresoNombre() {
 		ventana.setContentPane(panelIngresoNombre);
 		refrescar();
 	}
 
 	public void mostrarPantallaRanking() {
 		ventana.setContentPane(panelRanking);
+		refrescar();
 	}
 
 	public void mostrarPantallaVictoria() {
-		guardarRanking();
 		ventana.setContentPane(panelVictoria);
+		refrescar();
 	}
 
 	public void reiniciarPantallas() {
@@ -141,15 +140,16 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 		mostrarPantallaRanking();
 	}
 
-	public void accionarPantallaAlIngresar() {
-		mostrarPantallaModoJuego();
-		refrescar();
-	}
-
-	public void accionarPantallaAlSalir() {
+	public void accionarPantallaAlIngresarNombre() {
+		guardarRanking();
 		reiniciarPantallas();
 		juego.salirDelJuego();
 		reiniciarListaDeObservers();
+		mostrarPantallaModoJuego();
+	}
+
+	public void accionarPantallaFinDeJuegoSalir() {
+		mostrarPantallaIngresoNombre();
 	}
 
 	public void accionarModoOriginal() {		

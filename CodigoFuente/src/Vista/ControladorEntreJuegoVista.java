@@ -10,6 +10,6 @@ public interface ControladorEntreJuegoVista {
 	public void mostrarPantallaInicial();
 	public void mostrarPantallaRanking();
 	public void mostrarPantallaModoJuego();
-	public void mostrarPantallaIngreso();
+	public void mostrarPantallaIngresoNombre();
 	public void mostrarPantallaVictoria();
 }
