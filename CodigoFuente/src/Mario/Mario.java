@@ -52,14 +52,16 @@ public class Mario extends Entidad implements EntidadMario{
 		int suelo=60;
 		int desplazamientoX = 0;
 		int desplazamientoY = 0;
-		posicionX += velocidad;
+		
 		if(direccion == DERECHA && puedeDerecha) {
 			desplazamientoX += 50;
 			puedeIzquierda = true;
+			//posicionX += velocidad;
 		}
 		if(direccion == IZQUIERDA && puedeIzquierda) {
 			desplazamientoX -= 50;
 			puedeDerecha = true;
+			//posicionX += velocidad;
 		}
 		if(direccion == SALTO) {
 			desplazamientoY -= velocidadSalto;
@@ -167,7 +169,8 @@ public class Mario extends Entidad implements EntidadMario{
 	public void moverDerecha() {
 		if(puedeDerecha) {
 			sentidoMovimientoMario = DERECHA;
-			velocidad = VELDERECHA;
+			//velocidad = VELDERECHA;
+			posicionX += 5;
 			actualizarAreaColision();
 		}
 	}
@@ -175,7 +178,8 @@ public class Mario extends Entidad implements EntidadMario{
 	public void moverIzquierda() {
 		if(posicionX>=40 && puedeIzquierda) {
 			sentidoMovimientoMario = IZQUIERDA;
-			velocidad = VELIZQUIERDA;
+			//velocidad = VELIZQUIERDA;
+			posicionX -= 5;
 			actualizarAreaColision();
 		}
 	}
