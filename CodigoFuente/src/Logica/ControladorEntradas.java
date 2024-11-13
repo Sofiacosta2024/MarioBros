@@ -32,7 +32,7 @@ public class ControladorEntradas implements KeyListener {
     
     public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_A) {
-			mario.actualizarMovimientoMario('q');
+			mario.actualizarMovimientoMario(mario.QUIETO);
 		}
 	}
 

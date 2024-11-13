@@ -198,6 +198,22 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 			  }
 	}
 	
+	public void actualizarPuntajePantallaPartida() {
+		panelPartida.actualizarLabelPuntaje();
+	}
+	
+	public void actualizarVidasPantallaPartida(EntidadMario mario) {
+		panelPartida.actualizarLabelVidas(mario);
+	}
+	
+	public void actualizarlNivelPantallaPartida() {
+		panelPartida.actualizarLabelNivel();
+	}
+	
+	public void actualizarTiempoPantallaPartida() {
+		panelPartida.actualizarLabelTiempo();
+	}
+	
 	public void setPuntajeLabel(int puntaje) {
 		panelVictoria.setPuntajeLabel(puntaje);
 	}
