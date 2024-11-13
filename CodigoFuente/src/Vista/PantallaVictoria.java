@@ -69,6 +69,7 @@ public class PantallaVictoria extends JPanel {
         botonMenuPrincipal.revalidate();
         botonMenuPrincipal.repaint();
     }
+    
     public void agregarEtiquetaGanador() {
     	agregarEtiquetaFelicidades();
     	agregarEtiquetaGanar();

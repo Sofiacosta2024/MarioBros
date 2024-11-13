@@ -6,7 +6,6 @@ import Threads.MoverMario;
 import Vista.*;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
-
 import Colisionador.ColisionadorVisitorBolaFuego;
 import Colisionador.ColisionadorVisitorEnemigo;
 import Colisionador.ColisionadorVisitorMario;
