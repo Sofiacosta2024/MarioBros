@@ -30,21 +30,21 @@ public class ColisionadorVisitorEnemigo {
 	public void visitarSpiny(Spiny spiny) {
 		if(spiny.getLakituLanzador() != entidadColisionable && entidadColisionable != spiny) {
 			if(!entidadColisionable.estaEnEnfriamiento()) {
-				if(entidadColisionable.getMovimiento().equals("IZQUIERDA")) {
+				if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
 					entidadColisionable.mover(5, 0);
-					entidadColisionable.setMovimiento("DERECHA");
+					entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
 				}
 				else {
 					entidadColisionable.mover(-5, 0);
-					entidadColisionable.setMovimiento("IZQUIERDA");
+					entidadColisionable.setMovimiento(entidadColisionable.IZQUIERDA);
 				}
-				if(spiny.getMovimiento().equals("IZQUIERDA")) {
+				if(spiny.getMovimiento() == entidadColisionable.IZQUIERDA) {
 					spiny.mover(5, 0);
-					spiny.setMovimiento("DERECHA");
+					spiny.setMovimiento(entidadColisionable.DERECHA);
 				}
 				else {
 					spiny.mover(-5, 0);
-					spiny.setMovimiento("IZQUIERDA");
+					spiny.setMovimiento(entidadColisionable.IZQUIERDA);
 				}
 				entidadColisionable.getObserver().actualizarPosicionTamano();
 				entidadColisionable.activarEnfriamiento();
@@ -58,13 +58,13 @@ public class ColisionadorVisitorEnemigo {
 		for(Spiny spiny : lakitu.getSpinyssLanzados()) {
 			if(entidadColisionable != spiny && lakitu != entidadColisionable) {
 				if(!entidadColisionable.estaEnEnfriamiento()) {
-					if(entidadColisionable.getMovimiento().equals("IZQUIERDA")) {
+					if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
 						entidadColisionable.mover(5, 0);
-						entidadColisionable.setMovimiento("DERECHA");
+						entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
 					}
 					else {
 						entidadColisionable.mover(-5, 0);
-						entidadColisionable.setMovimiento("IZQUIERDA");
+						entidadColisionable.setMovimiento(entidadColisionable.IZQUIERDA);
 					}
 					entidadColisionable.getObserver().actualizarPosicionTamano();
 					entidadColisionable.activarEnfriamiento();
@@ -76,13 +76,13 @@ public class ColisionadorVisitorEnemigo {
 	public void visitarTuberiaPiranha(TuberiaConPiranha  tuberiaConPiranha) {
 		if(entidadColisionable!= tuberiaConPiranha.getPiranha()) {
 			if(!entidadColisionable.estaEnEnfriamiento()) {
-				if(entidadColisionable.getMovimiento().equals("IZQUIERDA")) {
+				if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
 					entidadColisionable.mover(5, 0);
-					entidadColisionable.setMovimiento("DERECHA");
+					entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
 				}
 				else {
 					entidadColisionable.mover(-5, 0);
-					entidadColisionable.setMovimiento("IZQUIERDA");
+					entidadColisionable.setMovimiento(entidadColisionable.IZQUIERDA);
 				}
 				entidadColisionable.getObserver().actualizarPosicionTamano();
 				entidadColisionable.activarEnfriamiento();
@@ -104,19 +104,19 @@ public class ColisionadorVisitorEnemigo {
 	    if(!entidadColisionable.estaEnEnfriamiento()) {
 	        if(direccion.equals("ARRIBA")) {
 	            entidadColisionable.detenerOActivarCaida(true);
-	            if(entidadColisionable.getMovimiento().equals("IZQUIERDA")) {
+	            if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
 	                entidadColisionable.mover(-2, 0);
-	            } else if(entidadColisionable.getMovimiento().equals("DERECHA")) {
+	            } else if(entidadColisionable.getMovimiento() == entidadColisionable.DERECHA) {
 	                entidadColisionable.mover(2, 0);
 	            }
 	        }
 	        else {
-	        	if(entidadColisionable.getMovimiento().equals("DERECHA")) {
+	        	if(entidadColisionable.getMovimiento() == entidadColisionable.DERECHA) {
 	                entidadColisionable.mover(-5, 0); 
-	                entidadColisionable.setMovimiento("IZQUIERDA");
+	                entidadColisionable.setMovimiento(entidadColisionable.IZQUIERDA);
 	            } else {
 	                entidadColisionable.mover(5, 0); 
-	                entidadColisionable.setMovimiento("DERECHA");
+	                entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
 	            }
 	        }
 	        entidadColisionable.activarEnfriamiento();

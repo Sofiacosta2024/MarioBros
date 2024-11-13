@@ -20,7 +20,7 @@ public class PiranhaPlant extends Enemigo{
 		puntajeMatarAMario = -30;
 		posicionInicialY = y-15;
 		limiteSuperiorY = y + getAlto();
-		movimiento = "DERECHA";
+		direccionMovimiento = DERECHA;
 		temporizador = new Timer(4000, e -> alternarVisibilidad());
 		temporizador.start();
 	}

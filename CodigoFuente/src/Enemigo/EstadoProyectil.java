@@ -27,13 +27,13 @@ public class EstadoProyectil extends EstadoKoopaTroopa{
 			enemigo.notificarObservador();
 		}
 		else {
-			if(enemigo.getMovimiento().equals("IZQUIERDA")) {
+			if(enemigo.getMovimiento() == enemigo.IZQUIERDA) {
 				enemigo.mover(5, 0);
-				enemigo.setMovimiento("DERECHA");
+				enemigo.setMovimiento(enemigo.DERECHA);
 			}
 			else {
 				enemigo.mover(-5, 0);
-				enemigo.setMovimiento("IZQUIERDA");
+				enemigo.setMovimiento(enemigo.IZQUIERDA);
 			}
 		}
 	}
