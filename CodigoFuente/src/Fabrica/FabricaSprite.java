@@ -47,7 +47,7 @@ public abstract class FabricaSprite {
 	public Sprite[] getKoopa() {
 		Sprite[] spritesKoopa = new Sprite[2];
 		spritesKoopa[0] = new Sprite(rutaImagen + "/Koopagreen.gif");
-		spritesKoopa[1] = new Sprite(rutaImagen + "KoopaTroopaProyectil.png");
+		spritesKoopa[1] = new Sprite(rutaImagen + "/KoopaTroopaProyectil.png");
 		return spritesKoopa;
 	}
 	
