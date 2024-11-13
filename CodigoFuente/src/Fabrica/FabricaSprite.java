@@ -18,8 +18,8 @@ public abstract class FabricaSprite {
 		Sprite[] spritesMario = new Sprite[24];
 		spritesMario[0] = new Sprite(rutaImagen + "/Marioquieto.png");
 		spritesMario[1] = new Sprite(rutaImagen + "/Marioquietoizq.png");
-		spritesMario[2] = new Sprite(rutaImagen + "/Mariocaminando.png");
-		spritesMario[3] = new Sprite(rutaImagen + "/Mariocaminandoizq.png");
+		spritesMario[2] = new Sprite(rutaImagen + "/Mariocaminando.gif");
+		spritesMario[3] = new Sprite(rutaImagen + "/Mariocaminandoizq.gif");
 		spritesMario[4] = new Sprite(rutaImagen + "/MarioJumping.png");
 		spritesMario[5] = new Sprite(rutaImagen + "/MarioJumpingizq.png");
 		spritesMario[6] = new Sprite(rutaImagen + "/Supermario-quieto.png");
