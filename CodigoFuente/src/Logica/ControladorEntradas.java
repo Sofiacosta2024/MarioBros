@@ -40,9 +40,10 @@ public class ControladorEntradas implements KeyListener {
 			mario.desactivarIzquierda();
 			break;
 		}
+		if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_A) {
+  			mario.actualizarMovimientoMario(mario.QUIETO);
+  		}
 	}
-
-	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 	}
