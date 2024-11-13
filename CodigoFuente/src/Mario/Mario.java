@@ -13,7 +13,7 @@ public class Mario extends Entidad implements EntidadMario{
 	protected int vidas;
 	protected int monedas;
 	protected boolean cayendoVacio, enSuelo,saltando,
-						puedeDerecha,puedeIzquierda,cambioEstado;
+						puedeDerecha,puedeIzquierda,cambioEstado, moverDerecha, moverIzquierda;
 	protected EstadoMario estado,anterior;
 	protected char sentidoMovimientoMario;
 	protected double progreso;
@@ -46,6 +46,25 @@ public class Mario extends Entidad implements EntidadMario{
 		this.juego = juego;
 		this.sprites = sprites;
 		this.spritesBolaFuego = spritesBolaFuego;
+		moverDerecha = false;
+		moverIzquierda = false;
+	}
+	public void activarDerecha() {
+		moverDerecha = true;
+		moverIzquierda = false;
+	}
+	
+	public void activarIzquierda() {
+		moverDerecha = false;
+		moverIzquierda = true;
+	}
+	
+	public void desactivarDerecha() {
+		moverDerecha = false;
+	}
+	
+	public void desactivarIzquierda() {
+		moverIzquierda = false;
 	}
 
 	public void actualizarMovimientoMario(char direccion) {
@@ -53,15 +72,21 @@ public class Mario extends Entidad implements EntidadMario{
 		int desplazamientoX = 0;
 		int desplazamientoY = 0;
 		
-		if(direccion == DERECHA && puedeDerecha) {
+		if(puedeDerecha && moverDerecha) {
 			desplazamientoX += 50;
 			puedeIzquierda = true;
-			//posicionX += velocidad;
+			sentidoMovimientoMario = DERECHA;
+			posicionX += 5;
+			actualizarAreaColision();
 		}
-		if(direccion == IZQUIERDA && puedeIzquierda) {
+		if( puedeIzquierda && moverIzquierda) {
 			desplazamientoX -= 50;
 			puedeDerecha = true;
-			//posicionX += velocidad;
+			if(posicionX>=40) {
+				sentidoMovimientoMario = IZQUIERDA;
+				posicionX -= 5;
+				actualizarAreaColision();
+			}
 		}
 		if(direccion == SALTO) {
 			desplazamientoY -= velocidadSalto;
@@ -70,10 +95,6 @@ public class Mario extends Entidad implements EntidadMario{
 			detenerMario();
 		}
 		if (saltando) {
-			if(direccion == DERECHA)
-				moverDerecha();
-			if(direccion == IZQUIERDA)
-				moverIzquierda();
 			double factorVelocidad = Math.cos(progreso) * velocidadSalto;
 			int nuevaPos = (int) Math.round(getPosicionY() + factorVelocidad);
 			setPosicionY(nuevaPos);
@@ -113,15 +134,9 @@ public class Mario extends Entidad implements EntidadMario{
 			char x = direccionMovimiento;
 			actualizarSprite(direccion);			
 			direccionMario(desplazamientoX, desplazamientoY);
-			if(direccion==x) {
-				observador.actualizarPosicionTamano();
-			}
-			else {
-				notificarObservador();
-			}
+			notificarObservador();
 		}
 	}
-
 	public void saltar() {
 		if(progreso == 0){
 			Sonido.obtenerInstancia().reproducirSonidoSaltar();
@@ -162,24 +177,6 @@ public class Mario extends Entidad implements EntidadMario{
 		if(desplazamientoY < 0) {
 			direccionMovimiento = SALTO;
 			direccionMovimientoAnterior = direccionMovimiento;
-		}
-	}
-
-	public void moverDerecha() {
-		if(puedeDerecha) {
-			sentidoMovimientoMario = DERECHA;
-			//velocidad = VELDERECHA;
-			posicionX += 5;
-			actualizarAreaColision();
-		}
-	}
-
-	public void moverIzquierda() {
-		if(posicionX>=40 && puedeIzquierda) {
-			sentidoMovimientoMario = IZQUIERDA;
-			//velocidad = VELIZQUIERDA;
-			posicionX -= 5;
-			actualizarAreaColision();
 		}
 	}
 

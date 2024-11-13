@@ -12,14 +12,14 @@ public class ControladorEntradas implements KeyListener {
 		this.mario = mario;
 	}
 
-    public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent e) {
 		int tecla = e.getKeyCode();
 		switch(tecla) {
 		case KeyEvent.VK_D:
-			mario.moverDerecha();
+			mario.activarDerecha();
 			break;
 		case KeyEvent.VK_A:
-			mario.moverIzquierda();
+			mario.activarIzquierda();
 			break;
 		case KeyEvent.VK_W:
 			mario.saltar();
@@ -31,12 +31,20 @@ public class ControladorEntradas implements KeyListener {
 	}
     
     public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_A) {
-			mario.actualizarMovimientoMario(mario.QUIETO);
+		int tecla = e.getKeyCode();
+		switch(tecla) {
+		case KeyEvent.VK_D:
+			mario.desactivarDerecha();
+			break;
+		case KeyEvent.VK_A:
+			mario.desactivarIzquierda();
+			break;
 		}
 	}
 
+	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
 	}
+
 }
