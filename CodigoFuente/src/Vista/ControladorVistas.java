@@ -158,7 +158,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void accionarModoEspecial() {	
-		juego.seleccionarModo("Imagenes/Sprites/Especial");
+		juego.seleccionarModo("/Imagenes/Sprites/Especial");
 		mostrarPantallaInicial();	
 	}
 
