@@ -205,28 +205,30 @@ public class Mario extends Entidad implements EntidadMario{
 	}
 
 	public Sprite actualizarSprite(char direccion) {
-		
-		if(direccion == DERECHA) {
-			if(direccionMovimiento == SALTO) 
-				sprite = estado.getSpriteSaltandoADerecha(sprites);
-			else 
-				sprite = estado.getSpriteDerecha(sprites);
+		if (saltando) {
+		  if (direccion == DERECHA || direccionMovimiento == DERECHA) 
+		      sprite = estado.getSpriteSaltandoADerecha(sprites);
+		  else 
+			  if (direccion == IZQUIERDA || direccionMovimiento == IZQUIERDA) 
+				  sprite = estado.getSpriteSaltandoAIzquierda(sprites);
+		    }
+		else {
+		        if (direccion == DERECHA) 
+		            sprite = estado.getSpriteDerecha(sprites);
+		        else 
+		        	if (direccion == IZQUIERDA) 
+		        		sprite = estado.getSpriteIzquierda(sprites);
+		        else 
+		        	if (direccion == QUIETO) {
+		        		if (direccionMovimientoAnterior == DERECHA) 
+		        			sprite = estado.getSpriteDetenidoDerecha(sprites);
+		        		else 
+		        			if (direccionMovimientoAnterior == IZQUIERDA) 
+		        					sprite = estado.getSpriteDetenidoIzquierda(sprites);
+		        	}
+		    }
+		    return sprite;
 		}
-		if(direccion == IZQUIERDA) {
-			if(direccionMovimiento == SALTO)
-				sprite = estado.getSpriteSaltandoAIzquierda(sprites);
-			else
-				sprite = estado.getSpriteIzquierda(sprites);
-		}
-		if(direccion == SALTO) {
-			if(direccionMovimientoAnterior==DERECHA)
-				sprite = estado.getSpriteSaltandoADerecha(sprites);
-			else
-			if(direccionMovimientoAnterior==IZQUIERDA)
-				sprite = estado.getSpriteSaltandoAIzquierda(sprites);
-		}
-		return sprite;
-	}
 
 	public void lanzarBolaFuego() {
 		if(estado.lanzarBolaFuego()) {

@@ -1,7 +1,6 @@
 package Launcher;
 
 import Logica.*;
-import Sonido.*;
 import Vista.*;
 
 public class Main {
