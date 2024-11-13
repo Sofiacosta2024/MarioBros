@@ -26,7 +26,7 @@ public class Mario extends Entidad implements EntidadMario{
 	protected int VELIZQUIERDA = -5;
 	
 	public Mario(int x, int y, int velocidad, Juego juego, Sprite[] sprites, Sprite[] spritesBolaFuego) {
-		super(x,y, velocidad,16,16);
+		super(x,y, velocidad,16,20);
 		estado = new EstadoNormal();
 		anterior = estado;
 		vidas = 3;
@@ -134,9 +134,8 @@ public class Mario extends Entidad implements EntidadMario{
 			char x = direccionMovimiento;
 			actualizarSprite(direccion);			
 			direccionMario(desplazamientoX, desplazamientoY);
-			notificarObservador();
 		}
-	notificarObservador();
+	observador.actualizarPosicionTamano();
 	}
 	public void saltar() {
 		if(progreso == 0){
@@ -188,12 +187,13 @@ public class Mario extends Entidad implements EntidadMario{
 			if(direccionMovimiento == IZQUIERDA)
 				sprite = estado.getSpriteDetenidoIzquierda(sprites);
 		direccionMovimiento= QUIETO;
-		sentidoMovimientoMario = QUIETO;
+		//sentidoMovimientoMario = QUIETO;
 		velocidad = 0;
 		notificarObservador();
 	}
 
 	public Sprite actualizarSprite(char direccion) {
+		Sprite aux = sprite;
 		if (saltando) {
 		  if (direccion == DERECHA || direccionMovimiento == DERECHA) 
 		      sprite = estado.getSpriteSaltandoADerecha(sprites);
@@ -216,6 +216,9 @@ public class Mario extends Entidad implements EntidadMario{
 		        					sprite = estado.getSpriteDetenidoIzquierda(sprites);
 		        	}
 		    }
+		if(aux!=sprite) {
+			notificarObservador();
+		}
 		    return sprite;
 		}
 
