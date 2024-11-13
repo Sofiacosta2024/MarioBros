@@ -25,7 +25,6 @@ public class BolaFuego extends Entidad {
 	
 	public void retirar() {
 		observador.actualizarPorMuerte();
-		System.out.println("Entro a retirar");
 	}
 	
 	public void mover(int nuevaX, int nuevaY) {
