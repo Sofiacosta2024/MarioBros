@@ -29,6 +29,7 @@ public class BloquePregunta extends BloqueSolido {
 				powerUp.setPosicionY(posicionY + 40);
 				powerUp.actualizarAreaColision();
 				powerUp.notificarObservador();
+				setSprite(bloqueVacio);
 			}
         	hayPowerUp = false;
 		}
