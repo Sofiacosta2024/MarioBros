@@ -136,6 +136,7 @@ public class Mario extends Entidad implements EntidadMario{
 			direccionMario(desplazamientoX, desplazamientoY);
 			notificarObservador();
 		}
+	notificarObservador();
 	}
 	public void saltar() {
 		if(progreso == 0){
