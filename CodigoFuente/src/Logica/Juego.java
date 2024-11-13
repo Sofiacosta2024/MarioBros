@@ -123,10 +123,12 @@ public class Juego {
 			controladorVistas.actualizarPantallaPasajeDeNivel(numeroDeNivel);
 			getNivelActual().getMario().setPosicionX(50);
 			int vidas = getNivelActual().getMario().getVidas();
+			int puntaje = getNivelActual().getMario().getPuntaje();
 			EstadoMario estado = getNivelActual().getMario().getEstadoMario();
 			cargarNivel();
 			getNivelActual().getMario().setVidas(vidas);
 			getNivelActual().getMario().setEstadoMario(estado);
+			getNivelActual().getMario().setPuntaje(puntaje);
 			iniciarPartida();
 			getNivelActual().getMario().setMarioEstadoNivel();
 			if(numeroDeNivel!=1)
@@ -164,6 +166,22 @@ public class Juego {
 
 	public boolean juegoTerminado() {
 		return juegoTerminado;
+	}
+	
+	public void actualizarPuntaje() {
+		controladorVistas.actualizarPuntajePantallaPartida();
+	}
+	
+	public void actualizarVidas() {
+		controladorVistas.actualizarVidasPantallaPartida(nivelActual.getMario());
+	}
+	
+	public void actualizarNivel() {
+		controladorVistas.actualizarlNivelPantallaPartida();
+	}
+	
+	public void actualizarTiempo() {
+		controladorVistas.actualizarTiempoPantallaPartida();
 	}
 
 	public void registrarObservers() {

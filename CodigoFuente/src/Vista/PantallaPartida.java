@@ -75,11 +75,26 @@ public class PantallaPartida extends JPanel {
 	}
 	
 	protected void actualizarLabelsInformacion(EntidadMario mario) {
+		actualizarLabelPuntaje();
+		actualizarLabelTiempo();
+		actualizarLabelVidas(mario);
+		actualizarLabelNivel();
+	}
+	
+	protected void actualizarLabelPuntaje() {
 		labelPuntaje.setText(textoConCantidadDigitos(juego.getNivelActual().getMario().getPuntaje() , 5)+" ");
-		labelTimer.setText( textoConCantidadDigitos(tiempoNivel,3)+"  ");
+	}
+	
+	protected void actualizarLabelVidas(EntidadMario mario) {
 		labelVidas.setText( textoConCantidadDigitos(mario.getVidas(), 2)+"   ");
+	}
+	
+	protected void actualizarLabelNivel() {
 		labelNivel.setText(textoConCantidadDigitos(juego.getNivelActual().getNivel(),1));
-		
+	}
+	
+	public void actualizarLabelTiempo() {
+		labelTimer.setText( textoConCantidadDigitos(tiempoNivel,3)+"  ");
 	}
 	
 	private String textoConCantidadDigitos(int numero, int digitos) {
@@ -89,7 +104,7 @@ public class PantallaPartida extends JPanel {
 	public void iniciarActualizacionInformacion() {
         timerActualizacionInformacion = new Timer(500, e -> {
             if (juego != null && juego.getNivelActual().getMario() != null) {
-                actualizarLabelsInformacion(juego.getNivelActual().getMario());
+                actualizarLabelTiempo();
             }
         });
         timerActualizacionInformacion.start();
