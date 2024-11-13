@@ -73,7 +73,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void mostrarPantallaPartida() {
-		guardarRanking();
+		//guardarRanking();
 		ventana.setContentPane(panelPartida);
 		panelPartida.requestFocus();
 		panelPartida.addKeyListener(controladorEntradas);

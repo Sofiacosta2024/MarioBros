@@ -15,7 +15,7 @@ public abstract class FabricaSprite {
 	}
 	
 	public Sprite[] getMario() {
-		Sprite[] spritesMario = new Sprite[15];
+		Sprite[] spritesMario = new Sprite[24];
 		spritesMario[0] = new Sprite(rutaImagen + "/Marioquieto.png");
 		spritesMario[1] = new Sprite(rutaImagen + "/Marioquietoizq.png");
 		spritesMario[2] = new Sprite(rutaImagen + "/Mariocaminando.png");

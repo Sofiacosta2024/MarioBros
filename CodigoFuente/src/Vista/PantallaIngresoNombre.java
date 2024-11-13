@@ -70,7 +70,7 @@ public class PantallaIngresoNombre extends JPanel {
                 String nombre = campoNombre.getText();
                 if (!nombre.isEmpty()) {
                     mostrarMensaje("Hola, " + nombre + "!");
-                    juego.getNivelActual().getMario().setNombre(nombre);
+                    //juego.getNivelActual().getMario().setNombre(nombre);
                     controladorVistas.accionarPantallaAlIngresar();
                 } else {
                     mostrarMensaje("Por favor, ingresa un nombre.");

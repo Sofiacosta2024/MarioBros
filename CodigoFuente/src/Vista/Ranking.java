@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 public class Ranking {
 	private static Ranking instancia;
-	protected List<Puntuacion> ranking;
+	protected ArrayList<Puntuacion> ranking;
 	
 	private Ranking() {
+		ranking=new ArrayList<>();
 		leerPuntajes();
 		ordenarPuntajes();
 	}
@@ -63,7 +64,7 @@ public class Ranking {
 	}
 	
 	private void obtenerMejoresPuntajes() {
-		List<Puntuacion> mejores = new ArrayList<>();
+		ArrayList<Puntuacion> mejores = new ArrayList<>();
        for (int i = 0; i < Math.min(5, ranking.size()); i++) {
            mejores.add(ranking.get(i));
        }
