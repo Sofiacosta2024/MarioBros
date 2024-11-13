@@ -359,6 +359,10 @@ public class Mario extends Entidad implements EntidadMario{
 	public boolean getCambioEstado() {
 		return cambioEstado;
 	} 
+	
+	public Sprite[] getSpritesMario() {
+		return sprites;
+	}
 
 	public boolean getSaltando() {
 		return saltando;
@@ -378,6 +382,10 @@ public class Mario extends Entidad implements EntidadMario{
 
 	public Juego getJuego() {
 		return juego;
+	}
+	
+	public char getDireccionMovimiento() {
+		return direccionMovimiento;
 	}
 	
 	public int getPuntaje() {

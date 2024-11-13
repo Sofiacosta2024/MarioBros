@@ -17,7 +17,8 @@ public class EstadoSuperMario extends EstadoMario {
 	public void recibirDaño(Mario mario, Enemigo enemigo) {
 		mario.setEstadoMario(new EstadoNormal());
 		mario.setCambioEstado(true);
-		mario.notificarObservador();
+		actualizarSpriteMario(mario);
+		mario.getObserver().actualizarPosicionTamano();
 		mario.setColisionable(false);
 		new Thread(() -> {
 	        try {
