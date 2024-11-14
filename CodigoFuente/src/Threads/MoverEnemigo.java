@@ -94,7 +94,7 @@ public class MoverEnemigo extends Thread{
 			}
 		}
 		catch(ConcurrentModificationException excepcion) {
-			System.out.println("CONCURRENNNTTT EN MOVERENEMIGO");
+			//System.out.println("CONCURRENNNTTT EN MOVERENEMIGO");
 			actualizar();
 		}
 	}

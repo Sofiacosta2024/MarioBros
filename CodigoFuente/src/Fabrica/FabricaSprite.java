@@ -29,7 +29,7 @@ public abstract class FabricaSprite {
 		spritesMario[10] = new Sprite(rutaImagen + "/SuperMario-saltando.png");
 		spritesMario[11] = new Sprite(rutaImagen + "/SuperMario-saltandoaizq.png");
 		spritesMario[12] = new Sprite(rutaImagen + "/Mario-invencible.gif");
-		spritesMario[13] = new Sprite(rutaImagen + "/Mario-invencible-aziq.gif");
+		spritesMario[13] = new Sprite(rutaImagen + "/Mario-invencible-aizq.gif");
 		spritesMario[14] = new Sprite(rutaImagen + "/Invencible-caminandoderecha.gif");
 		spritesMario[15] = new Sprite(rutaImagen + "/Invencible-caminandoizquierda.gif");
 		spritesMario[16] = new Sprite(rutaImagen + "/Invencible-saltandoder.gif");

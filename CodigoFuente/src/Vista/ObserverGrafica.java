@@ -61,6 +61,5 @@ public abstract class ObserverGrafica extends JLabel implements Observer {
 		this.setIcon(null);
 		revalidate();
 		repaint();
-		System.out.println("Lo saco de la pantalla");
 	}
 }

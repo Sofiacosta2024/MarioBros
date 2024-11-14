@@ -14,7 +14,7 @@ public abstract class Plataforma extends Entidad{
 	}
 
 	public void interactuar(Mario mario, String direccionColision) {
-		System.out.println(mario.getEnSuelo());
+		//System.out.println(mario.getEnSuelo());
 		if (direccionColision.equals("IZQUIERDA")) {
 			mario.setPuedeMoverseALaDerecha(false); 
 			if(!mario.getEnSuelo()) {
@@ -43,7 +43,7 @@ public abstract class Plataforma extends Entidad{
 				} else 
 					if (direccionColision.equals("ABAJO")) {
 						mario.rebotarHaciaAbajo();
-						System.out.println("a");
+						//System.out.println("a");
 					}
 	}
 

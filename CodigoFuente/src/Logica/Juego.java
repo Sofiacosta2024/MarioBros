@@ -310,7 +310,7 @@ public class Juego {
 				}
 			}
 		}catch(ConcurrentModificationException excepcion) {
-			System.out.println("CONCURRENNNNTTTTTTTTTTTT EN COLISIONADORES");
+			//System.out.println("CONCURRENNNNTTTTTTTTTTTT EN COLISIONADORES");
 			detectarColisionesMundoSinMario();
 		}
 	}

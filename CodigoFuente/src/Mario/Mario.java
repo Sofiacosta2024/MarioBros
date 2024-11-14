@@ -4,7 +4,6 @@ import Sonido.*;
 import Fabrica.Sprite;
 import Logica.*;
 import Vista.*;
-import java.lang.Math;
 import Colisionador.ColisionadorVisitorMario;
 import Threads.TemporizadorEstadoEstrella;
 
@@ -24,7 +23,7 @@ public class Mario extends Entidad implements EntidadMario{
 	protected Sprite sprites[], spritesBolaFuego[];
 	protected int VELDERECHA = 5;
 	protected int VELIZQUIERDA = -5;
-	protected int cont;
+	protected int contSalto;
 	
 	public Mario(int x, int y, int velocidad, Juego juego, Sprite[] sprites, Sprite[] spritesBolaFuego) {
 		super(x,y, velocidad,20,20);
@@ -49,7 +48,7 @@ public class Mario extends Entidad implements EntidadMario{
 		this.spritesBolaFuego = spritesBolaFuego;
 		moverDerecha = false;
 		moverIzquierda = false;
-		cont=0;
+		contSalto=0;
 	}
 	public void activarDerecha() {
 		moverDerecha = true;
@@ -97,34 +96,19 @@ public class Mario extends Entidad implements EntidadMario{
 			detenerMario();
 		}
 
-		if (saltando) {
-			/*double factorVelocidad = Math.cos(progreso) * velocidadSalto;
-			int nuevaPos = (int) Math.round(getPosicionY() + factorVelocidad);
-			setPosicionY(nuevaPos);
-			progreso += 0.15; 		
-			saltando = progreso <= Math.PI/2;
-			*/
-			
-			
-			cont++;
-			setPosicionY(getPosicionY()+20-cont);
+		if (saltando) {	
+			contSalto++;
+			setPosicionY(getPosicionY()+20-contSalto);
 			actualizarAreaColision();
-			if(cont>20) {
+			if(contSalto>20) {
 				saltando=false;
-				//cont=0;
 			}
-			//caer cuando saltando es false
-			/*if(progreso > 0 && getPosicionY() < suelo && !cayendoVacio){
-				detenerSalto();
-				setPosicionY(posInicialSalto);
-				actualizarAreaColision();
-			}*/
 		} 
 		else if(!enSuelo){
 			//codigo caida
-			setPosicionY(getPosicionY()-20+cont);
+			setPosicionY(getPosicionY()-20+contSalto);
 			actualizarAreaColision();
-			cont--;
+			contSalto--;
 			if(getPosicionY()<=suelo && !cayendoVacio) {
 				setPosicionY(suelo);
 				actualizarAreaColision();
@@ -133,20 +117,10 @@ public class Mario extends Entidad implements EntidadMario{
 				limiteIzquierda=0;
 				enSuelo=true;
 			}
-			
-			
-			
-			/*if(progreso > 0) {
-				setPosicionY(posInicialSalto);
-				actualizarAreaColision();
-			}*/
-			
-			
 		} 
 		
 		if(getPosicionX()>limiteDerecha || getPosicionX()<limiteIzquierda ){
 			posInicialSalto = getPosicionY();
-			System.out.println("suelo falso");
 			enSuelo=false;
 			
 		}
@@ -163,7 +137,7 @@ public class Mario extends Entidad implements EntidadMario{
 	public void saltar() {
 		if(progreso == 0 && enSuelo){
 			enSuelo=false;
-			cont=0;
+			contSalto=0;
 			Sonido.obtenerInstancia().reproducirSonidoSaltar();
 			saltando = true;
 			posInicialSalto = getPosicionY();
@@ -180,15 +154,10 @@ public class Mario extends Entidad implements EntidadMario{
 		saltando=false;
 		puedeIzquierda=true;
 		puedeDerecha=true;
-		/*if(progreso<((Math.PI /2))) {
-			progreso = Math.PI - progreso;
-		}*/
 	}
 
 	public void morirPorVacio() {
 		Sonido.obtenerInstancia().reproducirSonidoCaeAlVacio();
-		//saltando=true;
-		//progreso=Math.PI/2;
 		enSuelo=false;
 		cayendoVacio=true;
 	}
