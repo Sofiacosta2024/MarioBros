@@ -37,7 +37,7 @@ public class PantallaIngresoNombre extends JPanel {
         labelIngresoNombre = new JLabel("Ingrese su nombre para entrar al ranking");
         labelIngresoNombre.setFont(new Font("Press Start 2P", Font.BOLD, 18));
         labelIngresoNombre.setForeground(Color.WHITE);
-        labelIngresoNombre.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150, ConstantesVistas.PANEL_ALTO - 350, 300, 30);
+        labelIngresoNombre.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150, ConstantesVistas.PANEL_ALTO - 350, 500, 30);
         imagenFondo.add(labelIngresoNombre);
     }
     public void agregarFondo() {
