@@ -128,7 +128,7 @@ public class FabricaEntidades{
 	
 	public BloquePregunta getBloquePregunta(int x, int y, PowerUp powerUp, int velocidad, Sprite[] sprites) {
 		Sprite[] spritesBloqueSolido = fabricaSprites.getBloqueSolido();
-		BloquePregunta bloquePregunta = new BloquePregunta( x, y, powerUp, velocidad, spritesBloqueSolido);
+		BloquePregunta bloquePregunta = new BloquePregunta( x, y, powerUp, velocidad, sprites, spritesBloqueSolido);
 		bloquePregunta.setSprite(sprites[0]);
 		return bloquePregunta;
 	}
