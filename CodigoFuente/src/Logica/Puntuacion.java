@@ -1,4 +1,4 @@
-package Vista;
+package Logica;
 
 public class Puntuacion {
 	private String nombre;

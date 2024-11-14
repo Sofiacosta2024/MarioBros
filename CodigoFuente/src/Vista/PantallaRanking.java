@@ -68,7 +68,7 @@ public class PantallaRanking extends JPanel{
 		botonVolver.setFont(fuente);
 	}
 	
-	protected void registrarOyenteBotonVolver() {
+	public void registrarOyenteBotonVolver() {
 		botonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controladorVistas.mostrarPantallaModoJuego();

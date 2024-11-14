@@ -86,7 +86,6 @@ public class PantallaIngresoNombre extends JPanel {
                 } else {
                     mostrarMensaje("Por favor, ingresa un nombre.");
                 }
-                System.out.println(nombre);
             }
         });
     }

@@ -10,7 +10,7 @@ public abstract class ObserverGrafica extends JLabel implements Observer {
 	private static final long serialVersionUID = 1L;
 	protected EntidadLogica entidadObservada;
 
-	protected ObserverGrafica(EntidadLogica entidadObservada) {
+	public ObserverGrafica(EntidadLogica entidadObservada) {
 		super();
 		this.entidadObservada = entidadObservada;
 	}

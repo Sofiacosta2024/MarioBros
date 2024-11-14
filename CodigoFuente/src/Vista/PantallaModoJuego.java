@@ -28,7 +28,7 @@ public class PantallaModoJuego extends JPanel{
 		agregarBotonRanking();
 	}
 
-	protected void agregarFondo() {
+	public void agregarFondo() {
 		imagenFondo = new JLabel();
 		ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource("/Imagenes/Fondos/pantallainicialmario.jpeg"));
 		Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
@@ -38,7 +38,7 @@ public class PantallaModoJuego extends JPanel{
 		add(imagenFondo);
 	}
 
-	protected void agregarBotonModoOriginal() {
+	public void agregarBotonModoOriginal() {
 		botonModoOriginal = new JButton("MODO ORIGINAL");
 		botonModoOriginal.setFont(fuente);
 		decorarBotonModoOriginal();
@@ -49,7 +49,7 @@ public class PantallaModoJuego extends JPanel{
 		botonModoOriginal.repaint();
 	}
 
-	protected void agregarBotonModoEspecial() {
+	public void agregarBotonModoEspecial() {
 		botonModoEspecial = new JButton("MODO ESPECIAL");
 		botonModoEspecial.setFont(fuente);
 		decorarBotonModoEspecial();
@@ -60,7 +60,7 @@ public class PantallaModoJuego extends JPanel{
 		botonModoEspecial.repaint();
 	}
 
-	protected void agregarBotonRanking() {
+	public void agregarBotonRanking() {
 		botonRanking = new JButton("RANKING");  
 		botonRanking.setFont(fuente);
 		decorarBotonRanking();
@@ -71,27 +71,27 @@ public class PantallaModoJuego extends JPanel{
 		botonRanking.repaint();
 	}
 
-	protected void decorarBotonModoEspecial() {
+	public void decorarBotonModoEspecial() {
 		botonModoEspecial.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 130 ,ConstantesVistas.PANEL_ALTO - 200, 260 , 50);
 		botonModoEspecial.setFocusable(false);
 		botonModoEspecial.setBackground(Color.RED);  
 		botonModoEspecial.setForeground(Color.WHITE); 
 	}
-	protected void decorarBotonModoOriginal() {
+	public void decorarBotonModoOriginal() {
 		botonModoOriginal.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 130 ,ConstantesVistas.PANEL_ALTO - 250, 260 , 50);
 		botonModoOriginal.setFocusable(false);
 		botonModoOriginal.setBackground(Color.BLUE);  
 		botonModoOriginal.setForeground(Color.WHITE);  
 	}
 
-	protected void decorarBotonRanking() {
+	public void decorarBotonRanking() {
 		botonRanking.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 130 ,ConstantesVistas.PANEL_ALTO - 150, 260 , 50);
 		botonRanking.setFocusable(false);
 		botonRanking.setBackground(Color.black);
 		botonRanking.setForeground(Color.WHITE);  
 	}
 
-	protected void registrarOyenteBotonModoEspecial() {
+	public void registrarOyenteBotonModoEspecial() {
 		botonModoEspecial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controladorVistas.accionarModoEspecial();
@@ -99,7 +99,7 @@ public class PantallaModoJuego extends JPanel{
 		});
 	}
 
-	protected void registrarOyenteBotonModoOriginal() {
+	public void registrarOyenteBotonModoOriginal() {
 		botonModoOriginal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controladorVistas.accionarModoOriginal();
@@ -107,7 +107,7 @@ public class PantallaModoJuego extends JPanel{
 		});
 	}
 
-	protected void registrarOyenteBotonRanking() {
+	public void registrarOyenteBotonRanking() {
 		botonRanking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controladorVistas.accionarPantallaRanking();
@@ -115,7 +115,7 @@ public class PantallaModoJuego extends JPanel{
 		});
 	}
 
-	protected Font cargarFuente() {
+	private Font cargarFuente() {
 		File fuenteFile = new File("src/Fuente/fuentejuego.ttf");
 		try {
         	return Font.createFont(Font.TRUETYPE_FONT, fuenteFile).deriveFont(16.3f);
