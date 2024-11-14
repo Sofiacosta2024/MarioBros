@@ -248,10 +248,10 @@ public class Juego {
 
 	public void detectarColisionesMundoSinMario() {
 		try {
-			ArrayList<Enemigo> enemigos = new ArrayList<>(nivelActual.getEnemigos());
-			ArrayList<Plataforma> plataformas = new ArrayList<>(nivelActual.getPlataformas());
-			ArrayList<Spiny> spinyss = new ArrayList<>(nivelActual.getSpinyssLanzados());
-			ArrayList<BolaFuego> bolasFuego = new ArrayList<>(nivelActual.getProyectiles());
+			ArrayList<Enemigo> enemigos = nivelActual.getEnemigos();
+			ArrayList<Plataforma> plataformas = nivelActual.getPlataformas();
+			ArrayList<Spiny> spinyss = nivelActual.getSpinyssLanzados();
+			ArrayList<BolaFuego> bolasFuego = nivelActual.getProyectiles();
 			
 			for(Enemigo enemigo: enemigos) {
 				ColisionadorVisitorEnemigo colisionador = new ColisionadorVisitorEnemigo(enemigo,this);
@@ -310,7 +310,7 @@ public class Juego {
 				}
 			}
 		}catch(ConcurrentModificationException excepcion) {
-			System.out.println("CONCURRENNNNTTTTTTTTTTTT");
+			System.out.println("CONCURRENNNNTTTTTTTTTTTT EN COLISIONADORES");
 			detectarColisionesMundoSinMario();
 		}
 	}

@@ -35,5 +35,6 @@ public class ColisionadorVisitorBolaFuego {
 	
 	private void retirarBolaFuego() {
 		entidadColisionable.retirar();
+		juego.getControladorVista().limpiarEntidadGrafica(entidadColisionable.getObserver());
 	}
 }

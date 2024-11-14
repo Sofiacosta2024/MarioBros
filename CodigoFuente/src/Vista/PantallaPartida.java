@@ -295,4 +295,8 @@ public class PantallaPartida extends JPanel {
 	public int getTiempoNivelInicial() {
 		return tiempoNivelInicial;
 	}
+	
+	public JLabel getImagenFondo() {
+		return imagenFondo;
+	}
 }

@@ -231,6 +231,7 @@ public class Mario extends Entidad implements EntidadMario{
 			juego.getNivelActual().agregarProyectil(bolaFuego);
 			juego.registrarObserverProyectiles(bolaFuego);
 			bolaFuego.setEnMovimiento(true);
+			System.out.println("Se lanza bola de fuego");
 		}
 	}
 

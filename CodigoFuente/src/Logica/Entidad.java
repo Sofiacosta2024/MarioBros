@@ -12,6 +12,7 @@ public abstract class Entidad implements EntidadLogica{
 	protected int posicionY, posicionX, velocidad, alto, ancho;
 	protected Sprite sprite;
 	protected Observer observador;
+	protected ObserverGrafica observadorProvisional;
 	protected Sonido sonido;
 	protected boolean  esColisionable;
 	protected Rectangle areaColision; 
@@ -86,11 +87,11 @@ public abstract class Entidad implements EntidadLogica{
 	public Sonido getSonido() {
 		return sonido;
 	}
-
+	
 	public Observer getObserver() {
 		return observador;
 	}
-
+	
 	public Rectangle getAreaColision() {
 		return areaColision;
 	}

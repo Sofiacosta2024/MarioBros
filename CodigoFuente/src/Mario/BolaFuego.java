@@ -10,6 +10,7 @@ public class BolaFuego extends Entidad {
 
 	public BolaFuego(int x, int y, int velocidad, Sprite sprite, char direccionMovimiento, char direccionMovimientoAnterior) {
 		super(x, y, velocidad, 16, 16);
+		this.sprite = sprite;
 		this.direccionMovimiento = direccionMovimiento;
 		this.direccionMovimientoAnterior = direccionMovimientoAnterior;
 		enMovimiento = false;
@@ -25,6 +26,7 @@ public class BolaFuego extends Entidad {
 	
 	public void retirar() {
 		observador.actualizarPorMuerte();
+		enMovimiento = false;
 	}
 	
 	public void mover(int nuevaX, int nuevaY) {

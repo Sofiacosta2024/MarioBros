@@ -52,6 +52,9 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public Observer registrarEntidadLogica(EntidadLogica entidadLogica) {
+		if(entidadLogica == null) {
+			System.out.println("BolaFuego nulo");
+		}
 		Observer observerEntidad = panelPartida.incorporarEntidad(entidadLogica);
 		lista.add(observerEntidad);
 		refrescar();
@@ -176,6 +179,11 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	
 	public void limpiezaDeEntidadesGraficas() {
 		panelPartida.limpiarEntidadesGraficas();
+	}
+	
+	public void limpiarEntidadGrafica(Observer observer) {
+		ObserverGrafica observerALimpiar = (ObserverGrafica) observer;
+		panelPartida.getImagenFondo().remove(observerALimpiar);
 	}
 	
 	public void seleccionarImagenFondo() {

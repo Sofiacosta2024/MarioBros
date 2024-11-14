@@ -6,12 +6,15 @@ import Fabrica.Sprite;
 import Logica.*;
 import Mario.Mario;
 import Vista.Observer;
+import Vista.ObserverGrafica;
 import Sonido.*;
-public class Lakitu extends Enemigo implements Runnable{
+public class Lakitu extends Enemigo {
 
 	protected Juego juego;
 	protected Sprite spinySprite;
 	protected ArrayList<Spiny> spinyssLanzados;
+	private int tiempoLanzar; 
+	private int tiempoActual; 
 
 	public Lakitu(int x, int y, int velocidad, Juego juego, Sprite[] spriteSpiny) {
 		super(x,y, velocidad,16,24);
@@ -20,9 +23,10 @@ public class Lakitu extends Enemigo implements Runnable{
 		this.juego = juego;
 		spinyssLanzados = new  ArrayList<Spiny>();
 		spinySprite = spriteSpiny[0];
-		new Thread(this).start();
+		this.tiempoActual = 0;
+		this.tiempoLanzar = 200;
 	}
-	
+
 	public void caer() {
 		//No cae
 	}
@@ -31,42 +35,37 @@ public class Lakitu extends Enemigo implements Runnable{
 		mario.decrementarVida();
 	}
 
-	public void lanzarSpinyss(int x, int y) {
-		Spiny spiny= new Spiny(x,y, velocidad);
-		spiny.setSprite(spinySprite);
-		spiny.setLakituLanzador(this);
-		Observer observadorEntidad =  juego.getControladorVista().registrarEntidadLogicaSpinyLanzado(spiny);
-		spiny.setObserver(observadorEntidad);
-		juego.getNivelActual().agregarSpinyLanzado(spiny);
-		spinyssLanzados.add(spiny);
-		spiny.notificarObservador();
-		Sonido.obtenerInstancia().reproducirSonidoLakituLanzaSpinyss();
-	}
+	 public void mover(int x, int y) {
+	        super.mover(x, y);
+	        tiempoActual +=1;
+	        if (tiempoActual >= tiempoLanzar) {
+	            lanzarSpiny();
+	            tiempoActual = 0; 
+	        }
+	    }
 
-	public void run() {
-		while (esColisionable) {
-			try {
-				Thread.sleep(3000);
-				lanzarSpinyss(posicionX, posicionY); 
-				Thread.sleep(8000);
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt(); 
-			}
-		}
+	    private void lanzarSpiny() {
+	        Spiny spiny = new Spiny(this.getPosicionX(), this.getPosicionY(), velocidad);
+	        spiny.setSprite(spinySprite);
+	        spiny.setLakituLanzador(this);
+	        Observer observadorEntidad = juego.getControladorVista().registrarEntidadLogicaSpinyLanzado(spiny);
+	        spiny.setObserver(observadorEntidad);
+	        juego.getNivelActual().agregarSpinyLanzado(spiny);
+	        spinyssLanzados.add(spiny); 
+	        spiny.notificarObservador();
+	        
+	        Sonido.obtenerInstancia().reproducirSonidoLakituLanzaSpinyss();
+	    }
 
-	}
+	    public void aceptarVisita(ColisionadorVisitorMario visitor) {
+	        visitor.visitarLakitu(this);
+	    }
 
-	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		visitor.visitarLakitu(this);
+	    public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
+	        visitor.visitarLakitu(this);
+	    }
 
-	}
-
-	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-		visitor.visitarLakitu(this);
-	}
-
-	public ArrayList<Spiny> getSpinyssLanzados(){
-		return spinyssLanzados;
-	}
-
+	    public ArrayList<Spiny> getSpinyssLanzados() {
+	        return spinyssLanzados;
+	    }
 }
