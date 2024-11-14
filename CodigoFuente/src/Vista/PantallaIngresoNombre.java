@@ -1,10 +1,12 @@
 package Vista;
 
-import java.awt.Color;
 import Logica.Juego;
-import java.awt.Image;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,12 +24,14 @@ public class PantallaIngresoNombre extends JPanel {
     private JButton botonEnviar;
     private JTextField campoNombre;
     private Juego juego;
+    private Font fuente;
     
     public PantallaIngresoNombre(ControladorDeVistas controladorVistas,Juego j) {
         this.controladorVistas = controladorVistas;
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         juego=j;
         setLayout(null);
+        fuente=cargarFuente();
         agregarFondo();
         agregarLabelIngresoNombre();
         agregarCampoNombre();
@@ -35,9 +39,9 @@ public class PantallaIngresoNombre extends JPanel {
     }
     public void agregarLabelIngresoNombre() {
         labelIngresoNombre = new JLabel("Ingrese su nombre para entrar al ranking");
-        labelIngresoNombre.setFont(new Font("Press Start 2P", Font.BOLD, 18));
+        labelIngresoNombre.setFont(fuente);
         labelIngresoNombre.setForeground(Color.WHITE);
-        labelIngresoNombre.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150, ConstantesVistas.PANEL_ALTO - 350, 500, 30);
+        labelIngresoNombre.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150*2, ConstantesVistas.PANEL_ALTO - 450, 800, 30);
         imagenFondo.add(labelIngresoNombre);
     }
     public void agregarFondo() {
@@ -57,8 +61,8 @@ public class PantallaIngresoNombre extends JPanel {
     }
 
     public void agregarBotonEnviar() {
-        botonEnviar = new JButton("EMPEZAR");
-        botonEnviar.setFont(new Font("Press Start 2P", Font.BOLD, 18));
+        botonEnviar = new JButton("GUARDAR");
+        botonEnviar.setFont(fuente);
         decorarBotonEnviar();
         registrarOyenteBotonEnviar();
         imagenFondo.add(botonEnviar);
@@ -76,7 +80,7 @@ public class PantallaIngresoNombre extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String nombre = campoNombre.getText();
                 if (!nombre.isEmpty()) {
-                    mostrarMensaje("Hola, " + nombre + "!");
+                    mostrarMensaje("¡Gracias por jugar , " + nombre + "!");
                     juego.getNivelActual().getMario().setNombre(nombre);
                     controladorVistas.accionarPantallaAlIngresarNombre();
                 } else {
@@ -89,11 +93,18 @@ public class PantallaIngresoNombre extends JPanel {
     private void mostrarMensaje(String mensaje) {
         JPanel panel = new JPanel();
         JLabel label = new JLabel(mensaje);
-        label.setFont(new Font("Press Start 2P", Font.BOLD, 18));
+        label.setFont(fuente);
         label.setForeground(Color.WHITE); 
         panel.add(label);
         panel.setBackground(Color.BLACK);
         JOptionPane.showMessageDialog(null, panel);
     }
-    
+	private Font cargarFuente() {
+		File fuenteFile = new File("src/Fuente/fuentejuego.ttf");
+		try {
+        	return Font.createFont(Font.TRUETYPE_FONT, fuenteFile).deriveFont(16.3f);
+		} catch (FontFormatException | IOException e) {
+			return new Font("Arial", Font.BOLD, 22);
+		}
+	}
 }

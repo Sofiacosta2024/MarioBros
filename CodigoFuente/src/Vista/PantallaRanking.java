@@ -140,7 +140,7 @@ public class PantallaRanking extends JPanel{
 		labelMejores.setFont(fuente.deriveFont(24f));
 		labelJugadores.setFont(fuente.deriveFont(24f));
 	}
-	protected Font cargarFuente() {
+	public Font cargarFuente() {
 		File fuenteFile = new File("src/Fuente/fuentejuego.ttf");
 		try {
         	return Font.createFont(Font.TRUETYPE_FONT, fuenteFile).deriveFont(16.3f);
