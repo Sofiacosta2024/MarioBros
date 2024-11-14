@@ -83,18 +83,22 @@ public class PantallaPartida extends JPanel {
 	
 	protected void actualizarLabelPuntaje() {
 		labelPuntaje.setText(textoConCantidadDigitos(juego.getNivelActual().getMario().getPuntaje() , 5)+" ");
+		labelPuntaje.repaint();
 	}
 	
 	protected void actualizarLabelVidas(EntidadMario mario) {
 		labelVidas.setText( textoConCantidadDigitos(mario.getVidas(), 2)+"   ");
+		labelVidas.repaint();
 	}
 	
 	protected void actualizarLabelNivel() {
 		labelNivel.setText(textoConCantidadDigitos(juego.getNivelActual().getNivel(),1));
+		labelNivel.repaint();
 	}
 	
 	public void actualizarLabelTiempo() {
 		labelTimer.setText( textoConCantidadDigitos(tiempoNivel,3)+"  ");
+		labelTimer.repaint();
 	}
 	
 	private String textoConCantidadDigitos(int numero, int digitos) {
@@ -102,7 +106,7 @@ public class PantallaPartida extends JPanel {
 	}
 	
 	public void iniciarActualizacionInformacion() {
-        timerActualizacionInformacion = new Timer(500, e -> {
+        timerActualizacionInformacion = new Timer(1000, e -> {
             if (juego != null && juego.getNivelActual().getMario() != null) {
                 actualizarLabelTiempo();
             }
