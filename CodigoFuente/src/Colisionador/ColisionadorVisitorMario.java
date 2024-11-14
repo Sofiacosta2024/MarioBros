@@ -24,7 +24,7 @@ public class ColisionadorVisitorMario{
 		if(entidadColisionable.colisionable()) {
 			direccionColision = detectarDireccion( goomba);
 			if(direccionColision.equals("ARRIBA")) {
-				player.reproducirSonidoMorir();
+				player.reproducirSonidoMuereEnemigo();;
 				goomba.retirar();
 				juego.getNivelActual().getMario().setPuntaje(goomba.getPuntaje() + juego.getNivelActual().getMario().getPuntaje());
 				juego.actualizarPuntaje();
