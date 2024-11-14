@@ -69,32 +69,36 @@ public class PantallaPartida extends JPanel {
 		return observer;
 	}
 	
-	protected void actualizarInfoMario(EntidadMario mario) {
+	public void actualizarInfoMario(EntidadMario mario) {
 		actualizarLabelsInformacion(mario);
 		actualizarScrollHaciaMario(mario);
 	}
 	
-	protected void actualizarLabelsInformacion(EntidadMario mario) {
+	public void actualizarLabelsInformacion(EntidadMario mario) {
 		actualizarLabelPuntaje();
 		actualizarLabelTiempo();
 		actualizarLabelVidas(mario);
 		actualizarLabelNivel();
 	}
 	
-	protected void actualizarLabelPuntaje() {
+	public void actualizarLabelPuntaje() {
 		labelPuntaje.setText(textoConCantidadDigitos(juego.getNivelActual().getMario().getPuntaje() , 5)+" ");
+		labelPuntaje.repaint();
 	}
 	
-	protected void actualizarLabelVidas(EntidadMario mario) {
+	public void actualizarLabelVidas(EntidadMario mario) {
 		labelVidas.setText( textoConCantidadDigitos(mario.getVidas(), 2)+"   ");
+		labelVidas.repaint();
 	}
 	
-	protected void actualizarLabelNivel() {
+	public void actualizarLabelNivel() {
 		labelNivel.setText(textoConCantidadDigitos(juego.getNivelActual().getNivel(),1));
+		labelNivel.repaint();
 	}
 	
 	public void actualizarLabelTiempo() {
 		labelTimer.setText( textoConCantidadDigitos(tiempoNivel,3)+"  ");
+		labelTimer.repaint();
 	}
 	
 	private String textoConCantidadDigitos(int numero, int digitos) {
@@ -102,7 +106,7 @@ public class PantallaPartida extends JPanel {
 	}
 	
 	public void iniciarActualizacionInformacion() {
-        timerActualizacionInformacion = new Timer(500, e -> {
+        timerActualizacionInformacion = new Timer(1000, e -> {
             if (juego != null && juego.getNivelActual().getMario() != null) {
                 actualizarLabelTiempo();
             }
@@ -116,7 +120,7 @@ public class PantallaPartida extends JPanel {
         }
     }
 	
-	protected void agregarPanelPartidaConFondoYScroll() {
+	public void agregarPanelPartidaConFondoYScroll() {
 		panelPartida = new JPanel();
 		panelPartida.setLayout(null);
 		panelPartida.setPreferredSize(new Dimension(ConstantesVistas.PANEL_PARTIDA_ANCHO*6, ConstantesVistas.PANEL_ALTO));
@@ -138,7 +142,7 @@ public class PantallaPartida extends JPanel {
         add(layeredPane, BorderLayout.CENTER);
 	}
 	
-	protected void actualizarScrollHaciaMario(EntidadMario mario) {
+	public void actualizarScrollHaciaMario(EntidadMario mario) {
 	    JScrollBar barraHorizontal = panelScrollNivel.getHorizontalScrollBar();
 	    int posicionMarioX = mario.getPosicionX();
 	    int AnchoPantalla = panelScrollNivel.getViewport().getWidth();
@@ -162,7 +166,7 @@ public class PantallaPartida extends JPanel {
 	
 	public void agregarImagenFondo() {
 		imagenFondo= new JLabel();
-		ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource(juego.getRutaModo()+"/FondoJuego.jpg"));
+		ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource(juego.getRutaModo()+"/Fondojuego.jpg"));
 		Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_PARTIDA_ANCHO*6, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
 		ImageIcon iconoImagenEscalado = new ImageIcon(imagenEscalada);
 		imagenFondo.setIcon(iconoImagenEscalado);
@@ -173,7 +177,7 @@ public class PantallaPartida extends JPanel {
 		panelPartida.repaint();
 	}
 	
-	protected void agregarPanelIndicadores() {
+	public void agregarPanelIndicadores() {
 		Font fuente=cargarFuente();
 		panelIndicadores = new JPanel();
 		panelIndicadores.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -195,7 +199,7 @@ public class PantallaPartida extends JPanel {
 		add(panelIndicadores);
 	}
 	
-	protected void agregarPanelInformacion() {
+	public void agregarPanelInformacion() {
 		panelInformacion = new JPanel();
 		panelInformacion.setLayout(new FlowLayout(FlowLayout.CENTER));
 		panelInformacion.setOpaque(false);
@@ -219,7 +223,7 @@ public class PantallaPartida extends JPanel {
 		refrescarPantalla();
 	}
 	
-	protected void agregarLabelsEditablesInformacion() {
+	public void agregarLabelsEditablesInformacion() {
 		labelIndicaPuntaje=new JLabel("SCORE");
 		labelIndicaVidas=new JLabel("LIVES");
 		labelIndicaNivel=new JLabel("LEVEL");
@@ -230,8 +234,7 @@ public class PantallaPartida extends JPanel {
 		labelNivel = new JLabel("00");
 		decorarLabelsInformacion();	
 	}	
-	
-	protected void decorarLabelsInformacion() {
+	public void decorarLabelsInformacion() {
 		labelPuntaje.setForeground(Color.WHITE);
 		labelTimer.setForeground(Color.WHITE);
 		labelVidas.setForeground(Color.WHITE);
@@ -274,7 +277,7 @@ public class PantallaPartida extends JPanel {
 	    timer.start();
 	}
 	
-	protected Font cargarFuente() {
+	private Font cargarFuente() {
 		File fuenteFile = new File("src/Fuente/fuentejuego.ttf");
 		try {
         	return Font.createFont(Font.TRUETYPE_FONT, fuenteFile).deriveFont(16.3f);

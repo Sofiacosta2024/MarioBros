@@ -95,7 +95,7 @@ public class PantallaVictoria extends JPanel {
         etiquetaGanar.setHorizontalAlignment(JLabel.CENTER);
         imagenFondo.add(etiquetaGanar); 
     }
-    private void asignarImagenBoton(JButton b, String s) {
+    public void asignarImagenBoton(JButton b, String s) {
         ImageIcon iconoBoton = new ImageIcon(this.getClass().getResource(s));
         Image imagenEscalada = iconoBoton.getImage().getScaledInstance(200, 50, Image.SCALE_SMOOTH);
         Icon iconoEscalado = new ImageIcon(imagenEscalada);
@@ -122,7 +122,7 @@ public class PantallaVictoria extends JPanel {
         boton.setBorderPainted(false);
     }
     
-	protected Font cargarFuente() {
+	private Font cargarFuente() {
 		File fuenteFile = new File("src/Fuente/fuentejuego.ttf");
 		try {
         	return Font.createFont(Font.TRUETYPE_FONT, fuenteFile).deriveFont(16.3f);

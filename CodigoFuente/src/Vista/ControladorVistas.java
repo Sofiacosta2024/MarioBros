@@ -161,7 +161,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void accionarModoEspecial() {	
-		juego.seleccionarModo("Imagenes/Sprites/Especial");
+		juego.seleccionarModo("/Imagenes/Sprites/Especial");
 		mostrarPantallaInicial();	
 	}
 
@@ -180,16 +180,15 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	public void limpiezaDeEntidadesGraficas() {
 		panelPartida.limpiarEntidadesGraficas();
 	}
-	
+
 	public void limpiarEntidadGrafica(Observer observer) {
 		ObserverGrafica observerALimpiar = (ObserverGrafica) observer;
 		panelPartida.getImagenFondo().remove(observerALimpiar);
 	}
 	
-	public void seleccionarImagenFondo() {
+	public void seleccionarImagenFondoPartida() {
 		panelPartida.agregarImagenFondo();
 	}
-	
 	public void setTiempoNivel() {
 		panelPartida.setTiempoNivel(panelPartida.getTiempoNivelInicial());
 	}

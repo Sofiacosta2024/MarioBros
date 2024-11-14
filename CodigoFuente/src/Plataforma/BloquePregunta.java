@@ -13,13 +13,13 @@ public class BloquePregunta extends BloqueSolido {
 	protected Sprite bloqueVacio;
 	protected Sprite bloqueConPowerUp;
 	
-	public BloquePregunta(int x, int y, PowerUp powerUp, int velocidad, Sprite[] sprites) {
+	public BloquePregunta(int x, int y, PowerUp powerUp, int velocidad, Sprite[] spritesBloquePregunta, Sprite[] spritesBloqueSolido) {
 		super(x,y, velocidad);
 		this.powerUp = powerUp;
 		hayPowerUp = true;
 		mostrarPowerUp = -1;
-		bloqueConPowerUp = sprite;
-		bloqueVacio = sprites[0];
+		bloqueConPowerUp = spritesBloquePregunta[0];
+		bloqueVacio = spritesBloqueSolido[0];
 	}
 
 	public void interactuar(Mario mario, String direccionColision) {
@@ -29,6 +29,8 @@ public class BloquePregunta extends BloqueSolido {
 				powerUp.setPosicionY(posicionY + 40);
 				powerUp.actualizarAreaColision();
 				powerUp.notificarObservador();
+				setSprite(bloqueVacio);
+				notificarObservador();
 			}
         	hayPowerUp = false;
 		}

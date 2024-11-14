@@ -23,7 +23,7 @@ public class PantallaInicial extends JPanel {
 		agregarBotonIniciar();
 	}
 	
-	protected void agregarFondo() {
+	public void agregarFondo() {
 		imagenFondo = new JLabel();
 		ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource("/Imagenes/Fondos/pantallainicialmario.jpeg"));
 		Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
@@ -33,7 +33,7 @@ public class PantallaInicial extends JPanel {
 		add(imagenFondo);
 	}
 	
-	protected void agregarBotonIniciar() {
+	public void agregarBotonIniciar() {
 		botonIniciar = new JButton();
 		decorarBotonIniciar();
 		asignarImagenBoton(botonIniciar, "/Imagenes/Botones/BotonInicio.jpg");
@@ -50,13 +50,13 @@ public class PantallaInicial extends JPanel {
 	    b.setIcon(iconoEscalado);
 	}
 	
-	protected void decorarBotonIniciar() {
+	public void decorarBotonIniciar() {
 		transparentarBoton(botonIniciar);
 		botonIniciar.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 100,ConstantesVistas.PANEL_ALTO - 230, 200 , 50);
 		botonIniciar.setFocusable(false);
 	}
 	
-	protected void registrarOyenteBotonIniciar() {
+	public void registrarOyenteBotonIniciar() {
 		botonIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controladorVistas.accionarInicioJuego();
@@ -64,7 +64,7 @@ public class PantallaInicial extends JPanel {
 		});
 	}
 	 
-	protected void transparentarBoton(JButton boton) {
+	public void transparentarBoton(JButton boton) {
 		boton.setOpaque(false);
 		boton.setContentAreaFilled(false);
 		boton.setBorderPainted(false);

@@ -77,7 +77,7 @@ public class Juego {
 			}
 		
 		fabricaEntidades = new FabricaEntidades(fabricaSprite);
-		this.getControladorVista().seleccionarImagenFondo();
+		this.getControladorVista().seleccionarImagenFondoPartida();
 		cargarNivel();
 	}
 

@@ -13,7 +13,7 @@ public class Mario extends Entidad implements EntidadMario{
 	protected int vidas;
 	protected int monedas;
 	protected boolean cayendoVacio, enSuelo,saltando,
-						puedeDerecha,puedeIzquierda,cambioEstado;
+						puedeDerecha,puedeIzquierda,cambioEstado, moverDerecha, moverIzquierda;
 	protected EstadoMario estado,anterior;
 	protected char sentidoMovimientoMario;
 	protected double progreso;
@@ -26,7 +26,7 @@ public class Mario extends Entidad implements EntidadMario{
 	protected int VELIZQUIERDA = -5;
 	
 	public Mario(int x, int y, int velocidad, Juego juego, Sprite[] sprites, Sprite[] spritesBolaFuego) {
-		super(x,y, velocidad,16,16);
+		super(x,y, velocidad,16,20);
 		estado = new EstadoNormal();
 		anterior = estado;
 		vidas = 3;
@@ -46,6 +46,25 @@ public class Mario extends Entidad implements EntidadMario{
 		this.juego = juego;
 		this.sprites = sprites;
 		this.spritesBolaFuego = spritesBolaFuego;
+		moverDerecha = false;
+		moverIzquierda = false;
+	}
+	public void activarDerecha() {
+		moverDerecha = true;
+		moverIzquierda = false;
+	}
+	
+	public void activarIzquierda() {
+		moverDerecha = false;
+		moverIzquierda = true;
+	}
+	
+	public void desactivarDerecha() {
+		moverDerecha = false;
+	}
+	
+	public void desactivarIzquierda() {
+		moverIzquierda = false;
 	}
 
 	public void actualizarMovimientoMario(char direccion) {
@@ -53,15 +72,21 @@ public class Mario extends Entidad implements EntidadMario{
 		int desplazamientoX = 0;
 		int desplazamientoY = 0;
 		
-		if(direccion == DERECHA && puedeDerecha) {
+		if(puedeDerecha && moverDerecha) {
 			desplazamientoX += 50;
 			puedeIzquierda = true;
-			//posicionX += velocidad;
+			sentidoMovimientoMario = DERECHA;
+			posicionX += 5;
+			actualizarAreaColision();
 		}
-		if(direccion == IZQUIERDA && puedeIzquierda) {
+		if( puedeIzquierda && moverIzquierda) {
 			desplazamientoX -= 50;
 			puedeDerecha = true;
-			//posicionX += velocidad;
+			if(posicionX>=40) {
+				sentidoMovimientoMario = IZQUIERDA;
+				posicionX -= 5;
+				actualizarAreaColision();
+			}
 		}
 		if(direccion == SALTO) {
 			desplazamientoY -= velocidadSalto;
@@ -70,10 +95,6 @@ public class Mario extends Entidad implements EntidadMario{
 			detenerMario();
 		}
 		if (saltando) {
-			if(direccion == DERECHA)
-				moverDerecha();
-			if(direccion == IZQUIERDA)
-				moverIzquierda();
 			double factorVelocidad = Math.cos(progreso) * velocidadSalto;
 			int nuevaPos = (int) Math.round(getPosicionY() + factorVelocidad);
 			setPosicionY(nuevaPos);
@@ -113,15 +134,9 @@ public class Mario extends Entidad implements EntidadMario{
 			char x = direccionMovimiento;
 			actualizarSprite(direccion);			
 			direccionMario(desplazamientoX, desplazamientoY);
-			if(direccion==x) {
-				observador.actualizarPosicionTamano();
-			}
-			else {
-				notificarObservador();
-			}
 		}
+	observador.actualizarPosicionTamano();
 	}
-
 	public void saltar() {
 		if(progreso == 0){
 			Sonido.obtenerInstancia().reproducirSonidoSaltar();
@@ -163,25 +178,6 @@ public class Mario extends Entidad implements EntidadMario{
 			direccionMovimiento = SALTO;
 			direccionMovimientoAnterior = direccionMovimiento;
 		}
-
-	}
-
-	public void moverDerecha() {
-		if(puedeDerecha) {
-			sentidoMovimientoMario = DERECHA;
-			//velocidad = VELDERECHA;
-			posicionX += 5;
-			actualizarAreaColision();
-		}
-	}
-
-	public void moverIzquierda() {
-		if(posicionX>=40 && puedeIzquierda) {
-			sentidoMovimientoMario = IZQUIERDA;
-			//velocidad = VELIZQUIERDA;
-			posicionX -= 5;
-			actualizarAreaColision();
-		}
 	}
 
 	public void detenerMario() {
@@ -191,12 +187,13 @@ public class Mario extends Entidad implements EntidadMario{
 			if(direccionMovimiento == IZQUIERDA)
 				sprite = estado.getSpriteDetenidoIzquierda(sprites);
 		direccionMovimiento= QUIETO;
-		sentidoMovimientoMario = QUIETO;
+		//sentidoMovimientoMario = QUIETO;
 		velocidad = 0;
 		notificarObservador();
 	}
 
 	public Sprite actualizarSprite(char direccion) {
+		Sprite aux = sprite;
 		if (saltando) {
 		  if (direccion == DERECHA || direccionMovimiento == DERECHA) 
 		      sprite = estado.getSpriteSaltandoADerecha(sprites);
@@ -219,6 +216,9 @@ public class Mario extends Entidad implements EntidadMario{
 		        					sprite = estado.getSpriteDetenidoIzquierda(sprites);
 		        	}
 		    }
+		if(aux!=sprite) {
+			notificarObservador();
+		}
 		    return sprite;
 		}
 
@@ -364,6 +364,10 @@ public class Mario extends Entidad implements EntidadMario{
 	public boolean getCambioEstado() {
 		return cambioEstado;
 	} 
+	
+	public Sprite[] getSpritesMario() {
+		return sprites;
+	}
 
 	public boolean getSaltando() {
 		return saltando;
@@ -383,6 +387,10 @@ public class Mario extends Entidad implements EntidadMario{
 
 	public Juego getJuego() {
 		return juego;
+	}
+	
+	public char getDireccionMovimiento() {
+		return direccionMovimiento;
 	}
 	
 	public int getPuntaje() {
