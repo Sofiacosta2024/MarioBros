@@ -14,21 +14,36 @@ public abstract class Plataforma extends Entidad{
 	}
 
 	public void interactuar(Mario mario, String direccionColision) {
+		System.out.println(mario.getEnSuelo());
 		if (direccionColision.equals("IZQUIERDA")) {
 			mario.setPuedeMoverseALaDerecha(false); 
+			if(!mario.getEnSuelo()) {
+				mario.rebotarHaciaAbajo();
+			}
+			
+			
 		} else 
 			if (direccionColision.equals("DERECHA")) {
-				mario.setPuedeMoverseALaIzquierda(false);  
-			} else 
+				mario.setPuedeMoverseALaIzquierda(false); 
+				if(!mario.getEnSuelo()) {
+					mario.rebotarHaciaAbajo();
+				}
+				/*if() {
+				mario.setEnSuelo(false);
+				}*/
+				
+				} else 
 				if (direccionColision.equals("ARRIBA")) {
 					mario.detenerSalto();
-					int pisoDerecha =this.getPosicionX()+this.getAncho(); 
-					int pisoIzquierda = (this.getPosicionX()); 
+					mario.setEnSuelo(true);
+					int pisoDerecha =this.getPosicionX()+this.getAncho()-5; 
+					int pisoIzquierda = (this.getPosicionX()-20); 
 					mario.setLimiteDerecha(pisoDerecha);
 					mario.setLimiteIzquierda(pisoIzquierda);
 				} else 
 					if (direccionColision.equals("ABAJO")) {
 						mario.rebotarHaciaAbajo();
+						System.out.println("a");
 					}
 	}
 

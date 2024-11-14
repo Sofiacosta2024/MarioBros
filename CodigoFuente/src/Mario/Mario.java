@@ -24,9 +24,10 @@ public class Mario extends Entidad implements EntidadMario{
 	protected Sprite sprites[], spritesBolaFuego[];
 	protected int VELDERECHA = 5;
 	protected int VELIZQUIERDA = -5;
+	protected int cont;
 	
 	public Mario(int x, int y, int velocidad, Juego juego, Sprite[] sprites, Sprite[] spritesBolaFuego) {
-		super(x,y, velocidad,16,20);
+		super(x,y, velocidad,20,20);
 		estado = new EstadoNormal();
 		anterior = estado;
 		vidas = 3;
@@ -48,6 +49,7 @@ public class Mario extends Entidad implements EntidadMario{
 		this.spritesBolaFuego = spritesBolaFuego;
 		moverDerecha = false;
 		moverIzquierda = false;
+		cont=0;
 	}
 	public void activarDerecha() {
 		moverDerecha = true;
@@ -94,51 +96,74 @@ public class Mario extends Entidad implements EntidadMario{
 		if(direccion == QUIETO) {
 			detenerMario();
 		}
+
 		if (saltando) {
-			double factorVelocidad = Math.cos(progreso) * velocidadSalto;
+			/*double factorVelocidad = Math.cos(progreso) * velocidadSalto;
 			int nuevaPos = (int) Math.round(getPosicionY() + factorVelocidad);
 			setPosicionY(nuevaPos);
 			progreso += 0.15; 		
-			saltando = progreso <= Math.PI;
+			saltando = progreso <= Math.PI/2;
+			*/
+			
+			
+			cont++;
+			setPosicionY(getPosicionY()+20-cont);
 			actualizarAreaColision();
-			if(progreso > 0 && getPosicionY() < suelo && !cayendoVacio){
+			if(cont>20) {
+				saltando=false;
+				//cont=0;
+			}
+			//caer cuando saltando es false
+			/*if(progreso > 0 && getPosicionY() < suelo && !cayendoVacio){
 				detenerSalto();
 				setPosicionY(posInicialSalto);
 				actualizarAreaColision();
-			}
+			}*/
 		} 
-		else {
-			if(progreso > 0) {
+		else if(!enSuelo){
+			//codigo caida
+			setPosicionY(getPosicionY()-20+cont);
+			actualizarAreaColision();
+			cont--;
+			if(getPosicionY()<=suelo && !cayendoVacio) {
+				setPosicionY(suelo);
+				actualizarAreaColision();
+
+				limiteDerecha=5000;
+				limiteIzquierda=0;
+				enSuelo=true;
+			}
+			
+			
+			
+			/*if(progreso > 0) {
 				setPosicionY(posInicialSalto);
 				actualizarAreaColision();
-			}
-			progreso = 0;
-			saltando = false;
-			if(getPosicionX()>limiteDerecha || getPosicionX()<limiteIzquierda){
-				posInicialSalto = suelo;
-				saltando=true;
-				progreso=Math.PI/2;
-				if(getPosicionY()<=suelo) {
-					setPosicionY(suelo);
-					actualizarAreaColision();
-					notificarObservador();
-					limiteDerecha=5000;
-					limiteIzquierda=0;
-					enSuelo=true;
-					progreso = 0;
-					saltando = false;
-				}
-			}
+			}*/
+			
+			
 		} 
+		
+		if(getPosicionX()>limiteDerecha || getPosicionX()<limiteIzquierda ){
+			posInicialSalto = getPosicionY();
+			System.out.println("suelo falso");
+			enSuelo=false;
+			
+		}
+		
 		if(desplazamientoX!= 0 || desplazamientoY!=0) {
-			char x = direccionMovimiento;
 			actualizarSprite(direccion);			
 			direccionMario(desplazamientoX, desplazamientoY);
 		}
+		
 	observador.actualizarPosicionTamano();
+	
 	}
+	
 	public void saltar() {
-		if(progreso == 0){
+		if(progreso == 0 && enSuelo){
+			enSuelo=false;
+			cont=0;
 			Sonido.obtenerInstancia().reproducirSonidoSaltar();
 			saltando = true;
 			posInicialSalto = getPosicionY();
@@ -147,20 +172,24 @@ public class Mario extends Entidad implements EntidadMario{
 	}
 
 	public void detenerSalto(){
-		progreso = 0;
 		saltando = false;
 	}
 
 	public void rebotarHaciaAbajo(){
-		if(progreso<((Math.PI /2))) {
+		enSuelo=false;
+		saltando=false;
+		puedeIzquierda=true;
+		puedeDerecha=true;
+		/*if(progreso<((Math.PI /2))) {
 			progreso = Math.PI - progreso;
-		}
+		}*/
 	}
 
 	public void morirPorVacio() {
 		Sonido.obtenerInstancia().reproducirSonidoCaeAlVacio();
-		saltando=true;
-		progreso=Math.PI/2;
+		//saltando=true;
+		//progreso=Math.PI/2;
+		enSuelo=false;
 		cayendoVacio=true;
 	}
 
@@ -231,7 +260,6 @@ public class Mario extends Entidad implements EntidadMario{
 			juego.getNivelActual().agregarProyectil(bolaFuego);
 			juego.registrarObserverProyectiles(bolaFuego);
 			bolaFuego.setEnMovimiento(true);
-			System.out.println("Se lanza bola de fuego");
 		}
 	}
 
