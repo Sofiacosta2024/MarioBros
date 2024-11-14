@@ -1,5 +1,2 @@
-null 45
-ANGE 45
-oi 0
-SOfi 0
-sofiimm 45
+m 0
+sofi 0
