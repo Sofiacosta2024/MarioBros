@@ -7,7 +7,7 @@ import Vista.*;
 import Colisionador.ColisionadorVisitorMario;
 import Threads.TemporizadorEstadoEstrella;
 
-public class Mario extends Entidad implements EntidadMario{
+public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMario{
 
 	protected int vidas;
 	protected int monedas;
@@ -185,7 +185,6 @@ public class Mario extends Entidad implements EntidadMario{
 			if(direccionMovimiento == IZQUIERDA)
 				sprite = estado.getSpriteDetenidoIzquierda(sprites);
 		direccionMovimiento= QUIETO;
-		//sentidoMovimientoMario = QUIETO;
 		velocidad = 0;
 		notificarObservador();
 	}
@@ -222,10 +221,8 @@ public class Mario extends Entidad implements EntidadMario{
 
 	public void lanzarBolaFuego() {
 		if(estado.lanzarBolaFuego()) {
-			int posicionXBola = posicionX + 45; 
-			int posicionYBola = posicionY + 15;
 			Sprite spriteBola = spritesBolaFuego[0];
-			BolaFuego bolaFuego = new BolaFuego(posicionXBola, posicionYBola,5,spriteBola,sentidoMovimientoMario,direccionMovimientoAnterior);
+			BolaFuego bolaFuego = new BolaFuego(posicionX + 45, posicionY + 15,5,spriteBola,sentidoMovimientoMario,direccionMovimientoAnterior);
 			juego.getNivelActual().agregarProyectil(bolaFuego);
 			juego.registrarObserverProyectiles(bolaFuego);
 			bolaFuego.setEnMovimiento(true);

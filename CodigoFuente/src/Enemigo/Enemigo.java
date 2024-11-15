@@ -16,7 +16,6 @@ public abstract class Enemigo extends Entidad{
 	protected boolean sobrePlataforma,sobreSuelo;
 	protected int puntaje, puntajeMatarAMario, posicionXInicial, posicionYInicial;
 	protected float gravedad;
-	protected Sonido player;
 	
 	public Enemigo(int x, int y, int velocidad, int anchoHitBox, int altoHitBox) {
 		super(x, y, velocidad, anchoHitBox,altoHitBox);

@@ -37,7 +37,7 @@ public class PantallaPartida extends JPanel {
 	private JLabel labelIndicaPuntaje;
 	private JLabel labelIndicaTimer;
 	private int tiempoNivel, tiempoNivelInicial;
-	private Timer timer, timerActualizacionInformacion;
+	private Timer timer, timerActualizacionInformacionTiempo;
 	private ControladorDeVistas controlador;
 	private Juego juego;
 	
@@ -107,19 +107,15 @@ public class PantallaPartida extends JPanel {
 		return String.format("%0" + digitos + "d", numero);
 	}
 	
-	public void iniciarActualizacionInformacion() {
-        timerActualizacionInformacion = new Timer(1000, e -> {
-            if (juego != null && juego.getNivelActual().getMario() != null) {
+	public void iniciarActualizacionInformacionTiempo() {
+        timerActualizacionInformacionTiempo = new Timer(1000, e -> {
                 actualizarLabelTiempo();
-            }
         });
-        timerActualizacionInformacion.start();
+        timerActualizacionInformacionTiempo.start();
     }
 	
 	public void detenerActualizacion() {
-        if (timerActualizacionInformacion != null) {
-        	timerActualizacionInformacion.stop();
-        }
+		timerActualizacionInformacionTiempo.stop();
     }
 	
 	public void agregarPanelPartidaConFondoYScroll() {
