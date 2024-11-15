@@ -45,7 +45,7 @@ public class MoverEnemigo extends Thread{
 			deltat +=  (tiempoActual - ultimaEjecucion)/tiempoEntreFrames;  
 			ultimaEjecucion = tiempoActual;
 			if(deltat >= 1) { 
-				actualizar();
+				actualizarMovimiento();
 				deltat--;
 			}		
 			synchronized(juego.getNivelActual()) {
@@ -59,26 +59,17 @@ public class MoverEnemigo extends Thread{
 		}
 	}
 
-	private void actualizar() {
+	private void actualizarMovimiento() {
 		try {
 			for (Enemigo enemigo : juego.getNivelActual().getEnemigos()) {
 				if (!enemigo.estaEnEnfriamiento() && enemigo.colisionable()) {
-					//enemigo.mover();
-					char direccionEnemigo = enemigo.getMovimiento();
-					if(direccionEnemigo == enemigo.IZQUIERDA)
-						enemigo.mover(-1, 0);
-					else
-						enemigo.mover(1, 0);  
+					enemigo.mover();
 				}
 			}
 			ArrayList<Spiny> spinyss = new ArrayList<>(juego.getNivelActual().getSpinyssLanzados());
 			for (Spiny spiny : spinyss) {
 				if (!spiny.estaEnEnfriamiento() && spiny.colisionable()) {
-					char direccionEnemigo = spiny.getMovimiento();
-					if(direccionEnemigo == spiny.IZQUIERDA)
-						spiny.mover(-2, 0);
-					else
-						spiny.mover(2, 0);  
+					spiny.mover();
 				}
 			}
 			for (BolaFuego bolaFuego : juego.getNivelActual().getProyectiles()) {
@@ -96,7 +87,7 @@ public class MoverEnemigo extends Thread{
 		}
 		catch(ConcurrentModificationException excepcion) {
 			//System.out.println("CONCURRENNNTTT EN MOVERENEMIGO");
-			actualizar();
+			actualizarMovimiento();
 		}
 	}
 }

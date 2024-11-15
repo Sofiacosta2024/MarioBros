@@ -14,14 +14,12 @@ public abstract class Enemigo extends Entidad{
 	protected long TIEMPO_ENFRIAMIENTO = 90;
 	protected final int posSuelo = 60;
 	protected boolean sobrePlataforma,sobreSuelo;
-	protected int puntaje, puntajeMatarAMario, posicionXInicial, posicionYInicial;
+	protected int puntaje, puntajeMatarAMario;
 	protected float gravedad;
 	
 	public Enemigo(int x, int y, int velocidad, int anchoHitBox, int altoHitBox) {
 		super(x, y, velocidad, anchoHitBox,altoHitBox);
 		direccionMovimiento = IZQUIERDA;
-		posicionXInicial = x;
-		posicionYInicial = y;
 		sobrePlataforma = false;
 		if(posicionY > posSuelo)
 			sobreSuelo = false;
@@ -32,16 +30,26 @@ public abstract class Enemigo extends Entidad{
 
 	public abstract void atacar(Mario m);
 
-	public void mover(int nuevaX, int nuevaY) {
+	public void mover() {
 		if(!sobreSuelo && !sobrePlataforma) {
 			caer();
 		}
-		posicionX = posicionX + nuevaX;
-		if(posicionX <= -65)
+		
+		if(direccionMovimiento == IZQUIERDA) {
+			posicionX = posicionX - velocidad;
+		}
+		else
+			if(direccionMovimiento == DERECHA) {
+				posicionX = posicionX + velocidad;
+			}
+		if(posicionX <= -65) {
 			retirar();
+		}
 		actualizarAreaColision();
 		observador.actualizarPosicionTamano();
 	}
+	
+	
 
 	public void caer() {
 		gravedad += 0.2;
@@ -78,9 +86,8 @@ public abstract class Enemigo extends Entidad{
 		notificarObservador();
 	}
 
-	public void setPosicionInicial() {
-		posicionX = posicionXInicial;
-		posicionY = posicionYInicial;
+	public void setEstadoInicial() {
+		super.setEstadoInicial();
 		sobrePlataforma = false;
 		if(posicionY > posSuelo)
 			sobreSuelo = false;

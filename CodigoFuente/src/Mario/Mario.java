@@ -232,10 +232,12 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 	public void decrementarVida() {
 		Sonido.obtenerInstancia().reproducirSonidoMorir();
 		vidas--;
+		if(vidas==0) {
+			juego.finalizarPartida();
+		}
 	}
-	public void resetearPosicion() {
-		posicionX = 50;
-		posicionY = 60;
+	public void setEstadoInicial() {
+		super.setEstadoInicial();
 		estado = new EstadoNormal();
 		puedeDerecha=true;
 		puedeIzquierda=true;

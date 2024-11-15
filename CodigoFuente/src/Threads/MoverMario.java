@@ -34,6 +34,7 @@ public class MoverMario extends Thread{
 				detenerHilo();
 				return;
 			}
+			
 			if(juego.getTiempoActual() == 0) {
 				if(mario.getVidas() > 1) {
 					mario.decrementarVida();
@@ -42,21 +43,12 @@ public class MoverMario extends Thread{
 				else
 					mario.decrementarVida();
 			}
-			if(mario.getPosicionX()>=4150) {
-				mario.detenerMario();
-				mario.setPuedeMoverseALaDerecha(false);
-				mario.setPuedeMoverseALaIzquierda(false);
-				juego.jugadorPasaDeNivel();
-			}	
+	
 			juego.moverMario();
 			synchronized(juego.getNivelActual()) {
 				juego.detectarColisionesMarioMundo();
 			}
-			if(mario.getVidas()==0) {
-				juego.finalizarPartida();
-				detenerHilo();
-				return;
-			}
+			
 			try {
 				Thread.sleep(40);
 			} 

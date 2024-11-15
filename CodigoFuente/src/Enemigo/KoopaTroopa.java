@@ -22,8 +22,8 @@ public class KoopaTroopa extends Enemigo{
 		spritesKoopa = sprites;
 	}
 	
-	public void setPosicionInicial() {
-		super.setPosicionInicial();
+	public void setEstadoInicial() {
+		super.setEstadoInicial();
 		estado = new EstadoCaminando(this);
 		sprite = spritesKoopa[0];
 		detener = false;
