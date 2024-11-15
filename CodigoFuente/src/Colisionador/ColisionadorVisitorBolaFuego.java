@@ -22,7 +22,7 @@ public class ColisionadorVisitorBolaFuego {
 
 	public void visitarLadrillo(LadrilloSolido ladrillo) {
 		ladrillo.retirar();
-		ladrillo.notificarObservador();
+		ladrillo.notificarObservador(); //adentro de retirar
 		retirarBolaFuego();
 	}
 
@@ -35,6 +35,6 @@ public class ColisionadorVisitorBolaFuego {
 	
 	private void retirarBolaFuego() {
 		entidadColisionable.retirar();
-		juego.getControladorVista().limpiarEntidadGrafica(entidadColisionable.getObserver());
+		//juego.getControladorVista().limpiarEntidadGrafica(entidadColisionable.getObserver());
 	}
 }

@@ -8,4 +8,5 @@ public interface ControladorDeVistas {
 	public void accionarModoEspecial();
 	public void accionarPantallaAlIngresarNombre();
 	public void accionarPantallaVictoria();
+	public void limpiarEntidadGrafica(ObserverGrafica observer);
 }

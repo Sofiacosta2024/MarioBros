@@ -10,8 +10,8 @@ public class ObserverMario extends ObserverGrafica{
 	private PantallaPartida panelPartida;
 	private EntidadMario marioObservado;
 	
-	public ObserverMario(PantallaPartida panelPartida, EntidadMario observado) {
-		super(observado);
+	public ObserverMario(PantallaPartida panelPartida, EntidadMario observado, ControladorDeVistas controlador) {
+		super(observado,controlador);
 		this.panelPartida = panelPartida;
 		marioObservado = observado;
 		actualizar();

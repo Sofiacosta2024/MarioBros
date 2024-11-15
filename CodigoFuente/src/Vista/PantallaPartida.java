@@ -38,10 +38,12 @@ public class PantallaPartida extends JPanel {
 	private JLabel labelIndicaTimer;
 	private int tiempoNivel, tiempoNivelInicial;
 	private Timer timer, timerActualizacionInformacion;
+	private ControladorDeVistas controlador;
 	private Juego juego;
 	
 	public PantallaPartida(ControladorDeVistas controladorVistas, Juego juego) {
 		this.juego = juego;
+		this.controlador = controladorVistas;
 		setPreferredSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO));
 		setLayout(new BorderLayout());
 		setDoubleBuffered(true); 
@@ -53,7 +55,7 @@ public class PantallaPartida extends JPanel {
 	}
 	
 	public Observer incorporarEntidad(EntidadLogica entidad) {
-		ObserverEntidades observer = new ObserverEntidades(entidad);
+		ObserverEntidades observer = new ObserverEntidades(entidad,controlador);
 		observer.setBounds(entidad.getPosicionX(), entidad.getPosicionY(), 50, 50);
 		imagenFondo.add(observer);
 		refrescarPantalla();
@@ -61,7 +63,7 @@ public class PantallaPartida extends JPanel {
 	}
 	
 	public Observer incorporarEntidadMario(EntidadMario entidad) {
-		ObserverMario observer = new ObserverMario(this, entidad);
+		ObserverMario observer = new ObserverMario(this, entidad, controlador);
 		observer.setBounds(entidad.getPosicionX(), entidad.getPosicionY(), 10, 10);
 		imagenFondo.add(observer);
 		actualizarInfoMario(entidad);

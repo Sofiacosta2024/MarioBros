@@ -9,9 +9,11 @@ import Logica.EntidadLogica;
 public abstract class ObserverGrafica extends JLabel implements Observer {
 	private static final long serialVersionUID = 1L;
 	protected EntidadLogica entidadObservada;
+	protected ControladorDeVistas controlador;
 
-	public ObserverGrafica(EntidadLogica entidadObservada) {
+	public ObserverGrafica(EntidadLogica entidadObservada,ControladorDeVistas controlador) {
 		super();
+		this.controlador = controlador;
 		this.entidadObservada = entidadObservada;
 	}
 
@@ -59,7 +61,7 @@ public abstract class ObserverGrafica extends JLabel implements Observer {
 	public void actualizarPorMuerte() {
 		setVisible(false);
 		this.setIcon(null);
-		revalidate();
+		revalidate(); //controlador estas dos
 		repaint();
 	}
 }

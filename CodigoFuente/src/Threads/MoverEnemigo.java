@@ -63,6 +63,7 @@ public class MoverEnemigo extends Thread{
 		try {
 			for (Enemigo enemigo : juego.getNivelActual().getEnemigos()) {
 				if (!enemigo.estaEnEnfriamiento() && enemigo.colisionable()) {
+					//enemigo.mover();
 					char direccionEnemigo = enemigo.getMovimiento();
 					if(direccionEnemigo == enemigo.IZQUIERDA)
 						enemigo.mover(-1, 0);
