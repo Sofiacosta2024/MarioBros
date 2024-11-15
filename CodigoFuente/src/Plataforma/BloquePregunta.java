@@ -40,6 +40,10 @@ public class BloquePregunta extends BloqueSolido {
 		visitor.visitarBloquePregunta(this);
 	}
 	
+	public void setEstadoInicial() {
+		setSprite(bloqueConPowerUp);
+	}
+	
 	public void setColisionable(boolean colisionable) {
 		esColisionable = colisionable;
 		hayPowerUp = colisionable;
