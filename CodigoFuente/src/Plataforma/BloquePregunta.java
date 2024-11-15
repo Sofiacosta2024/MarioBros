@@ -41,6 +41,7 @@ public class BloquePregunta extends BloqueSolido {
 	}
 	
 	public void setEstadoInicial() {
+		super.setEstadoInicial();
 		setSprite(bloqueConPowerUp);
 	}
 	

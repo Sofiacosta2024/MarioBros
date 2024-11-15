@@ -9,7 +9,7 @@ import Vista.*;
 
 public abstract class Entidad implements EntidadLogica{
 
-	protected int posicionY, posicionX, velocidad, alto, ancho;
+	protected int posicionY, posicionX, posicionInicialX, posicionInicialY, velocidad, alto, ancho;
 	protected Sprite sprite;
 	protected Observer observador;
 	protected ObserverGrafica observadorProvisional;
@@ -25,6 +25,8 @@ public abstract class Entidad implements EntidadLogica{
 	public Entidad(int x, int y, int velocidad, int anchoHitBox, int altoHitBox) {
 		posicionX = x;
 		posicionY = y;
+		posicionInicialX = x;
+		posicionInicialY = y;
 		this.velocidad = velocidad;
 		alto = altoHitBox;
 		ancho = anchoHitBox;
@@ -62,6 +64,11 @@ public abstract class Entidad implements EntidadLogica{
 
 	public void setPosicionY(int y) {
 		posicionY = y;
+	}
+	
+	public void setEstadoInicial() {
+		posicionX = posicionInicialX;
+		posicionY = posicionInicialY;
 	}
 
 	public void setColisionable(boolean colisionable) {

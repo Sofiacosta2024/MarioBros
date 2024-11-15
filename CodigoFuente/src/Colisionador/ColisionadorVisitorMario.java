@@ -144,6 +144,13 @@ public class ColisionadorVisitorMario{
 	public void visitarTuberiaPiranha(TuberiaConPiranha tuberia) {
 		visitarTuberia(tuberia);
 	}
+	
+	public void visitarBandera(Bandera bandera) {
+		entidadColisionable.detenerMario();
+		entidadColisionable.setPuedeMoverseALaDerecha(false);
+		entidadColisionable.setPuedeMoverseALaIzquierda(false);
+		juego.reiniciarNivel();
+	}
 
 	public void visitarVacio(Vacio vacio) {
 		entidadColisionable.morirPorVacio();
@@ -159,7 +166,7 @@ public class ColisionadorVisitorMario{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			entidadColisionable.resetearPosicion();
+			entidadColisionable.setEstadoInicial();
 			juego.reiniciarNivel();
 		}).start();
 		

@@ -91,15 +91,16 @@ public class Juego {
 	public void reiniciarNivel() {
 		for(Plataforma plataforma: nivelActual.getPlataformas()) {
 			plataforma.setColisionable(true);
+			plataforma.setEstadoInicial();
 			plataforma.notificarObservador();
 		}
 		for(Enemigo enemigo: nivelActual.getEnemigos()) {
-			enemigo.setPosicionInicial();
+			enemigo.setEstadoInicial();
 			enemigo.setColisionable(true);
 			enemigo.notificarObservador();
 		}
 		for(PowerUp powerUp: nivelActual.getPowerUps()) {
-			powerUp.setPosicionInicial();
+			powerUp.setEstadoInicial();
 			powerUp.setColisionable(true);
 			powerUp.notificarObservador();
 		}
@@ -111,7 +112,7 @@ public class Juego {
 			bola.retirar();
 			bola.notificarObservador();
 		}
-		nivelActual.getMario().resetearPosicion();
+		nivelActual.getMario().setEstadoInicial();
 		controladorVistas.setTiempoNivel();
 	}
 
@@ -145,6 +146,7 @@ public class Juego {
 
 	public void finalizarPartida() {
 		juegoTerminado = true;
+		detenerHilos();
 		player.reproducirSonidoGameOver();
 		controladorVistas.mostrarPantallaFinJuego();
 		for(Spiny spiny : nivelActual.getSpinyssLanzados()) {

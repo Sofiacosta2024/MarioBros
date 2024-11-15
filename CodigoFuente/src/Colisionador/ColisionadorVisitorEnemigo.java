@@ -31,20 +31,20 @@ public class ColisionadorVisitorEnemigo {
 		if(spiny.getLakituLanzador() != entidadColisionable && entidadColisionable != spiny) {
 			if(!entidadColisionable.estaEnEnfriamiento()) {
 				if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
-					entidadColisionable.mover(5, 0);
 					entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
+					entidadColisionable.mover();
 				}
 				else {
-					entidadColisionable.mover(-5, 0);
-					entidadColisionable.setMovimiento(entidadColisionable.IZQUIERDA);
+					   entidadColisionable.setMovimiento(entidadColisionable.IZQUIERDA);
+					   entidadColisionable.mover();
 				}
 				if(spiny.getMovimiento() == entidadColisionable.IZQUIERDA) {
-					spiny.mover(5, 0);
 					spiny.setMovimiento(entidadColisionable.DERECHA);
+					spiny.mover();
 				}
 				else {
-					spiny.mover(-5, 0);
-					spiny.setMovimiento(entidadColisionable.IZQUIERDA);
+					  spiny.setMovimiento(entidadColisionable.IZQUIERDA);
+					  spiny.mover();
 				}
 				entidadColisionable.getObserver().actualizarPosicionTamano();
 				entidadColisionable.activarEnfriamiento();
@@ -59,12 +59,12 @@ public class ColisionadorVisitorEnemigo {
 			if(entidadColisionable != spiny && lakitu != entidadColisionable) {
 				if(!entidadColisionable.estaEnEnfriamiento()) {
 					if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
-						entidadColisionable.mover(5, 0);
 						entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
+						entidadColisionable.mover();
 					}
 					else {
-						entidadColisionable.mover(-5, 0);
-						entidadColisionable.setMovimiento(entidadColisionable.IZQUIERDA);
+						  entidadColisionable.setMovimiento(entidadColisionable.IZQUIERDA);
+						  entidadColisionable.mover();
 					}
 					entidadColisionable.getObserver().actualizarPosicionTamano();
 					entidadColisionable.activarEnfriamiento();
@@ -77,12 +77,12 @@ public class ColisionadorVisitorEnemigo {
 		if(entidadColisionable!= tuberiaConPiranha.getPiranha()) {
 			if(!entidadColisionable.estaEnEnfriamiento()) {
 				if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
-					entidadColisionable.mover(5, 0);
 					entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
+					entidadColisionable.mover();
 				}
 				else {
-					entidadColisionable.mover(-5, 0);
-					entidadColisionable.setMovimiento(entidadColisionable.IZQUIERDA);
+					   entidadColisionable.setMovimiento(entidadColisionable.IZQUIERDA);
+					   entidadColisionable.mover();
 				}
 				entidadColisionable.getObserver().actualizarPosicionTamano();
 				entidadColisionable.activarEnfriamiento();
@@ -105,18 +105,18 @@ public class ColisionadorVisitorEnemigo {
 	        if(direccion.equals("ARRIBA")) {
 	            entidadColisionable.detenerOActivarCaida(true);
 	            if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
-	                entidadColisionable.mover(-2, 0);
+	                entidadColisionable.mover();
 	            } else if(entidadColisionable.getMovimiento() == entidadColisionable.DERECHA) {
-	                entidadColisionable.mover(2, 0);
+	                entidadColisionable.mover();
 	            }
 	        }
 	        else {
 	        	if(entidadColisionable.getMovimiento() == entidadColisionable.DERECHA) {
-	                entidadColisionable.mover(-5, 0); 
-	                entidadColisionable.setMovimiento(entidadColisionable.IZQUIERDA);
+	        		entidadColisionable.setMovimiento(entidadColisionable.IZQUIERDA);
+	        		entidadColisionable.mover(); 	  
 	            } else {
-	                entidadColisionable.mover(5, 0); 
-	                entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
+	            	    entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
+	            	    entidadColisionable.mover(); 	                
 	            }
 	        }
 	        entidadColisionable.activarEnfriamiento();

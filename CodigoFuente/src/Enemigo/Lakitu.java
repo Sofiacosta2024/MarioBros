@@ -35,8 +35,8 @@ public class Lakitu extends Enemigo {
 		mario.decrementarVida();
 	}
 
-	 public void mover(int x, int y) {
-	        super.mover(x, y);
+	 public void mover() {
+	        super.mover();
 	        tiempoActual +=1;
 	        if (tiempoActual >= tiempoLanzar) {
 	            lanzarSpiny();

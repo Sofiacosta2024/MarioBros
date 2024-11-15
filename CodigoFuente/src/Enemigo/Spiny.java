@@ -13,6 +13,25 @@ public class Spiny extends Enemigo{
 		puntajeMatarAMario = -30;
 	}
 	
+	public void mover() {
+		if(!sobreSuelo && !sobrePlataforma) {
+			caer();
+		}
+		
+		if(direccionMovimiento == IZQUIERDA) {
+			posicionX = posicionX - 2*velocidad;
+		}
+		else
+			if(direccionMovimiento == DERECHA) {
+				posicionX = posicionX + 2*velocidad;
+			}
+		if(posicionX <= -65) {
+			retirar();
+		}
+		actualizarAreaColision();
+		observador.actualizarPosicionTamano();
+	}
+	
 	public void atacar(Mario mario) {
 		mario.decrementarVida();
 	}

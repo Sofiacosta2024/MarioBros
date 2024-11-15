@@ -10,6 +10,7 @@ public class Bandera extends Plataforma{
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {		
+		visitor.visitarBandera(this);
 	}
 
 	public void retirar() {
