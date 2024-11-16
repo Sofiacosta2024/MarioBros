@@ -7,7 +7,6 @@ import Vista.*;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-
 import Colisionador.ColisionadorVisitorBolaFuego;
 import Colisionador.ColisionadorVisitorEnemigo;
 import Colisionador.ColisionadorVisitorMario;
@@ -18,7 +17,7 @@ import Parser.*;
 import Plataforma.*;
 import PowerUp.*;
 
-public class Juego {
+public class Juego implements VistaDeJuego {
 
 	protected Sonido player;
 	protected ControladorVistas controladorVistas;
@@ -52,7 +51,7 @@ public class Juego {
 	}
 
 	public void iniciarHilos() {
-		hiloMario= new MoverMario(this, nivelActual.getMario());
+		hiloMario= new MoverMario(this);
 		hiloMundo = new MoverEnemigo(this);
 		hiloMario.iniciarHilo();
 		hiloMundo.iniciarHilo();
@@ -92,23 +91,20 @@ public class Juego {
 
 	public void reiniciarNivel() {
 		for(Plataforma plataforma: nivelActual.getPlataformas()) {
-			plataforma.setColisionable(true);
 			plataforma.setEstadoInicial();
-			plataforma.notificarObservador();
+			plataforma.setColisionable(true);
 		}
 		for(Enemigo enemigo: nivelActual.getEnemigos()) {
 			enemigo.setEstadoInicial();
-			enemigo.setColisionable(true);
-			enemigo.notificarObservador();
+			enemigo.setVivo(true);
 		}
 		for(PowerUp powerUp: nivelActual.getPowerUps()) {
 			powerUp.setEstadoInicial();
 			powerUp.setColisionable(true);
-			powerUp.notificarObservador();
 		}
-		for(Spiny spiny : nivelActual.getSpinyssLanzados()) {
-			spiny.retirar();
-			spiny.notificarObservador();
+		for(Spiny spiny: nivelActual.getSpinyssLanzados()) {
+			spiny.setEstadoInicial();
+			spiny.setVivo(true);
 		}
 		for(BolaFuego bola: nivelActual.getProyectiles()) {
 			bola.retirar();
@@ -161,6 +157,15 @@ public class Juego {
 		}
 		numeroDeNivel = 1;
 		controladorVistas.detenerActualizacionPantallaPartida();
+	}
+	
+	public void tiempoNivelTerminado() {
+		if(nivelActual.getMario().getVidas() > 1) {
+			nivelActual.getMario().decrementarVida();
+			reiniciarNivel();
+		}
+		else
+			nivelActual.getMario().decrementarVida();
 	}
 
 	public void salirDelJuego() {
@@ -225,35 +230,42 @@ public class Juego {
 		Observer observadorEntidad = controladorVistas.registrarEntidadLogica(bolaFuego);
 		bolaFuego.setObserver(observadorEntidad);
 	}
+	
+	public void registrarObserversEntidadesMuertas(ArrayList<Entidad> list) {
+		for(Entidad entidad : list) {
+			Observer observadorEntidad =  controladorVistas.registrarEntidadLogica(entidad);
+			entidad.setObserver(observadorEntidad);
+		}
+	}
 
 	public void detectarColisionesMarioMundo() {
 	    ColisionadorVisitorMario colisionador = new ColisionadorVisitorMario(nivelActual.getMario(), this);
 	    Iterator<Plataforma> iterPlataformas = nivelActual.getPlataformas().iterator();
 	    while (iterPlataformas.hasNext()) {
 	        Plataforma plataforma = iterPlataformas.next();
-	        if (plataforma.colisionable() && nivelActual.getMario().getAreaColision().intersects(plataforma.getAreaColision())) {
+	        if (nivelActual.getMario().getAreaColision().intersects(plataforma.getAreaColision())) {
 	            plataforma.aceptarVisita(colisionador);
 	        }
 	    }
 	    Iterator<Enemigo> iterEnemigos = nivelActual.getEnemigos().iterator();
 	    while (iterEnemigos.hasNext()) {
 	        Enemigo enemigo = iterEnemigos.next();
-	        if (enemigo.colisionable() && nivelActual.getMario().getAreaColision().intersects(enemigo.getAreaColision())) {
+	        if (nivelActual.getMario().getAreaColision().intersects(enemigo.getAreaColision())) {
 	            enemigo.aceptarVisita(colisionador);
 	        }
 	    }
 	    Iterator<Spiny> iterSpinys = nivelActual.getSpinyssLanzados().iterator();
 	    while (iterSpinys.hasNext()) {
 	        Spiny spiny = iterSpinys.next();
-	        if (spiny.colisionable() && nivelActual.getMario().getAreaColision().intersects(spiny.getAreaColision())) {
+	        if (nivelActual.getMario().getAreaColision().intersects(spiny.getAreaColision())) {
 	            spiny.aceptarVisita(colisionador);
 	        }
 	    }
 	    Iterator<PowerUp> iterPowerUps = nivelActual.getPowerUps().iterator();
 	    while (iterPowerUps.hasNext()) {
-	        Entidad entidad = iterPowerUps.next();
-	        if (entidad.colisionable() && nivelActual.getMario().getAreaColision().intersects(entidad.getAreaColision())) {
-	            entidad.aceptarVisita(colisionador);
+	        PowerUp powerUp  = iterPowerUps.next();
+	        if (nivelActual.getMario().getAreaColision().intersects(powerUp.getAreaColision())) {
+	        	powerUp.aceptarVisita(colisionador);
 	        }
 	    }
 	}
@@ -272,16 +284,14 @@ public class Juego {
 	            Iterator<Enemigo> iterOtrosEnemigos = enemigos.iterator();
 	            while (iterOtrosEnemigos.hasNext()) {
 	                Enemigo enemigoColisionable = iterOtrosEnemigos.next();
-	                if (enemigoColisionable != enemigo && enemigoColisionable.colisionable() && enemigo.colisionable() &&
-	                        enemigo.getAreaColision().intersects(enemigoColisionable.getAreaColision())) {
+	                if (enemigo != enemigoColisionable && enemigo.getAreaColision().intersects(enemigoColisionable.getAreaColision())) {
 	                    enemigoColisionable.aceptarVisita(colisionador);
 	                }
 	            }
 	            Iterator<Plataforma> iterPlataformas = plataformas.iterator();
 	            while (iterPlataformas.hasNext()) {
 	                Plataforma plataforma = iterPlataformas.next();
-	                if (plataforma.colisionable() && enemigo.colisionable() &&
-	                        enemigo.getAreaColision().intersects(plataforma.getAreaColision())) {
+	                if (enemigo.getAreaColision().intersects(plataforma.getAreaColision())) {
 	                    plataforma.aceptarVisita(colisionador);
 	                    sobreAlgunaPlataforma = true;
 	                }
@@ -289,8 +299,7 @@ public class Juego {
 	            Iterator<Spiny> iterSpinys = spinyss.iterator();
 	            while (iterSpinys.hasNext()) {
 	                Spiny spiny = iterSpinys.next();
-	                if (spiny.colisionable() && enemigo.colisionable() && spiny != enemigo &&
-	                        enemigo.getAreaColision().intersects(spiny.getAreaColision())) {
+	                if (spiny != enemigo && enemigo.getAreaColision().intersects(spiny.getAreaColision())) {
 	                    enemigo.aceptarVisita(colisionador);
 	                }
 	            }
@@ -304,8 +313,7 @@ public class Juego {
 	            Iterator<Plataforma> iterPlataformas = plataformas.iterator();
 	            while (iterPlataformas.hasNext()) {
 	                Plataforma plataforma = iterPlataformas.next();
-	                if (plataforma.colisionable() && spiny.colisionable() &&
-	                        spiny.getAreaColision().intersects(plataforma.getAreaColision())) {
+	                if (spiny.getAreaColision().intersects(plataforma.getAreaColision())) {
 	                    plataforma.aceptarVisita(colisionador);
 	                    sobreAlgunaPlataforma = true;
 	                }
@@ -314,8 +322,7 @@ public class Juego {
 	            Iterator<Enemigo> iterEnemigosCol = enemigos.iterator();
 	            while (iterEnemigosCol.hasNext()) {
 	                Enemigo enemigo = iterEnemigosCol.next();
-	                if (spiny.colisionable() && enemigo.colisionable() && spiny != enemigo &&
-	                        enemigo.getAreaColision().intersects(spiny.getAreaColision())) {
+	                if (spiny != enemigo && enemigo.getAreaColision().intersects(spiny.getAreaColision())) {
 	                    enemigo.aceptarVisita(colisionador);
 	                }
 	            }
@@ -327,30 +334,24 @@ public class Juego {
 	            Iterator<Enemigo> iterEnemigosCol = enemigos.iterator();
 	            while (iterEnemigosCol.hasNext()) {
 	                Enemigo enemigo = iterEnemigosCol.next();
-	                if (enemigo.colisionable() && bolaFuego.colisionable() &&
-	                        bolaFuego.getAreaColision().intersects(enemigo.getAreaColision())) {
+	                if (bolaFuego.getAreaColision().intersects(enemigo.getAreaColision())) {
 	                    enemigo.aceptarVisita(colisionador);
-	                    iterBolasFuego.remove();
 	                    break;
 	                }
 	            }
 	            Iterator<Plataforma> iterPlataformasCol = plataformas.iterator();
 	            while (iterPlataformasCol.hasNext()) {
 	                Plataforma plataforma = iterPlataformasCol.next();
-	                if (plataforma.colisionable() && bolaFuego.colisionable() &&
-	                        bolaFuego.getAreaColision().intersects(plataforma.getAreaColision())) {
+	                if (bolaFuego.getAreaColision().intersects(plataforma.getAreaColision())) {
 	                    plataforma.aceptarVisita(colisionador);
-	                    iterBolasFuego.remove();
 	                    break;
 	                }
 	            }
 	            Iterator<Spiny> iterSpinysCol = spinyss.iterator();
 	            while (iterSpinysCol.hasNext()) {
 	                Spiny spiny = iterSpinysCol.next();
-	                if (spiny.colisionable() && bolaFuego.colisionable() &&
-	                        bolaFuego.getAreaColision().intersects(spiny.getAreaColision())) {
+	                if (bolaFuego.getAreaColision().intersects(spiny.getAreaColision())) {
 	                    spiny.aceptarVisita(colisionador);
-	                    iterBolasFuego.remove();
 	                    break;
 	                }
 	            }

@@ -18,8 +18,6 @@ public class EstadoCaminando extends EstadoKoopaTroopa{
 	public void mover(int nuevaX, int nuevaY) {
 		koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() + nuevaX);
 		koopaTroopa.setPosicionY(koopaTroopa.getPosicionY() + nuevaY);
-		koopaTroopa.actualizarAreaColision();
-        koopaTroopa.getObserver().actualizarPosicionTamano();
 	}
 	
 	public void interactuarEnemigos(Enemigo enemigo) {

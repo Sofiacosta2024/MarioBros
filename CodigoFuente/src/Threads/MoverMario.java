@@ -1,18 +1,15 @@
 package Threads;
 
 import Logica.Juego;
-import Mario.*;
 
 public class MoverMario extends Thread{
 
-	private Mario mario;
 	private Juego juego;
 	private boolean corriendo;
 
-	public MoverMario(Juego j,Mario mario){
+	public MoverMario(Juego j){
 		juego = j;
 		corriendo = false;
-		this.mario=mario;
 	}
 
 	public void iniciarHilo() {
@@ -29,26 +26,11 @@ public class MoverMario extends Thread{
 	}
 
 	public void run() {		
-		while(corriendo) {	
-			if(juego.juegoTerminado()) {
-				detenerHilo();
-				return;
-			}
-			
-			if(juego.getTiempoActual() == 0) {
-				if(mario.getVidas() > 1) {
-					mario.decrementarVida();
-					juego.reiniciarNivel();
-				}
-				else
-					mario.decrementarVida();
-			}
-	
+		while(corriendo) {				
 			juego.moverMario();
 			synchronized(juego.getNivelActual()) {
 				juego.detectarColisionesMarioMundo();
 			}
-			
 			try {
 				Thread.sleep(40);
 			} 

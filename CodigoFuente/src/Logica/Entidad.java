@@ -14,7 +14,6 @@ public abstract class Entidad implements EntidadLogica{
 	protected Observer observador;
 	protected ObserverGrafica observadorProvisional;
 	protected Sonido sonido;
-	protected boolean  esColisionable;
 	protected Rectangle areaColision; 
 	public final char QUIETO = 'q';
 	public final char DERECHA = 'd';
@@ -31,7 +30,6 @@ public abstract class Entidad implements EntidadLogica{
 		alto = altoHitBox;
 		ancho = anchoHitBox;
 		areaColision = new Rectangle(getPosicionX(),getPosicionY(), anchoHitBox, altoHitBox);
-		esColisionable = true;
 	}
 
 	public void notificarObservador() {
@@ -69,14 +67,6 @@ public abstract class Entidad implements EntidadLogica{
 	public void setEstadoInicial() {
 		posicionX = posicionInicialX;
 		posicionY = posicionInicialY;
-	}
-
-	public void setColisionable(boolean colisionable) {
-		esColisionable = colisionable;
-	}
-
-	public boolean colisionable() {
-		return esColisionable;
 	}
 
 	public int getPosicionX() {

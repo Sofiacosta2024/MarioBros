@@ -12,8 +12,10 @@ public class LadrilloSolido extends BloqueSolido{
 	}
 
 	public void interactuar(Mario mario,String direccionColision) {
-		super.interactuar(mario, direccionColision);
-		mario.getEstadoMario().interactuarConLadrillo(this,direccionColision);
+		if(esColisionable) {
+			super.interactuar(mario, direccionColision);
+			mario.getEstadoMario().interactuarConLadrillo(mario,this,direccionColision);
+		}
 	}
 	
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
@@ -26,5 +28,7 @@ public class LadrilloSolido extends BloqueSolido{
 	
 	public void retirar() {
 		esColisionable = false;
+		observador.actualizarPorMuerte();
+		notificarObservador();
 	}
 }

@@ -1,14 +1,13 @@
 package Enemigo;
 
 import Mario.*;
+import Sonido.Sonido;
 import Colisionador.ColisionadorVisitorBolaFuego;
 import Colisionador.ColisionadorVisitorEnemigo;
-import Fabrica.*;
 import Logica.*;
-import Sonido.*;
 
 public abstract class Enemigo extends Entidad{
-	
+
 	protected boolean enEnfriamiento = false;
 	protected long tiempoUltimaColision;
 	protected long TIEMPO_ENFRIAMIENTO = 90;
@@ -16,7 +15,8 @@ public abstract class Enemigo extends Entidad{
 	protected boolean sobrePlataforma,sobreSuelo;
 	protected int puntaje, puntajeMatarAMario;
 	protected float gravedad;
-	
+	protected boolean muerto;
+
 	public Enemigo(int x, int y, int velocidad, int anchoHitBox, int altoHitBox) {
 		super(x, y, velocidad, anchoHitBox,altoHitBox);
 		direccionMovimiento = IZQUIERDA;
@@ -26,30 +26,40 @@ public abstract class Enemigo extends Entidad{
 		else
 			sobreSuelo = true;
 		gravedad = 1.0f;
+		muerto = false;
 	}
 
 	public abstract void atacar(Mario m);
+	
+	public void morir(Mario mario) {
+		if(!muerto) {
+			Sonido.obtenerInstancia().reproducirSonidoMuereEnemigo();;
+			retirar();
+			mario.setPuntaje(mario.getPuntaje() + this.getPuntaje());
+		}
+	}
 
 	public void mover() {
-		if(!sobreSuelo && !sobrePlataforma) {
-			caer();
-		}
-		
-		if(direccionMovimiento == IZQUIERDA) {
-			posicionX = posicionX - velocidad;
-		}
-		else
-			if(direccionMovimiento == DERECHA) {
-				posicionX = posicionX + velocidad;
+		if(!muerto) {
+			if(!sobreSuelo && !sobrePlataforma) {
+				caer();
 			}
-		if(posicionX <= -65) {
-			retirar();
+			if(direccionMovimiento == IZQUIERDA) {
+				posicionX = posicionX - velocidad;
+			}
+			else
+				if(direccionMovimiento == DERECHA) {
+					posicionX = posicionX + velocidad;
+				}
+			if(posicionX <= -65) {
+				retirar();
+			}
+			actualizarAreaColision();
+			observador.actualizarPosicionTamano();
 		}
-		actualizarAreaColision();
-		observador.actualizarPosicionTamano();
 	}
-	
-	
+
+
 
 	public void caer() {
 		gravedad += 0.2;
@@ -74,16 +84,24 @@ public abstract class Enemigo extends Entidad{
 	}
 
 	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-		visitor.visitarPlataformaOEnemigo(this);
+		if(!muerto)
+			visitor.visitarPlataformaOEnemigo(this);
 	}
 
 	public void aceptarVisita(ColisionadorVisitorBolaFuego visitor) {
-		visitor.visitarEnemigo(this);
+		if(!muerto)
+			visitor.visitarEnemigo(this);
 	}
 
 	public void retirar() {
-		esColisionable = false;
+		muerto = true;
+		observador.actualizarPorMuerte();
 		notificarObservador();
+	}
+	
+	public void notificarObservador() {
+		if(!muerto)
+			observador.actualizar();
 	}
 
 	public void setEstadoInicial() {
@@ -97,6 +115,11 @@ public abstract class Enemigo extends Entidad{
 
 	public void setMovimiento(char movimiento) {
 		direccionMovimiento = movimiento;
+	}
+	
+	public void setVivo(boolean vivo) {
+		muerto = !vivo;
+		notificarObservador();
 	}
 
 	public void detenerOActivarCaida(boolean enPlataforma) {
@@ -113,6 +136,10 @@ public abstract class Enemigo extends Entidad{
 
 	public boolean getCaida() {
 		return sobrePlataforma;
+	}
+	
+	public boolean colisionable() {
+		return !muerto;
 	}
 
 	public int puntajeMatarAMario() {

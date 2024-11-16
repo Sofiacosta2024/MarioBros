@@ -3,14 +3,15 @@ import Colisionador.ColisionadorVisitorEnemigo;
 import Colisionador.ColisionadorVisitorMario;
 import Fabrica.Sprite;
 import Mario.Mario;
+import Sonido.Sonido;
 
 public class KoopaTroopa extends Enemigo{
-	
+
 	protected EstadoKoopaTroopa estado;
 	protected boolean detener;
 	protected int contadorColisiones;
 	protected Sprite[] spritesKoopa;
-	
+
 	public KoopaTroopa(int x, int y, int velocidad, Sprite[] sprites) {
 		super(x,y, velocidad,32,48);
 		puntaje = 90;
@@ -21,7 +22,14 @@ public class KoopaTroopa extends Enemigo{
 		contadorColisiones = 0;
 		spritesKoopa = sprites;
 	}
-	
+
+	public void morir(Mario mario) {
+		if(!muerto && !enEnfriamiento) {
+			atacado();
+			mario.setPuntaje(mario.getPuntaje() + this.getPuntaje());
+		}
+	}
+
 	public void setEstadoInicial() {
 		super.setEstadoInicial();
 		estado = new EstadoCaminando(this);
@@ -29,46 +37,73 @@ public class KoopaTroopa extends Enemigo{
 		detener = false;
 		contadorColisiones = 0;
 	}
-	
+
 	public void atacar(Mario mario) {
-		mario.decrementarVida();
+		if(!muerto)
+			mario.decrementarVida();
 	}
-	
-	public void mover(int nuevaX, int nuevaY) {
-		if(!detener)
-			estado.mover(nuevaX, nuevaY);
-	}
-	
-	public void movilidad() {
-		if(contadorColisiones <= 1) {
-			detener = !detener;
-			activarEnfriamiento();
+
+	public void mover() {
+		if(!detener && !muerto && !enEnfriamiento) {
+			if(!sobreSuelo && !sobrePlataforma) {
+				caer();
+			}
+			if(direccionMovimiento == IZQUIERDA) {
+				estado.mover(-velocidad, 0);
+			}
+			else
+				if(direccionMovimiento == DERECHA) {
+					estado.mover(velocidad, 0);
+				}
+			if(posicionX <= -65) {
+				retirar();
+			}
+			actualizarAreaColision();
+			observador.actualizarPosicionTamano();
 		}
-		contadorColisiones++;
 	}
-	
+
+	public void movilidad() {
+		if(!muerto && !enEnfriamiento) {
+			if(contadorColisiones <= 1) {
+				detener = !detener;
+				activarEnfriamiento();
+			}
+			contadorColisiones++;
+		}
+	}
+
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		visitor.visitarKoopa(this);
+		if(!muerto && !enEnfriamiento)
+			visitor.visitarKoopa(this);
 	}
-	
+
 	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-		visitor.visitarKoopaTroopa(this);
+		if(!muerto && !enEnfriamiento)
+			visitor.visitarKoopaTroopa(this);
 	}
-	
+
 	public void atacado() {
-		estado.afectado(this, spritesKoopa);
+		if(!muerto && !enEnfriamiento) {
+			Sonido.obtenerInstancia().reproducirSonidoMuereKoopa();
+			estado.afectado(this, spritesKoopa);
+		}
 	}
-	
+
 	public void setEstado(EstadoKoopaTroopa estado) {
 		this.estado = estado;
 	}
-	
+
 	public EstadoKoopaTroopa getEstado() {
 		return estado;
 	}
 	
+	public int getContadorColisiones() {
+		return contadorColisiones;
+	}
+
 	public boolean getMovilidad() {
 		return detener;
 	}
-	
+
 }

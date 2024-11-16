@@ -27,14 +27,12 @@ public class EstadoSuperMario extends EstadoMario {
 	            e.printStackTrace();
 	        }
 	        mario.setColisionable(true);
-	        mario.notificarObservador();
 	    }).start();	
 	}
 	
-	public void interactuarConLadrillo(LadrilloSolido ladrillo, String direccionColision) {
+	public void interactuarConLadrillo(Mario mario, LadrilloSolido ladrillo, String direccionColision) {
 		if(direccionColision.equals("ABAJO")) {
 			ladrillo.retirar();
-			ladrillo.notificarObservador();
 		}
 	}
 

@@ -19,7 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.Timer;
 import Logica.EntidadLogica;
 import Logica.EntidadMario;
-import Logica.Juego;
+import Logica.VistaDeJuego;
 
 public class PantallaPartida extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -39,9 +39,9 @@ public class PantallaPartida extends JPanel {
 	private int tiempoNivel, tiempoNivelInicial;
 	private Timer timer, timerActualizacionInformacionTiempo;
 	private ControladorDeVistas controlador;
-	private Juego juego;
+	private VistaDeJuego juego;
 	
-	public PantallaPartida(ControladorDeVistas controladorVistas, Juego juego) {
+	public PantallaPartida(ControladorDeVistas controladorVistas, VistaDeJuego juego) {
 		this.juego = juego;
 		this.controlador = controladorVistas;
 		setPreferredSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO));
@@ -270,6 +270,7 @@ public class PantallaPartida extends JPanel {
 	            labelTimer.setText(String.format("%d", tiempoNivel));
 	        } else {
 	            timer.stop();
+	            juego.tiempoNivelTerminado();
 	        }
 	    });
 	    timer.start();

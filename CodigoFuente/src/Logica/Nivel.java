@@ -45,8 +45,8 @@ public class Nivel{
 		spinyssLanzados.add(spiny);
 	}
 	
-	public void agregarProyectil(BolaFuego e) {
-		proyectiles.add(e);
+	public void agregarProyectil(BolaFuego bola) {
+		proyectiles.add(bola);
 	}
 	
 	public ArrayList<Enemigo> getEnemigos(){

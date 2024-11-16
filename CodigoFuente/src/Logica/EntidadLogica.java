@@ -13,5 +13,4 @@ public interface EntidadLogica {
 	public int getVelocidad();
 	public Sprite getSprite();
 	public boolean colisionable();
-	
 }

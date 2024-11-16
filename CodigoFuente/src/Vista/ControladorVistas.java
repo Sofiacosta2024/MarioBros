@@ -1,6 +1,5 @@
 package Vista;
 
-import Mario.*;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import Enemigo.Spiny;
@@ -18,9 +17,9 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	protected PantallaModoJuego panelModoJuego;
 	protected PantallaVictoria panelVictoria;
 	protected ControladorEntradas controladorEntradas;
-	protected Juego juego;
+	protected VistaDeJuego juego;
 	protected Sonido player;
-	private ArrayList<Observer> lista;
+	private ArrayList<Observer> listaObservers;
 
 
 	public ControladorVistas(Juego j) {
@@ -32,7 +31,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 		panelRanking = new PantallaRanking(this);
 		panelModoJuego = new PantallaModoJuego(this);
 		panelVictoria=new PantallaVictoria(this);
-		lista = new ArrayList<Observer>();
+		listaObservers = new ArrayList<Observer>();
 		configurarVentana();
 		player= Sonido.obtenerInstancia();
 	}
@@ -47,27 +46,27 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void registarControladorEntradas() {
-		Mario mario = juego.getNivelActual().getMario();
+		EntidadMovimientoMario mario = juego.getNivelActual().getMario();
 		controladorEntradas = new ControladorEntradas(mario);
 	}
 
 	public Observer registrarEntidadLogica(EntidadLogica entidadLogica) {
 		Observer observerEntidad = panelPartida.incorporarEntidad(entidadLogica);
-		lista.add(observerEntidad);
+		listaObservers.add(observerEntidad);
 		refrescar();
 		return observerEntidad;
 	}
 
 	public Observer registrarEntidadLogicaSpinyLanzado(Spiny spiny) {
 		Observer observerEntidad = panelPartida.incorporarEntidad(spiny);
-		lista.add(observerEntidad);
+		listaObservers.add(observerEntidad);
 		refrescar();
 		return observerEntidad;
 	}
 
 	public Observer registrarEntidadMario(EntidadMario entidadMario) {
 		Observer observerEntidad = panelPartida.incorporarEntidadMario(entidadMario);
-		lista.add(observerEntidad);
+		listaObservers.add(observerEntidad);
 		refrescar();
 		return observerEntidad;
 	}
@@ -118,7 +117,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void reiniciarListaDeObservers() {
-		lista = new ArrayList<Observer>();
+		listaObservers = new ArrayList<Observer>();
 	}
 
 	public void reiniciarPantallaPartida() {
@@ -176,10 +175,11 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	
 	public void limpiezaDeEntidadesGraficas() {
 		panelPartida.limpiarEntidadesGraficas();
+		reiniciarListaDeObservers();
 	}
 
 	public void limpiarEntidadGrafica(ObserverGrafica observer) {
-		panelPartida.getImagenFondo().remove(observer);
+		observer.setVisible(false);
 		refrescar();
 	}
 	
@@ -235,7 +235,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 	
 	protected void refrescar() {	
-		for(Observer observers : new ArrayList<>(lista)) {
+		for(Observer observers : new ArrayList<>(listaObservers)) {
 	        observers.actualizar();
 	    }
 		ventana.revalidate();

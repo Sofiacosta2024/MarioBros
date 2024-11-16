@@ -13,6 +13,7 @@ public class BloqueSolido extends Plataforma {
 	}
 	
 	public void retirar() {
-		
+		esColisionable = false;
+		observador.actualizarPorMuerte();
 	}
 }

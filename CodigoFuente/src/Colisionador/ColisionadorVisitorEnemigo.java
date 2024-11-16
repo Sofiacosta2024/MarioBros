@@ -29,7 +29,6 @@ public class ColisionadorVisitorEnemigo {
 
 	public void visitarSpiny(Spiny spiny) {
 		if(spiny.getLakituLanzador() != entidadColisionable && entidadColisionable != spiny) {
-			if(!entidadColisionable.estaEnEnfriamiento()) {
 				if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
 					entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
 					entidadColisionable.mover();
@@ -50,14 +49,12 @@ public class ColisionadorVisitorEnemigo {
 				entidadColisionable.activarEnfriamiento();
 				spiny.getObserver().actualizarPosicionTamano();
 				spiny.activarEnfriamiento();
-			}
 		}
 	}
 
 	public void visitarLakitu(Lakitu lakitu) {
 		for(Spiny spiny : lakitu.getSpinyssLanzados()) {
 			if(entidadColisionable != spiny && lakitu != entidadColisionable) {
-				if(!entidadColisionable.estaEnEnfriamiento()) {
 					if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
 						entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
 						entidadColisionable.mover();
@@ -68,14 +65,12 @@ public class ColisionadorVisitorEnemigo {
 					}
 					entidadColisionable.getObserver().actualizarPosicionTamano();
 					entidadColisionable.activarEnfriamiento();
-				}
 			}
 		}
 	}
 
 	public void visitarTuberiaPiranha(TuberiaConPiranha  tuberiaConPiranha) {
 		if(entidadColisionable!= tuberiaConPiranha.getPiranha()) {
-			if(!entidadColisionable.estaEnEnfriamiento()) {
 				if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
 					entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
 					entidadColisionable.mover();
@@ -86,22 +81,17 @@ public class ColisionadorVisitorEnemigo {
 				}
 				entidadColisionable.getObserver().actualizarPosicionTamano();
 				entidadColisionable.activarEnfriamiento();
-			}
-
 		}
 	}
 
 	public void visitarKoopaTroopa(KoopaTroopa koopaTroopa) {
-		if(!entidadColisionable.estaEnEnfriamiento()) {
 			koopaTroopa.getEstado().interactuarEnemigos(entidadColisionable);
 			entidadColisionable.getObserver().actualizarPosicionTamano();
 			entidadColisionable.activarEnfriamiento();
-		}
 	}
 
 	public void visitarPlataformaOEnemigo(Entidad entidad) {
 	    String direccion = detectarDireccion(entidad);
-	    if(!entidadColisionable.estaEnEnfriamiento()) {
 	        if(direccion.equals("ARRIBA")) {
 	            entidadColisionable.detenerOActivarCaida(true);
 	            if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
@@ -118,7 +108,6 @@ public class ColisionadorVisitorEnemigo {
 	            	    entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
 	            	    entidadColisionable.mover(); 	                
 	            }
-	        }
 	        entidadColisionable.activarEnfriamiento();
 	        entidadColisionable.getObserver().actualizarPosicionTamano();
 	    }

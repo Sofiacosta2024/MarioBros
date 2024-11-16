@@ -29,12 +29,19 @@ public class BolaFuego extends Entidad {
 		enMovimiento = false;
 	}
 	
-	public void mover(int nuevaX, int nuevaY) {
-		posicionX = posicionX + nuevaX;
-		if(posicionX <= -65)
-			retirar();
-		actualizarAreaColision();
-		observador.actualizarPosicionTamano();
+	public void mover() {
+		if(enMovimiento) {
+			char direccion = getDireccionMovimiento();
+			char direccionAnterior = getDireccionMovimientoAnterior();
+			if (direccion == DERECHA || (direccion == QUIETO && direccionAnterior == DERECHA)) {
+				posicionX += 2;
+			}
+			else { 
+				posicionX -= 2;
+			}
+			actualizarAreaColision();
+			observador.actualizarPosicionTamano();
+		}
 	}
 	
 	public void setEnMovimiento(boolean enMovimiento) {
@@ -49,7 +56,7 @@ public class BolaFuego extends Entidad {
 		return direccionMovimientoAnterior;
 	}
 	
-	public boolean enMovimiento() {
+	public boolean colisionable() {
 		return enMovimiento;
 	}
 }

@@ -12,22 +12,30 @@ public abstract class EstadoMario {
 	public void aplicarEfecto(Mario mario, EstadoInvencible estadoNuevo) {
 		mario.setEstadoAnterior(mario.getEstadoMario());
 		mario.setEstadoMario(new EstadoInvencible());
+		mario.setAlto(32);
+		mario.actualizarAreaColision();
 		mario.setCambioEstado(true);
 	}
 	
 	public void aplicarEfecto(Mario mario, EstadoFlorFuego estadoNuevo) {
 		mario.setEstadoMario(estadoNuevo);
+		mario.setAlto(32);
+		mario.actualizarAreaColision();
 		mario.setCambioEstado(true);
 	}
 	
 	public void aplicarEfecto(Mario mario, EstadoNormal estadoNuevo) {
 		mario.setEstadoAnterior(mario.getEstadoMario());
 		mario.setEstadoMario(new EstadoInvencible());
+		mario.setAlto(20);
+		mario.actualizarAreaColision();
 		mario.setCambioEstado(true);
 	}
 	
 	public void aplicarEfecto(Mario mario, EstadoSuperMario estadoNuevo) {
 		mario.setEstadoMario(estadoNuevo);
+		mario.setAlto(32);
+		mario.actualizarAreaColision();
 		mario.setCambioEstado(true);
 	}
 	
@@ -40,7 +48,7 @@ public abstract class EstadoMario {
 		}
 	}
 	
-	public void interactuarConLadrillo(LadrilloSolido ladrilloSolido, String direccionColision) {
+	public void interactuarConLadrillo(Mario mario, LadrilloSolido ladrilloSolido, String direccionColision) {
 
 	}
 	

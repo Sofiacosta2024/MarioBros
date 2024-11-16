@@ -1,6 +1,6 @@
 package Vista;
 
-import Logica.Juego;
+import Logica.VistaDeJuego;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,10 +23,10 @@ public class PantallaIngresoNombre extends JPanel {
 	private JLabel labelIngresoNombre;
     private JButton botonEnviar;
     private JTextField campoNombre;
-    private Juego juego;
+    private VistaDeJuego juego;
     private Font fuente;
     
-    public PantallaIngresoNombre(ControladorDeVistas controladorVistas,Juego j) {
+    public PantallaIngresoNombre(ControladorDeVistas controladorVistas,VistaDeJuego j) {
         this.controladorVistas = controladorVistas;
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         juego=j;

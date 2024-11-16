@@ -4,22 +4,26 @@ import Colisionador.ColisionadorVisitorMario;
 import Fabrica.Sprite;
 import Mario.EstadoFlorFuego;
 import Mario.Mario;
+import Sonido.Sonido;
 
 public class FlorFuego extends PowerUp {
-	
+
 	public FlorFuego(int x, int y, int velocidad) {
 		super(x,y, velocidad,24,24);
 	}
-	
+
 	public void afectar(Mario mario) {
-		EstadoFlorFuego estadoNuevo = new EstadoFlorFuego();
-		mario.getEstadoMario().aplicarEfecto(mario, estadoNuevo);
-		mario.setAlto(32);
-		mario.setAncho(24);
-		mario.actualizarAreaColision();
+		if(esColisionable) {
+			Sonido.obtenerInstancia().reproducirSonidoFlorDeFuego();
+			EstadoFlorFuego estadoNuevo = new EstadoFlorFuego();
+			mario.getEstadoMario().aplicarEfecto(mario, estadoNuevo);
+			mario.setPuntaje(mario.getPuntaje() + mario.getEstadoMario().puntajeFlorFuego());
+			retirar();
+		}
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		visitor.visitarFlorFuego(this);
+		if(esColisionable)
+			visitor.visitarFlorFuego(this);
 	}
 }

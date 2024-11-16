@@ -32,40 +32,45 @@ public class Lakitu extends Enemigo {
 	}
 
 	public void atacar(Mario mario) {
-		mario.decrementarVida();
+		if(!muerto)
+			mario.decrementarVida();
 	}
 
-	 public void mover() {
-	        super.mover();
-	        tiempoActual +=1;
-	        if (tiempoActual >= tiempoLanzar) {
-	            lanzarSpiny();
-	            tiempoActual = 0; 
-	        }
-	    }
+	public void mover() {
+		super.mover();
+		if(!muerto) {
+			tiempoActual +=1;
+			if (tiempoActual >= tiempoLanzar) {
+				lanzarSpiny();
+				tiempoActual = 0; 
+			}
+		}
+	}
 
-	    private void lanzarSpiny() {
-	        Spiny spiny = new Spiny(this.getPosicionX(), this.getPosicionY(), velocidad);
-	        spiny.setSprite(spinySprite);
-	        spiny.setLakituLanzador(this);
-	        Observer observadorEntidad = juego.getControladorVista().registrarEntidadLogicaSpinyLanzado(spiny);
-	        spiny.setObserver(observadorEntidad);
-	        juego.getNivelActual().agregarSpinyLanzado(spiny);
-	        spinyssLanzados.add(spiny); 
-	        spiny.notificarObservador();
-	        
-	        Sonido.obtenerInstancia().reproducirSonidoLakituLanzaSpinyss();
-	    }
+	private void lanzarSpiny() {
+		Spiny spiny = new Spiny(this.getPosicionX(), this.getPosicionY(), velocidad);
+		spiny.setSprite(spinySprite);
+		spiny.setLakituLanzador(this);
+		Observer observadorEntidad = juego.getControladorVista().registrarEntidadLogicaSpinyLanzado(spiny);
+		spiny.setObserver(observadorEntidad);
+		juego.getNivelActual().agregarSpinyLanzado(spiny);
+		spinyssLanzados.add(spiny); 
+		spiny.notificarObservador();
 
-	    public void aceptarVisita(ColisionadorVisitorMario visitor) {
-	        visitor.visitarLakitu(this);
-	    }
+		Sonido.obtenerInstancia().reproducirSonidoLakituLanzaSpinyss();
+	}
 
-	    public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-	        visitor.visitarLakitu(this);
-	    }
+	public void aceptarVisita(ColisionadorVisitorMario visitor) {
+		if(!muerto)
+			visitor.visitarLakitu(this);
+	}
 
-	    public ArrayList<Spiny> getSpinyssLanzados() {
-	        return spinyssLanzados;
-	    }
+	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
+		if(!muerto)
+			visitor.visitarLakitu(this);
+	}
+
+	public ArrayList<Spiny> getSpinyssLanzados() {
+		return spinyssLanzados;
+	}
 }

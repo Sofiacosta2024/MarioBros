@@ -13,11 +13,13 @@ public class BuzzyBeetle extends Enemigo{
 	}
 	
 	public void atacar(Mario mario) {
-		mario.decrementarVida();
+		if(mario.colisionable())
+			mario.decrementarVida();
 	}
 	
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		visitor.visitarBuzzy(this);
+		if(!muerto)
+			visitor.visitarBuzzy(this);
 	}
 	
 	public int getPosicionX() {

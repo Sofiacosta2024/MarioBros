@@ -26,15 +26,18 @@ public class PiranhaPlant extends Enemigo{
 	}
 
 	public void atacar(Mario mario) {
-		mario.decrementarVida();
+		if(!muerto)
+			mario.decrementarVida();
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		visitor.visitarPiranha(this);
+		if(!muerto)
+			visitor.visitarPiranha(this);
 	}
 
 	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-		visitor.visitarPiranhaPlant(this);
+		if(!muerto)
+			visitor.visitarPiranhaPlant(this);
 	}
 
 	private void alternarVisibilidad() {
@@ -42,16 +45,18 @@ public class PiranhaPlant extends Enemigo{
 	}
 
 	public void mover(int desplazamiento, int desplazamientoNulo) {
-		if (visible && posicionY < limiteSuperiorY) {
-			setPosicionY(posicionY + desplazamiento); // Subir
-			actualizarAreaColision();
-			observador.actualizarPosicionTamano();
-		} else
-			if (!visible && posicionY > posicionInicialY) {
-				setPosicionY((posicionY - 10) - desplazamiento); // Bajar
+		if(!muerto) {
+			if (visible && posicionY < limiteSuperiorY) {
+				setPosicionY(posicionY + desplazamiento); // Subir
 				actualizarAreaColision();
 				observador.actualizarPosicionTamano();
-			}
+			} else
+				if (!visible && posicionY > posicionInicialY) {
+					setPosicionY((posicionY - 10) - desplazamiento); // Bajar
+					actualizarAreaColision();
+					observador.actualizarPosicionTamano();
+				}
+		}
 	}
 
 	public void detener() {

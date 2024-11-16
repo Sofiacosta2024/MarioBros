@@ -11,11 +11,13 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void atacar(Mario mario) {
-		mario.decrementarVida();
+		if(!muerto)
+			mario.decrementarVida();
 	}
 	
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		visitor.visitarGoomba(this);
+		if(!muerto)
+			visitor.visitarGoomba(this);
 	}
 	
 }

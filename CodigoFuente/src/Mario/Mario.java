@@ -11,8 +11,8 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 
 	protected int vidas;
 	protected int monedas;
-	protected boolean cayendoVacio, enSuelo,saltando,
-						puedeDerecha,puedeIzquierda,cambioEstado, moverDerecha, moverIzquierda;
+	protected boolean cayendoVacio, enSuelo,saltando, esColisionable,
+	puedeDerecha,puedeIzquierda,cambioEstado, moverDerecha, moverIzquierda;
 	protected EstadoMario estado,anterior;
 	protected char sentidoMovimientoMario;
 	protected double progreso;
@@ -24,7 +24,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 	protected int VELDERECHA = 5;
 	protected int VELIZQUIERDA = -5;
 	protected int contSalto;
-	
+
 	public Mario(int x, int y, int velocidad, Juego juego, Sprite[] sprites, Sprite[] spritesBolaFuego) {
 		super(x,y, velocidad,20,20);
 		estado = new EstadoNormal();
@@ -54,16 +54,16 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 		moverDerecha = true;
 		moverIzquierda = false;
 	}
-	
+
 	public void activarIzquierda() {
 		moverDerecha = false;
 		moverIzquierda = true;
 	}
-	
+
 	public void desactivarDerecha() {
 		moverDerecha = false;
 	}
-	
+
 	public void desactivarIzquierda() {
 		moverIzquierda = false;
 	}
@@ -72,7 +72,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 		int suelo=60;
 		int desplazamientoX = 0;
 		int desplazamientoY = 0;
-		
+
 		if(puedeDerecha && moverDerecha) {
 			desplazamientoX += 50;
 			puedeIzquierda = true;
@@ -118,22 +118,22 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 				enSuelo=true;
 			}
 		} 
-		
+
 		if(getPosicionX()>limiteDerecha || getPosicionX()<limiteIzquierda ){
 			posInicialSalto = getPosicionY();
 			enSuelo=false;
-			
+
 		}
-		
+
 		if(desplazamientoX!= 0 || desplazamientoY!=0) {
 			actualizarSprite(direccion);			
 			direccionMario(desplazamientoX, desplazamientoY);
 		}
-		
-	observador.actualizarPosicionTamano();
-	
+
+		observador.actualizarPosicionTamano();
+
 	}
-	
+
 	public void saltar() {
 		if(progreso == 0 && enSuelo){
 			enSuelo=false;
@@ -192,32 +192,32 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 	public Sprite actualizarSprite(char direccion) {
 		Sprite aux = sprite;
 		if (saltando) {
-		  if (direccion == DERECHA || direccionMovimiento == DERECHA) 
-		      sprite = estado.getSpriteSaltandoADerecha(sprites);
-		  else 
-			  if (direccion == IZQUIERDA || direccionMovimiento == IZQUIERDA) 
-				  sprite = estado.getSpriteSaltandoAIzquierda(sprites);
-		    }
+			if (direccion == DERECHA || direccionMovimiento == DERECHA) 
+				sprite = estado.getSpriteSaltandoADerecha(sprites);
+			else 
+				if (direccion == IZQUIERDA || direccionMovimiento == IZQUIERDA) 
+					sprite = estado.getSpriteSaltandoAIzquierda(sprites);
+		}
 		else {
-		        if (direccion == DERECHA) 
-		            sprite = estado.getSpriteDerecha(sprites);
-		        else 
-		        	if (direccion == IZQUIERDA) 
-		        		sprite = estado.getSpriteIzquierda(sprites);
-		        else 
-		        	if (direccion == QUIETO) {
-		        		if (direccionMovimientoAnterior == DERECHA) 
-		        			sprite = estado.getSpriteDetenidoDerecha(sprites);
-		        		else 
-		        			if (direccionMovimientoAnterior == IZQUIERDA) 
-		        					sprite = estado.getSpriteDetenidoIzquierda(sprites);
-		        	}
-		    }
+			if (direccion == DERECHA) 
+				sprite = estado.getSpriteDerecha(sprites);
+			else 
+				if (direccion == IZQUIERDA) 
+					sprite = estado.getSpriteIzquierda(sprites);
+				else 
+					if (direccion == QUIETO) {
+						if (direccionMovimientoAnterior == DERECHA) 
+							sprite = estado.getSpriteDetenidoDerecha(sprites);
+						else 
+							if (direccionMovimientoAnterior == IZQUIERDA) 
+								sprite = estado.getSpriteDetenidoIzquierda(sprites);
+					}
+		}
 		if(aux!=sprite) {
 			notificarObservador();
 		}
-		    return sprite;
-		}
+		return sprite;
+	}
 
 	public void lanzarBolaFuego() {
 		if(estado.lanzarBolaFuego()) {
@@ -230,14 +230,15 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 	}
 
 	public void decrementarVida() {
-		Sonido.obtenerInstancia().reproducirSonidoMorir();
-		vidas--;
-		if(vidas==0) {
-			juego.finalizarPartida();
+		if(esColisionable) {
+			Sonido.obtenerInstancia().reproducirSonidoMorir();
+			vidas--;
+			juego.actualizarVidas();
 		}
 	}
-	public void setEstadoInicial() {
-		super.setEstadoInicial();
+	public void resetearPosicion() {
+		posicionX = 50;
+		posicionY = 60;
 		estado = new EstadoNormal();
 		puedeDerecha=true;
 		puedeIzquierda=true;
@@ -266,12 +267,13 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 
 	public void aumentarVida() {
 		vidas++;
+		juego.actualizarVidas();
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
 
 	}
-	
+
 	public void setMarioEstadoNivel() {
 		sprite = estado.getSpriteDetenidoDerecha(sprites);
 		notificarObservador();
@@ -329,26 +331,35 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 	public void setLimiteIzquierda(int i) {
 		limiteIzquierda = i;
 	}
-	
+
 	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
-	
+
 	public void setPuntaje(int puntaje) {
 		this.puntaje = puntaje;
 		if(this.puntaje < 0)
 			this.puntaje = 0;
+		juego.actualizarPuntaje();
 	}
-	
+
 	public void setNombre(String nombre) {
 		this.nombre=nombre;
 	}
-	
+
+	public void setColisionable(boolean colisionable) {
+		esColisionable = colisionable;
+		notificarObservador();
+	}
+
+	public boolean colisionable() {
+		return esColisionable;
+	}
 
 	public EstadoMario getEstadoMario() {
 		return estado;
 	}
-	
+
 	public EstadoMario getEstadoAnterior() {
 		return anterior;
 	}
@@ -360,7 +371,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 	public boolean getCambioEstado() {
 		return cambioEstado;
 	} 
-	
+
 	public Sprite[] getSpritesMario() {
 		return sprites;
 	}
@@ -384,15 +395,15 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 	public Juego getJuego() {
 		return juego;
 	}
-	
+
 	public char getDireccionMovimiento() {
 		return direccionMovimiento;
 	}
-	
+
 	public int getPuntaje() {
 		return puntaje;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}

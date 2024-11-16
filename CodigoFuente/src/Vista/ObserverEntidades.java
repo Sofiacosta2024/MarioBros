@@ -7,6 +7,6 @@ public class ObserverEntidades extends ObserverGrafica {
 
 	public ObserverEntidades(EntidadLogica entidadObservada,ControladorDeVistas controlador) {
 		super(entidadObservada,controlador);
-		actualizar();
+			actualizar();
 	}
 }

@@ -13,7 +13,7 @@ public class ColisionadorVisitorMario{
 	protected String direccionColision;
 	protected Juego juego;
 	protected Sonido player;
-	
+
 	public ColisionadorVisitorMario(Mario entidadColisionable,Juego juego) {
 		this.entidadColisionable = entidadColisionable;
 		this.juego = juego;
@@ -21,103 +21,62 @@ public class ColisionadorVisitorMario{
 	}
 
 	public void visitarGoomba(Goomba goomba) {
-		if(entidadColisionable.colisionable()) {
-			direccionColision = detectarDireccion( goomba);
-			if(direccionColision.equals("ARRIBA")) {
-				player.reproducirSonidoMuereEnemigo();;
-				goomba.retirar();
-				juego.getNivelActual().getMario().setPuntaje(goomba.getPuntaje() + juego.getNivelActual().getMario().getPuntaje());
-				juego.actualizarPuntaje();
-			} else
-				if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA")){
-					entidadColisionable.getEstadoMario().recibirDaño(entidadColisionable,goomba);	
-					juego.getNivelActual().getMario().setPuntaje(juego.getNivelActual().getMario().getPuntaje() + goomba.puntajeMatarAMario());
-					juego.actualizarPuntaje();
-					juego.actualizarVidas();
-				}
-		}
+		direccionColision = detectarDireccion(goomba);
+		if(direccionColision.equals("ARRIBA")) {
+			goomba.morir(entidadColisionable);
+		} else
+			if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA")){
+				entidadColisionable.getEstadoMario().recibirDaño(entidadColisionable,goomba);	
+			}
 	}
 
 	public void visitarKoopa(KoopaTroopa koopa) {
 		direccionColision = detectarDireccion(koopa);
-		if(!koopa.estaEnEnfriamiento()) {
-			if(direccionColision.equals("ARRIBA")) {
-				Sonido.obtenerInstancia().reproducirSonidoMuereKoopa();
-				koopa.atacado();
-				juego.getNivelActual().getMario().setPuntaje(koopa.getPuntaje() + juego.getNivelActual().getMario().getPuntaje());
-				juego.actualizarPuntaje();
-			}
-			if(entidadColisionable.colisionable()) {
-				if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA")){
-					if(!koopa.getMovilidad()) {
-						entidadColisionable.getEstadoMario().recibirDaño(entidadColisionable,koopa);
-						juego.getNivelActual().getMario().setPuntaje(juego.getNivelActual().getMario().getPuntaje() + koopa.puntajeMatarAMario());
-						juego.actualizarPuntaje();
-						juego.actualizarVidas();
-					}
-					else {
-						koopa.movilidad();
-					}
+		if(direccionColision.equals("ARRIBA")) {
+			koopa.atacado();
+		}
+		else 
+			if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA")){
+				if(!koopa.getMovilidad()) {
+					entidadColisionable.getEstadoMario().recibirDaño(entidadColisionable,koopa);
+				}
+				else {
+					koopa.movilidad();
 				}
 			}
-		}
 	}
 
 	public void visitarLakitu(Lakitu lakitu) {
-		if(entidadColisionable.colisionable()) {
-			direccionColision = detectarDireccion(lakitu);
-			if(direccionColision.equals("ARRIBA")) {
-				Sonido.obtenerInstancia().reproducirSonidoMuereEnemigo();
-				lakitu.retirar();
-				juego.getNivelActual().getMario().setPuntaje(lakitu.getPuntaje() + juego.getNivelActual().getMario().getPuntaje());
-				juego.actualizarPuntaje();
-			}
-			if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA")){	
-				entidadColisionable.getEstadoMario().recibirDaño(entidadColisionable,lakitu);	
-				juego.actualizarVidas();
-			}
+		direccionColision = detectarDireccion(lakitu);
+		if(direccionColision.equals("ARRIBA")) {
+			lakitu.morir(entidadColisionable);
+		}
+		if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA")){	
+			entidadColisionable.getEstadoMario().recibirDaño(entidadColisionable,lakitu);	
 		}
 	}
 
 	public void visitarBuzzy(BuzzyBeetle buzzy) {
-		if(entidadColisionable.colisionable()) {
-			direccionColision = detectarDireccion( buzzy);
-			if(direccionColision.equals("ARRIBA")) {
-				Sonido.obtenerInstancia().reproducirSonidoMuereEnemigo();
-				retirarEntidad(buzzy);
-				juego.getNivelActual().getMario().setPuntaje(buzzy.getPuntaje() + juego.getNivelActual().getMario().getPuntaje());
-				juego.actualizarPuntaje();
-			}
-			if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA")){	
-				entidadColisionable.getEstadoMario().recibirDaño(entidadColisionable,buzzy);
-				juego.getNivelActual().getMario().setPuntaje(juego.getNivelActual().getMario().getPuntaje() + buzzy.puntajeMatarAMario());
-				juego.actualizarPuntaje();
-				juego.actualizarVidas();
-			}
+		direccionColision = detectarDireccion(buzzy);
+		if(direccionColision.equals("ARRIBA")) {
+			buzzy.morir(entidadColisionable);
+		}
+		if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA")){	
+			entidadColisionable.getEstadoMario().recibirDaño(entidadColisionable,buzzy);
 		}
 	}
 
 	public void visitarSpiny(Spiny spiny) {
-		if(entidadColisionable.colisionable()) {
-			direccionColision = detectarDireccion(spiny);
-			if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA") || direccionColision.equals("ARRIBA")){
-				entidadColisionable.getEstadoMario().recibirDaño(entidadColisionable,spiny);
-				juego.getNivelActual().getMario().setPuntaje(juego.getNivelActual().getMario().getPuntaje() + spiny.puntajeMatarAMario());
-				juego.actualizarPuntaje();
-				juego.actualizarVidas();
-			}
+		direccionColision = detectarDireccion(spiny);
+		if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA") || direccionColision.equals("ARRIBA")){
+			entidadColisionable.getEstadoMario().recibirDaño(entidadColisionable,spiny);
 		}
 	}
 
 	public void visitarPiranha(PiranhaPlant piranha) {
-		if(entidadColisionable.colisionable()) {
-			direccionColision = detectarDireccion(piranha);
-			if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA") || direccionColision.equals("ARRIBA")){
-				entidadColisionable.getEstadoMario().recibirDaño(entidadColisionable,piranha);	
-				juego.getNivelActual().getMario().setPuntaje(juego.getNivelActual().getMario().getPuntaje() + piranha.puntajeMatarAMario());
-				juego.actualizarPuntaje();
-				juego.actualizarVidas();
-			}
+		direccionColision = detectarDireccion(piranha);
+		if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA") || direccionColision.equals("ARRIBA")){
+			entidadColisionable.getEstadoMario().recibirDaño(entidadColisionable,piranha);	
 		}
 	}
 
@@ -144,7 +103,7 @@ public class ColisionadorVisitorMario{
 	public void visitarTuberiaPiranha(TuberiaConPiranha tuberia) {
 		visitarTuberia(tuberia);
 	}
-	
+
 	public void visitarBandera(Bandera bandera) {
 		entidadColisionable.detenerMario();
 		entidadColisionable.setPuedeMoverseALaDerecha(false);
@@ -169,62 +128,27 @@ public class ColisionadorVisitorMario{
 			entidadColisionable.setEstadoInicial();
 			juego.reiniciarNivel();
 		}).start();
-		
+
 	}
 
 	public void visitarChampinonVerde(ChampinonVerde champinon) {
-		if (champinon.colisionable() && champinon.getAreaColision().intersects(champinon.getAreaColision())) {
-			Sonido.obtenerInstancia().reproducirSonidoObtuvoVida();
-			champinon.afectar(entidadColisionable);
-			juego.getNivelActual().getMario().setPuntaje(champinon.getPuntaje() + juego.getNivelActual().getMario().getPuntaje());
-			juego.actualizarPuntaje();
-			retirarEntidad(champinon);
-		}
+		champinon.afectar(entidadColisionable);
 	}
 
 	public void visitarEstrella(Estrella estrella) {
-		Sonido.obtenerInstancia().reproducirSonidoPowerUp();
 		estrella.afectar(entidadColisionable);
-		entidadColisionable.setAlto(32);
-		entidadColisionable.actualizarAreaColision();
-		juego.getNivelActual().getMario().setPuntaje(entidadColisionable.getEstadoMario().puntajeEstrella() + juego.getNivelActual().getMario().getPuntaje());
-		juego.actualizarPuntaje();
-		retirarEntidad(estrella);
-		entidadColisionable.iniciarRegresionEstadoEstrella();
 	}
 
 	public void visitarFlorFuego(FlorFuego flor) {
-		Sonido.obtenerInstancia().reproducirSonidoFlorDeFuego();
 		flor.afectar(entidadColisionable);
-		entidadColisionable.setAlto(32);
-		entidadColisionable.actualizarAreaColision();
-		juego.getNivelActual().getMario().setPuntaje(entidadColisionable.getEstadoMario().puntajeFlorFuego() + juego.getNivelActual().getMario().getPuntaje());
-		juego.actualizarPuntaje();
-		retirarEntidad(flor);
 	}
 
 	public void visitarMoneda(Moneda moneda) {
-		Sonido.obtenerInstancia().reproducirSonidoMoneda();
 		moneda.afectar(entidadColisionable);
-		juego.getNivelActual().getMario().setPuntaje(moneda.getPuntaje() + juego.getNivelActual().getMario().getPuntaje());
-		juego.actualizarPuntaje();
-		retirarEntidad(moneda);
 	}
 
 	public void visitarSuperChampinon(SuperChampinon champinon) {
-		Sonido.obtenerInstancia().reproducirSonidoSuperChampinon();
 		champinon.afectar(entidadColisionable);
-		entidadColisionable.setCambioEstado(true);
-		entidadColisionable.setAlto(32);
-		entidadColisionable.actualizarAreaColision();
-		juego.getNivelActual().getMario().setPuntaje(entidadColisionable.getEstadoMario().puntajeSuperChampinon() + juego.getNivelActual().getMario().getPuntaje());
-		juego.actualizarPuntaje();
-		retirarEntidad(champinon);
-	}
-
-	private void retirarEntidad(Entidad entidad) {
-		entidad.retirar();
-		entidad.notificarObservador();
 	}
 
 	private String detectarDireccion(Entidad entidad) {
