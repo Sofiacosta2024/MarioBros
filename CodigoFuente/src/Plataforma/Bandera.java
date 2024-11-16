@@ -2,6 +2,8 @@ package Plataforma;
 
 import Colisionador.ColisionadorVisitorMario;
 import Fabrica.Sprite;
+import Logica.Juego;
+import Mario.Mario;
 
 public class Bandera extends Plataforma{
 
@@ -11,6 +13,16 @@ public class Bandera extends Plataforma{
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {		
 		visitor.visitarBandera(this);
+	}
+	
+	public void interactuar(Juego juego, Mario mario) {
+		if(esColisionable) {
+			mario.detenerMario();
+			mario.setPuedeMoverseALaDerecha(false);
+			mario.setPuedeMoverseALaIzquierda(false);
+			juego.jugadorPasaDeNivel();
+			esColisionable = false;
+		}
 	}
 
 	public void retirar() {

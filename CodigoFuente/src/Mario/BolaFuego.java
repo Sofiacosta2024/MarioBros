@@ -6,6 +6,7 @@ import Logica.Entidad;
 
 public class BolaFuego extends Entidad {
 	
+	protected boolean esColisionable;
 	private boolean enMovimiento;
 
 	public BolaFuego(int x, int y, int velocidad, Sprite sprite, char direccionMovimiento, char direccionMovimientoAnterior) {
@@ -14,6 +15,7 @@ public class BolaFuego extends Entidad {
 		this.direccionMovimiento = direccionMovimiento;
 		this.direccionMovimientoAnterior = direccionMovimientoAnterior;
 		enMovimiento = false;
+		esColisionable = true;
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
@@ -27,10 +29,11 @@ public class BolaFuego extends Entidad {
 	public void retirar() {
 		observador.actualizarPorMuerte();
 		enMovimiento = false;
+		esColisionable = false;
 	}
 	
 	public void mover() {
-		if(enMovimiento) {
+		if(enMovimiento && esColisionable) {
 			char direccion = getDireccionMovimiento();
 			char direccionAnterior = getDireccionMovimientoAnterior();
 			if (direccion == DERECHA || (direccion == QUIETO && direccionAnterior == DERECHA)) {
@@ -57,6 +60,6 @@ public class BolaFuego extends Entidad {
 	}
 	
 	public boolean colisionable() {
-		return enMovimiento;
+		return esColisionable;
 	}
 }

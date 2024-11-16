@@ -180,7 +180,6 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 
 	public void limpiarEntidadGrafica(ObserverGrafica observer) {
 		observer.setVisible(false);
-		refrescar();
 	}
 	
 	public void seleccionarImagenFondoPartida() {

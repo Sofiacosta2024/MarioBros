@@ -96,7 +96,6 @@ public abstract class Enemigo extends Entidad{
 	public void retirar() {
 		muerto = true;
 		observador.actualizarPorMuerte();
-		notificarObservador();
 	}
 	
 	public void notificarObservador() {
@@ -111,6 +110,8 @@ public abstract class Enemigo extends Entidad{
 			sobreSuelo = false;
 		else
 			sobreSuelo = true;
+		muerto = false;
+		notificarObservador();
 	}
 
 	public void setMovimiento(char movimiento) {
@@ -119,7 +120,6 @@ public abstract class Enemigo extends Entidad{
 	
 	public void setVivo(boolean vivo) {
 		muerto = !vivo;
-		notificarObservador();
 	}
 
 	public void detenerOActivarCaida(boolean enPlataforma) {

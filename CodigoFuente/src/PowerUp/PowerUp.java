@@ -23,6 +23,12 @@ public abstract class PowerUp extends Entidad {
 			observador.actualizar();
 	}
 	
+	public void setEstadoInicial() {
+		super.setEstadoInicial();
+		esColisionable = true;
+		notificarObservador();
+	}
+	
 	public abstract void afectar(Mario mario);
 	
 	public void setColisionable(boolean colisionable) {

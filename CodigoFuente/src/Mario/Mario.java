@@ -161,6 +161,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 		Sonido.obtenerInstancia().reproducirSonidoCaeAlVacio();
 		enSuelo=false;
 		cayendoVacio=true;
+		setCambioEstado(true);
 	}
 
 	public void direccionMario(int desplazamientoX, int desplazamientoY) {
@@ -193,32 +194,32 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 	public Sprite actualizarSprite(char direccion) {
 		Sprite aux = sprite;
 		if (saltando || !enSuelo) {
-		  if (direccion == DERECHA || direccionMovimiento == DERECHA) 
-		      sprite = estado.getSpriteSaltandoADerecha(sprites);
-		  else 
-			  if (direccion == IZQUIERDA || direccionMovimiento == IZQUIERDA) 
-				  sprite = estado.getSpriteSaltandoAIzquierda(sprites);
-		    }
+			if (direccion == DERECHA || direccionMovimiento == DERECHA) 
+				sprite = estado.getSpriteSaltandoADerecha(sprites);
+			else 
+				if (direccion == IZQUIERDA || direccionMovimiento == IZQUIERDA) 
+					sprite = estado.getSpriteSaltandoAIzquierda(sprites);
+		}
 		else {
-		        if (direccion == DERECHA) 
-		            sprite = estado.getSpriteDerecha(sprites);
-		        else 
-		        	if (direccion == IZQUIERDA) 
-		        		sprite = estado.getSpriteIzquierda(sprites);
-		        else 
-		        	if (direccion == QUIETO) {
-		        		if (direccionMovimientoAnterior == DERECHA) 
-		        			sprite = estado.getSpriteDetenidoDerecha(sprites);
-		        		else 
-		        			if (direccionMovimientoAnterior == IZQUIERDA) 
-		        					sprite = estado.getSpriteDetenidoIzquierda(sprites);
-		        	}
-		    }
+			if (direccion == DERECHA) 
+				sprite = estado.getSpriteDerecha(sprites);
+			else 
+				if (direccion == IZQUIERDA) 
+					sprite = estado.getSpriteIzquierda(sprites);
+				else 
+					if (direccion == QUIETO) {
+						if (direccionMovimientoAnterior == DERECHA) 
+							sprite = estado.getSpriteDetenidoDerecha(sprites);
+						else 
+							if (direccionMovimientoAnterior == IZQUIERDA) 
+								sprite = estado.getSpriteDetenidoIzquierda(sprites);
+					}
+		}
 		if(aux != sprite) {
 			notificarObservador();
 		}
-		    return sprite;
-		}
+		return sprite;
+	}
 
 	public void lanzarBolaFuego() {
 		if(estado.lanzarBolaFuego()) {
@@ -234,12 +235,13 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 		if(esColisionable) {
 			Sonido.obtenerInstancia().reproducirSonidoMorir();
 			vidas--;
-			juego.actualizarVidas();
+			if(vidas==0) {
+				juego.finalizarPartida();
+			}
 		}
 	}
-	public void resetearPosicion() {
-		posicionX = 50;
-		posicionY = 60;
+	public void setEstadoInicial() {
+		super.setEstadoInicial();
 		estado = new EstadoNormal();
 		puedeDerecha=true;
 		puedeIzquierda=true;

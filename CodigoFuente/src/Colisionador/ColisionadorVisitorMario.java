@@ -105,30 +105,12 @@ public class ColisionadorVisitorMario{
 	}
 
 	public void visitarBandera(Bandera bandera) {
-		entidadColisionable.detenerMario();
-		entidadColisionable.setPuedeMoverseALaDerecha(false);
-		entidadColisionable.setPuedeMoverseALaIzquierda(false);
-		juego.jugadorPasaDeNivel();
+		bandera.interactuar(juego, entidadColisionable);
 	}
 
 	public void visitarVacio(Vacio vacio) {
 		entidadColisionable.morirPorVacio();
-		entidadColisionable.setCambioEstado(true);
-		entidadColisionable.decrementarVida();
-		juego.getNivelActual().getMario().setPuntaje(juego.getNivelActual().getMario().getPuntaje() + vacio.puntajeMarioVacio());
-		juego.actualizarPuntaje();
-		juego.actualizarVidas();
-		vacio.setColisionable(false);
-		new Thread(() -> {
-			try {
-				Thread.sleep(550); 
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			entidadColisionable.setEstadoInicial();
-			juego.reiniciarNivel();
-		}).start();
-
+		vacio.interactuar(entidadColisionable, juego);
 	}
 
 	public void visitarChampinonVerde(ChampinonVerde champinon) {

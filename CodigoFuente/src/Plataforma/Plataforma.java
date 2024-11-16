@@ -55,6 +55,12 @@ public abstract class Plataforma extends Entidad {
 		if(esColisionable)
 			visitor.visitarPlataforma(this);
 	}
+	
+	public void setEstadoInicial() {
+		super.setEstadoInicial();
+		esColisionable = true;
+		notificarObservador();
+	}
 
 	public void notificarObservador() {
 		if(esColisionable)

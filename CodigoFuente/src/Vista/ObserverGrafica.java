@@ -18,8 +18,10 @@ public abstract class ObserverGrafica extends JLabel implements Observer {
 	}
 
 	public void actualizar() {
+		if(entidadObservada.colisionable()) {
 			actualizarImagen();
 			actualizarPosicionTamano();
+		}
 	}
 
 	public void actualizarImagen() {	

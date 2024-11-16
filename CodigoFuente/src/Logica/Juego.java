@@ -92,23 +92,18 @@ public class Juego implements VistaDeJuego {
 	public void reiniciarNivel() {
 		for(Plataforma plataforma: nivelActual.getPlataformas()) {
 			plataforma.setEstadoInicial();
-			plataforma.setColisionable(true);
 		}
 		for(Enemigo enemigo: nivelActual.getEnemigos()) {
 			enemigo.setEstadoInicial();
-			enemigo.setVivo(true);
 		}
 		for(PowerUp powerUp: nivelActual.getPowerUps()) {
 			powerUp.setEstadoInicial();
-			powerUp.setColisionable(true);
 		}
 		for(Spiny spiny: nivelActual.getSpinyssLanzados()) {
 			spiny.setEstadoInicial();
-			spiny.setVivo(true);
 		}
 		for(BolaFuego bola: nivelActual.getProyectiles()) {
 			bola.retirar();
-			bola.notificarObservador();
 		}
 		nivelActual.getMario().setEstadoInicial();
 		controladorVistas.setTiempoNivel();
