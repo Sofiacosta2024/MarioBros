@@ -102,6 +102,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 			actualizarAreaColision();
 			if(contSalto>20) {
 				saltando=false;
+				enSuelo=false;
 			}
 		} 
 		else if(!enSuelo){
