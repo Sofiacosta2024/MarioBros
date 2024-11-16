@@ -7,7 +7,7 @@ import Logica.*;
 import Mario.Mario;
 
 public abstract class Plataforma extends Entidad {
-	
+
 	protected boolean esColisionable;
 
 	public Plataforma(int x, int y, int velocidad, int anchoHitBox, int altoHitBox) {
@@ -28,7 +28,8 @@ public abstract class Plataforma extends Entidad {
 					if(!mario.getEnSuelo()) {
 						mario.rebotarHaciaAbajo();
 					}
-				} else 
+				} 
+				else 
 					if (direccionColision.equals("ARRIBA")) {
 						mario.detenerSalto();
 						mario.setEnSuelo(true);
@@ -54,17 +55,17 @@ public abstract class Plataforma extends Entidad {
 		if(esColisionable)
 			visitor.visitarPlataforma(this);
 	}
-	
+
 	public void notificarObservador() {
 		if(esColisionable)
 			observador.actualizar();
 	}
-	
+
 	public void setColisionable(boolean colisionable) {
 		esColisionable = colisionable;
 		notificarObservador();
 	}
-	
+
 	public boolean colisionable() {
 		return esColisionable;
 	}

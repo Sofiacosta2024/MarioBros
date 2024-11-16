@@ -44,20 +44,8 @@ public class KoopaTroopa extends Enemigo{
 	}
 
 	public void mover() {
-		if(!detener && !muerto && !enEnfriamiento) {
-			if(!sobreSuelo && !sobrePlataforma) {
-				caer();
-			}
-			if(direccionMovimiento == IZQUIERDA) {
-				estado.mover(-velocidad, 0);
-			}
-			else
-				if(direccionMovimiento == DERECHA) {
-					estado.mover(velocidad, 0);
-				}
-			if(posicionX <= -65) {
-				retirar();
-			}
+		if(!detener) {
+			estado.mover(velocidad);
 			actualizarAreaColision();
 			observador.actualizarPosicionTamano();
 		}

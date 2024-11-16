@@ -8,10 +8,10 @@ public class EstadoProyectil extends EstadoKoopaTroopa{
 		this.koopaTroopa = koopaTroopa;
 	}
 	
-	public void mover(int nuevaX, int nuevaY) {
+	public void mover(int velocidad) {
 		koopaTroopa.movilidad();
-		koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() + nuevaX*3);
-		koopaTroopa.setPosicionY(koopaTroopa.getPosicionY() + nuevaY);
+		koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() + velocidad*3);
+		//koopaTroopa.setPosicionY(koopaTroopa.getPosicionY());
 		koopaTroopa.actualizarAreaColision();
         koopaTroopa.getObserver().actualizarPosicionTamano();
 	    }
@@ -28,12 +28,12 @@ public class EstadoProyectil extends EstadoKoopaTroopa{
 		}
 		else {
 			if(enemigo.getMovimiento() == enemigo.IZQUIERDA) {
-				enemigo.mover();
 				enemigo.setMovimiento(enemigo.DERECHA);
+				enemigo.mover();
 			}
 			else {
-				enemigo.mover();
-				enemigo.setMovimiento(enemigo.IZQUIERDA);
+				  enemigo.setMovimiento(enemigo.IZQUIERDA);
+				  enemigo.mover();
 			}
 		}
 	}

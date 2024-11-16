@@ -102,6 +102,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 			actualizarAreaColision();
 			if(contSalto>20) {
 				saltando=false;
+				enSuelo=false;
 			}
 		} 
 		else if(!enSuelo){
@@ -191,33 +192,33 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 
 	public Sprite actualizarSprite(char direccion) {
 		Sprite aux = sprite;
-		if (saltando) {
-			if (direccion == DERECHA || direccionMovimiento == DERECHA) 
-				sprite = estado.getSpriteSaltandoADerecha(sprites);
-			else 
-				if (direccion == IZQUIERDA || direccionMovimiento == IZQUIERDA) 
-					sprite = estado.getSpriteSaltandoAIzquierda(sprites);
-		}
+		if (saltando || !enSuelo) {
+		  if (direccion == DERECHA || direccionMovimiento == DERECHA) 
+		      sprite = estado.getSpriteSaltandoADerecha(sprites);
+		  else 
+			  if (direccion == IZQUIERDA || direccionMovimiento == IZQUIERDA) 
+				  sprite = estado.getSpriteSaltandoAIzquierda(sprites);
+		    }
 		else {
-			if (direccion == DERECHA) 
-				sprite = estado.getSpriteDerecha(sprites);
-			else 
-				if (direccion == IZQUIERDA) 
-					sprite = estado.getSpriteIzquierda(sprites);
-				else 
-					if (direccion == QUIETO) {
-						if (direccionMovimientoAnterior == DERECHA) 
-							sprite = estado.getSpriteDetenidoDerecha(sprites);
-						else 
-							if (direccionMovimientoAnterior == IZQUIERDA) 
-								sprite = estado.getSpriteDetenidoIzquierda(sprites);
-					}
-		}
-		if(aux!=sprite) {
+		        if (direccion == DERECHA) 
+		            sprite = estado.getSpriteDerecha(sprites);
+		        else 
+		        	if (direccion == IZQUIERDA) 
+		        		sprite = estado.getSpriteIzquierda(sprites);
+		        else 
+		        	if (direccion == QUIETO) {
+		        		if (direccionMovimientoAnterior == DERECHA) 
+		        			sprite = estado.getSpriteDetenidoDerecha(sprites);
+		        		else 
+		        			if (direccionMovimientoAnterior == IZQUIERDA) 
+		        					sprite = estado.getSpriteDetenidoIzquierda(sprites);
+		        	}
+		    }
+		if(aux != sprite) {
 			notificarObservador();
 		}
-		return sprite;
-	}
+		    return sprite;
+		}
 
 	public void lanzarBolaFuego() {
 		if(estado.lanzarBolaFuego()) {

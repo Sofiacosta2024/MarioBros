@@ -108,7 +108,7 @@ public class ColisionadorVisitorMario{
 		entidadColisionable.detenerMario();
 		entidadColisionable.setPuedeMoverseALaDerecha(false);
 		entidadColisionable.setPuedeMoverseALaIzquierda(false);
-		juego.reiniciarNivel();
+		juego.jugadorPasaDeNivel();
 	}
 
 	public void visitarVacio(Vacio vacio) {

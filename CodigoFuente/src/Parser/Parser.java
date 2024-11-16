@@ -165,10 +165,10 @@ public class Parser {
 			nivel.agregarPlataforma(fabricaEntidad.getVacio(posicionX, posicionY, velocidadNula, fSprite.getVacio()));
 			break;
 		case "46":
-			nivel.agregarPlataforma(fabricaEntidad.getBandera(posicionX, posicionY, velocidadNula, fSprite.getVacio()));
+			nivel.agregarPlataforma(fabricaEntidad.getBandera(posicionX, posicionY, velocidadNula, fSprite.getBandera()));
 			break;
 		case "47":
-			nivel.agregarPlataforma(fabricaEntidad.getPrincesa(posicionX, posicionY, velocidadNula, fSprite.getVacio()));
+			nivel.agregarPlataforma(fabricaEntidad.getPrincesa(posicionX, posicionY, velocidadNula, fSprite.getPrincesa()));
 		}
 	}
 	

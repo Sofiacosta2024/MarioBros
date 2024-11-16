@@ -44,18 +44,16 @@ public class PiranhaPlant extends Enemigo{
 		visible = !visible;
 	}
 
-	public void mover(int desplazamiento, int desplazamientoNulo) {
-		if(!muerto) {
-			if (visible && posicionY < limiteSuperiorY) {
-				setPosicionY(posicionY + desplazamiento); // Subir
+	public void mover() {
+		if (visible && posicionY < limiteSuperiorY) {
+			setPosicionY(posicionY + velocidad); // Subir
+			actualizarAreaColision();
+			observador.actualizarPosicionTamano();
+		} else
+			if (!visible && posicionY > posicionInicialY) {
+				setPosicionY((posicionY - 10) - velocidad); // Bajar
 				actualizarAreaColision();
 				observador.actualizarPosicionTamano();
-			} else
-				if (!visible && posicionY > posicionInicialY) {
-					setPosicionY((posicionY - 10) - desplazamiento); // Bajar
-					actualizarAreaColision();
-					observador.actualizarPosicionTamano();
-				}
 		}
 	}
 
