@@ -192,7 +192,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 
 	public Sprite actualizarSprite(char direccion) {
 		Sprite aux = sprite;
-		if (saltando) {
+		if (saltando || !enSuelo) {
 		  if (direccion == DERECHA || direccionMovimiento == DERECHA) 
 		      sprite = estado.getSpriteSaltandoADerecha(sprites);
 		  else 
