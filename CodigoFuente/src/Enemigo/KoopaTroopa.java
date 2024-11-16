@@ -34,9 +34,9 @@ public class KoopaTroopa extends Enemigo{
 		mario.decrementarVida();
 	}
 	
-	public void mover(int nuevaX, int nuevaY) {
+	public void mover() {
 		if(!detener)
-			estado.mover(nuevaX, nuevaY);
+			estado.mover(velocidad);
 	}
 	
 	public void movilidad() {

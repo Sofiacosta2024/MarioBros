@@ -15,21 +15,32 @@ public class EstadoCaminando extends EstadoKoopaTroopa{
 		koopaTroopa.notificarObservador();
 	}
 
-	public void mover(int nuevaX, int nuevaY) {
-		koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() + nuevaX);
-		koopaTroopa.setPosicionY(koopaTroopa.getPosicionY() + nuevaY);
+	public void mover(int velocidad) {
+		if(koopaTroopa.getMovimiento() == koopaTroopa.IZQUIERDA) {
+			koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() - velocidad);
+		}
+		else
+			if(koopaTroopa.getMovimiento() == koopaTroopa.DERECHA) {
+				koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() + velocidad);
+			}
+		/*if(posicionX <= -65) {
+			retirar();
+		}
+		koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() + velocidad);
+		//koopaTroopa.setPosicionY(koopaTroopa.getPosicionY() + nuevaY);
+		 * */
 		koopaTroopa.actualizarAreaColision();
         koopaTroopa.getObserver().actualizarPosicionTamano();
 	}
 	
 	public void interactuarEnemigos(Enemigo enemigo) {
 		if(enemigo.getMovimiento() == enemigo.IZQUIERDA) {
-			enemigo.mover();
 			enemigo.setMovimiento(enemigo.DERECHA);
+			enemigo.mover();
 		}
 		else {
-			enemigo.mover();
-			enemigo.setMovimiento(enemigo.IZQUIERDA);
+			   enemigo.setMovimiento(enemigo.IZQUIERDA);
+			   enemigo.mover();
 		}
 	}
 }
