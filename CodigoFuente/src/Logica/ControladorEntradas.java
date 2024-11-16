@@ -1,14 +1,14 @@
 package Logica;
 
-import Mario.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class ControladorEntradas implements KeyListener {
+	
+	private final char QUIETO = 'q';
+	private EntidadMovimientoMario mario;
 
-	private Mario mario;
-
-	public ControladorEntradas(Mario mario) {
+	public ControladorEntradas(EntidadMovimientoMario mario) {
 		this.mario = mario;
 	}
 
@@ -41,7 +41,7 @@ public class ControladorEntradas implements KeyListener {
 			break;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_A) {
-  			mario.actualizarMovimientoMario(mario.QUIETO);
+  			mario.actualizarMovimientoMario(QUIETO);
   		}
 	}
 	public void keyTyped(KeyEvent e) {

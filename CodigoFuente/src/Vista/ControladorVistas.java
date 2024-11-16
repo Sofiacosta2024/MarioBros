@@ -171,7 +171,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 	
 	public void iniciarActualizarInformacionPantallaPartida() {
-		panelPartida.iniciarActualizacionInformacion();
+		panelPartida.iniciarActualizacionInformacionTiempo();
 	}
 	
 	public void limpiezaDeEntidadesGraficas() {
@@ -179,8 +179,8 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void limpiarEntidadGrafica(ObserverGrafica observer) {
-		ObserverGrafica observerALimpiar = (ObserverGrafica) observer;
-		panelPartida.getImagenFondo().remove(observerALimpiar);
+		panelPartida.getImagenFondo().remove(observer);
+		refrescar();
 	}
 	
 	public void seleccionarImagenFondoPartida() {

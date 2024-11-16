@@ -6,6 +6,8 @@ import Threads.MoverMario;
 import Vista.*;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+
 import Colisionador.ColisionadorVisitorBolaFuego;
 import Colisionador.ColisionadorVisitorEnemigo;
 import Colisionador.ColisionadorVisitorMario;
@@ -225,96 +227,137 @@ public class Juego {
 	}
 
 	public void detectarColisionesMarioMundo() {
-		ColisionadorVisitorMario colisionador = new ColisionadorVisitorMario(nivelActual.getMario(),this);
-		for (Plataforma plataforma : nivelActual.getPlataformas()) {
-			if (plataforma.colisionable() && nivelActual.getMario().getAreaColision().intersects(plataforma.getAreaColision())) {
-				plataforma.aceptarVisita(colisionador);	
-			}
-		}
-		for (Enemigo enemigo : nivelActual.getEnemigos()) {
-			if (enemigo.colisionable() && nivelActual.getMario().getAreaColision().intersects(enemigo.getAreaColision())) {
-				enemigo.aceptarVisita(colisionador);
-			}
-		}
-		for(Spiny spiny : nivelActual.getSpinyssLanzados()) {
-			if (spiny.colisionable() && nivelActual.getMario().getAreaColision().intersects(spiny.getAreaColision())) {
-				spiny.aceptarVisita(colisionador);
-			}
-		}
-		for (Entidad entidad : nivelActual.getPowerUps()) {
-			if (entidad.colisionable() && nivelActual.getMario().getAreaColision().intersects(entidad.getAreaColision())) {
-				entidad.aceptarVisita(colisionador);
-			}
-		}
+	    ColisionadorVisitorMario colisionador = new ColisionadorVisitorMario(nivelActual.getMario(), this);
+	    Iterator<Plataforma> iterPlataformas = nivelActual.getPlataformas().iterator();
+	    while (iterPlataformas.hasNext()) {
+	        Plataforma plataforma = iterPlataformas.next();
+	        if (plataforma.colisionable() && nivelActual.getMario().getAreaColision().intersects(plataforma.getAreaColision())) {
+	            plataforma.aceptarVisita(colisionador);
+	        }
+	    }
+	    Iterator<Enemigo> iterEnemigos = nivelActual.getEnemigos().iterator();
+	    while (iterEnemigos.hasNext()) {
+	        Enemigo enemigo = iterEnemigos.next();
+	        if (enemigo.colisionable() && nivelActual.getMario().getAreaColision().intersects(enemigo.getAreaColision())) {
+	            enemigo.aceptarVisita(colisionador);
+	        }
+	    }
+	    Iterator<Spiny> iterSpinys = nivelActual.getSpinyssLanzados().iterator();
+	    while (iterSpinys.hasNext()) {
+	        Spiny spiny = iterSpinys.next();
+	        if (spiny.colisionable() && nivelActual.getMario().getAreaColision().intersects(spiny.getAreaColision())) {
+	            spiny.aceptarVisita(colisionador);
+	        }
+	    }
+	    Iterator<PowerUp> iterPowerUps = nivelActual.getPowerUps().iterator();
+	    while (iterPowerUps.hasNext()) {
+	        Entidad entidad = iterPowerUps.next();
+	        if (entidad.colisionable() && nivelActual.getMario().getAreaColision().intersects(entidad.getAreaColision())) {
+	            entidad.aceptarVisita(colisionador);
+	        }
+	    }
 	}
 
 	public void detectarColisionesMundoSinMario() {
-		try {
-			ArrayList<Enemigo> enemigos = nivelActual.getEnemigos();
-			ArrayList<Plataforma> plataformas = nivelActual.getPlataformas();
-			ArrayList<Spiny> spinyss = nivelActual.getSpinyssLanzados();
-			ArrayList<BolaFuego> bolasFuego = nivelActual.getProyectiles();
-			
-			for(Enemigo enemigo: enemigos) {
-				ColisionadorVisitorEnemigo colisionador = new ColisionadorVisitorEnemigo(enemigo,this);
-				boolean sobreAlgunaPlataforma = false;
-				for(Enemigo enemigoColisionable : nivelActual.getEnemigos()) {
-					if (enemigoColisionable != enemigo && enemigoColisionable.colisionable() && enemigo.colisionable() &&
-							enemigo.getAreaColision().intersects(enemigoColisionable.getAreaColision())) {
-						enemigoColisionable.aceptarVisita(colisionador);
-					}
-				}
-				for(Plataforma plataforma : plataformas) {
-					if (plataforma.colisionable() && enemigo.colisionable() && 
-							enemigo.getAreaColision().intersects(plataforma.getAreaColision())) {
-						plataforma.aceptarVisita(colisionador);
-						sobreAlgunaPlataforma = true;
-					}
-				}
-				enemigo.detenerOActivarCaida(sobreAlgunaPlataforma);
-				for(Spiny spiny : spinyss) {
-					if (spiny.colisionable() && enemigo.colisionable() && spiny != enemigo && 
-							enemigo.getAreaColision().intersects(spiny.getAreaColision())) {
-						enemigo.aceptarVisita(colisionador);
-					}
-				}
-			}	
-			for(Spiny spiny : spinyss) {
-				ColisionadorVisitorEnemigo colisionador = new ColisionadorVisitorEnemigo(spiny,this);
-				boolean sobreAlgunaPlataforma = false;
-				for(Plataforma plataforma : plataformas) {
-					if (plataforma.colisionable() && spiny.colisionable() && 
-							spiny.getAreaColision().intersects(plataforma.getAreaColision())) {
-						plataforma.aceptarVisita(colisionador);
-						sobreAlgunaPlataforma = true;
-					}
-				}
-				spiny.detenerOActivarCaida(sobreAlgunaPlataforma);
-				for(Enemigo enemigo: enemigos) 
-					if (spiny.colisionable() && enemigo.colisionable() && spiny != enemigo && enemigo.getAreaColision().intersects(spiny.getAreaColision())) {
-						enemigo.aceptarVisita(colisionador);
-					}
-			}
-			for(BolaFuego bolaFuego : bolasFuego) {
-				ColisionadorVisitorBolaFuego colisionador = new ColisionadorVisitorBolaFuego(bolaFuego,this);
-				for(Enemigo enemigoColisionable : enemigos)
-					if (enemigoColisionable.colisionable() && bolaFuego.colisionable() && bolaFuego.getAreaColision().intersects(enemigoColisionable.getAreaColision())) {
-						enemigoColisionable.aceptarVisita(colisionador);
-					}
-				for(Plataforma plataforma : plataformas)
-					if (plataforma.colisionable() && bolaFuego.colisionable() && bolaFuego.getAreaColision().intersects(plataforma.getAreaColision())) {
-						plataforma.aceptarVisita(colisionador);
-					}
-				for(Spiny spiny : spinyss) {
-					if (spiny.colisionable() && bolaFuego.colisionable() && bolaFuego.getAreaColision().intersects(spiny.getAreaColision())) {
-						spiny.aceptarVisita(colisionador);
-					}
-				}
-			}
-		}catch(ConcurrentModificationException excepcion) {
-			//System.out.println("CONCURRENNNNTTTTTTTTTTTT EN COLISIONADORES");
-			detectarColisionesMundoSinMario();
-		}
+	    try {
+	        ArrayList<Enemigo> enemigos = nivelActual.getEnemigos();
+	        ArrayList<Plataforma> plataformas = nivelActual.getPlataformas();
+	        ArrayList<Spiny> spinyss = nivelActual.getSpinyssLanzados();
+	        ArrayList<BolaFuego> bolasFuego = nivelActual.getProyectiles();
+	        Iterator<Enemigo> iterEnemigos = enemigos.iterator();
+	        while (iterEnemigos.hasNext()) {
+	            Enemigo enemigo = iterEnemigos.next();
+	            ColisionadorVisitorEnemigo colisionador = new ColisionadorVisitorEnemigo(enemigo, this);
+	            boolean sobreAlgunaPlataforma = false;
+	            Iterator<Enemigo> iterOtrosEnemigos = enemigos.iterator();
+	            while (iterOtrosEnemigos.hasNext()) {
+	                Enemigo enemigoColisionable = iterOtrosEnemigos.next();
+	                if (enemigoColisionable != enemigo && enemigoColisionable.colisionable() && enemigo.colisionable() &&
+	                        enemigo.getAreaColision().intersects(enemigoColisionable.getAreaColision())) {
+	                    enemigoColisionable.aceptarVisita(colisionador);
+	                }
+	            }
+	            Iterator<Plataforma> iterPlataformas = plataformas.iterator();
+	            while (iterPlataformas.hasNext()) {
+	                Plataforma plataforma = iterPlataformas.next();
+	                if (plataforma.colisionable() && enemigo.colisionable() &&
+	                        enemigo.getAreaColision().intersects(plataforma.getAreaColision())) {
+	                    plataforma.aceptarVisita(colisionador);
+	                    sobreAlgunaPlataforma = true;
+	                }
+	            }
+	            Iterator<Spiny> iterSpinys = spinyss.iterator();
+	            while (iterSpinys.hasNext()) {
+	                Spiny spiny = iterSpinys.next();
+	                if (spiny.colisionable() && enemigo.colisionable() && spiny != enemigo &&
+	                        enemigo.getAreaColision().intersects(spiny.getAreaColision())) {
+	                    enemigo.aceptarVisita(colisionador);
+	                }
+	            }
+	            enemigo.detenerOActivarCaida(sobreAlgunaPlataforma);
+	        }
+	        Iterator<Spiny> iterSpinys = spinyss.iterator();
+	        while (iterSpinys.hasNext()) {
+	            Spiny spiny = iterSpinys.next();
+	            ColisionadorVisitorEnemigo colisionador = new ColisionadorVisitorEnemigo(spiny, this);
+	            boolean sobreAlgunaPlataforma = false;
+	            Iterator<Plataforma> iterPlataformas = plataformas.iterator();
+	            while (iterPlataformas.hasNext()) {
+	                Plataforma plataforma = iterPlataformas.next();
+	                if (plataforma.colisionable() && spiny.colisionable() &&
+	                        spiny.getAreaColision().intersects(plataforma.getAreaColision())) {
+	                    plataforma.aceptarVisita(colisionador);
+	                    sobreAlgunaPlataforma = true;
+	                }
+	            }
+	            spiny.detenerOActivarCaida(sobreAlgunaPlataforma);
+	            Iterator<Enemigo> iterEnemigosCol = enemigos.iterator();
+	            while (iterEnemigosCol.hasNext()) {
+	                Enemigo enemigo = iterEnemigosCol.next();
+	                if (spiny.colisionable() && enemigo.colisionable() && spiny != enemigo &&
+	                        enemigo.getAreaColision().intersects(spiny.getAreaColision())) {
+	                    enemigo.aceptarVisita(colisionador);
+	                }
+	            }
+	        }
+	        Iterator<BolaFuego> iterBolasFuego = bolasFuego.iterator();
+	        while (iterBolasFuego.hasNext()) {
+	            BolaFuego bolaFuego = iterBolasFuego.next();
+	            ColisionadorVisitorBolaFuego colisionador = new ColisionadorVisitorBolaFuego(bolaFuego, this);
+	            Iterator<Enemigo> iterEnemigosCol = enemigos.iterator();
+	            while (iterEnemigosCol.hasNext()) {
+	                Enemigo enemigo = iterEnemigosCol.next();
+	                if (enemigo.colisionable() && bolaFuego.colisionable() &&
+	                        bolaFuego.getAreaColision().intersects(enemigo.getAreaColision())) {
+	                    enemigo.aceptarVisita(colisionador);
+	                    iterBolasFuego.remove();
+	                    break;
+	                }
+	            }
+	            Iterator<Plataforma> iterPlataformasCol = plataformas.iterator();
+	            while (iterPlataformasCol.hasNext()) {
+	                Plataforma plataforma = iterPlataformasCol.next();
+	                if (plataforma.colisionable() && bolaFuego.colisionable() &&
+	                        bolaFuego.getAreaColision().intersects(plataforma.getAreaColision())) {
+	                    plataforma.aceptarVisita(colisionador);
+	                    iterBolasFuego.remove();
+	                    break;
+	                }
+	            }
+	            Iterator<Spiny> iterSpinysCol = spinyss.iterator();
+	            while (iterSpinysCol.hasNext()) {
+	                Spiny spiny = iterSpinysCol.next();
+	                if (spiny.colisionable() && bolaFuego.colisionable() &&
+	                        bolaFuego.getAreaColision().intersects(spiny.getAreaColision())) {
+	                    spiny.aceptarVisita(colisionador);
+	                    iterBolasFuego.remove();
+	                    break;
+	                }
+	            }
+	        }
+	    } catch (ConcurrentModificationException excepcion) {
+	        detectarColisionesMundoSinMario();
+	    }
 	}
 
 	public void moverMario() {

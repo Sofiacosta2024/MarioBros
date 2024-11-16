@@ -59,9 +59,8 @@ public abstract class ObserverGrafica extends JLabel implements Observer {
 	}
 
 	public void actualizarPorMuerte() {
+		controlador.limpiarEntidadGrafica(this);
 		setVisible(false);
 		this.setIcon(null);
-		revalidate(); //controlador estas dos
-		repaint();
 	}
 }
