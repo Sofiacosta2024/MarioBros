@@ -36,6 +36,7 @@ public class KoopaTroopa extends Enemigo{
 		super.setEstadoInicial();
 		estado = new EstadoCaminando(this);
 		sprite = spritesKoopa[0];
+		notificarObservador();
 		detener = false;
 		contadorColisiones = 0;
 	}
@@ -71,7 +72,7 @@ public class KoopaTroopa extends Enemigo{
 	}
 
 	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-		if(!muerto && !estaEnEnfriamiento()) {
+		if(!muerto) {
 			visitor.visitarKoopaTroopa(this);
 		}
 	}

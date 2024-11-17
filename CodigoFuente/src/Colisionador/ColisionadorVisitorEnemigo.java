@@ -18,8 +18,10 @@ public class ColisionadorVisitorEnemigo {
 	}
 
 	public void visitarVacio(Vacio vacio) {
-		entidadColisionable.retirar();
-		entidadColisionable.getObserver().actualizar();
+		if(entidadColisionable.colisionable()) {
+			entidadColisionable.retirar();
+			entidadColisionable.getObserver().actualizar();
+		}
 	}
 
 	public void visitarPiranhaPlant(PiranhaPlant piranhaPlant) {

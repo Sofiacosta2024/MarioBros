@@ -101,10 +101,8 @@ public abstract class Enemigo extends Entidad{
 	}
 
 	public void retirar() {
-		if(!muerto) {
 			muerto = true;
 			observador.actualizarPorMuerte();
-		 }
 	}
 	
 	public void notificarObservador() {
