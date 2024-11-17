@@ -20,7 +20,6 @@ public class ColisionadorVisitorEnemigo {
 	public void visitarVacio(Vacio vacio) {
 		entidadColisionable.retirar();
 		entidadColisionable.getObserver().actualizar();
-
 	}
 
 	public void visitarPiranhaPlant(PiranhaPlant piranhaPlant) {
@@ -71,8 +70,6 @@ public class ColisionadorVisitorEnemigo {
 
 	public void visitarTuberiaPiranha(TuberiaConPiranha  tuberiaConPiranha) {
 		if(entidadColisionable!= tuberiaConPiranha.getPiranha()) {
-			System.out.println("Visitar tubería piranha");
-			System.out.println(entidadColisionable.getMovimiento());
 				if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
 					entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
 					entidadColisionable.mover();
