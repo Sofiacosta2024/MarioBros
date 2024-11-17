@@ -2,7 +2,6 @@ package Enemigo;
 
 import Mario.*;
 import Colisionador.ColisionadorVisitorMario;
-import Fabrica.*;
 
 public class BuzzyBeetle extends Enemigo{
 	
@@ -18,8 +17,9 @@ public class BuzzyBeetle extends Enemigo{
 	}
 	
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		if(!muerto)
+		if(!muerto) {
 			visitor.visitarBuzzy(this);
+		}
 	}
 	
 	public int getPosicionX() {

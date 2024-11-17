@@ -2,7 +2,6 @@ package Plataforma;
 
 import Colisionador.ColisionadorVisitorBolaFuego;
 import Colisionador.ColisionadorVisitorMario;
-import Fabrica.Sprite;
 import Mario.Mario;
 
 public class LadrilloSolido extends BloqueSolido{

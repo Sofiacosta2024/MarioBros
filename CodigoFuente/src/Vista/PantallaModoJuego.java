@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class PantallaModoJuego extends JPanel{
+	
 	private static final long serialVersionUID = 1L;
 	private ControladorDeVistas controladorVistas;
 	private JButton botonModoOriginal;

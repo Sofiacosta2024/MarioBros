@@ -1,7 +1,6 @@
 package Plataforma;
 
 import Colisionador.ColisionadorVisitorMario;
-import Fabrica.Sprite;
 import Logica.Juego;
 import Mario.Mario;
 
@@ -26,5 +25,6 @@ public class Bandera extends Plataforma{
 	}
 
 	public void retirar() {
+	
 	}
 }

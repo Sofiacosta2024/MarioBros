@@ -1,11 +1,6 @@
 package Sonido;
 
 import javax.sound.sampled.*;
-
-import Logica.Juego;
-import Logica.Nivel;
-import Parser.Parser;
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -16,6 +11,7 @@ public class Sonido {
     private Clip clip;
     
     private Sonido() {
+    
     }
     
     public static Sonido obtenerInstancia() {

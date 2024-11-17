@@ -74,6 +74,7 @@ public class PantallaVictoria extends JPanel {
     	agregarEtiquetaFelicidades();
     	agregarEtiquetaGanar();
     }
+    
     public void agregarEtiquetaFelicidades() {
         Font fuente = cargarFuente();
         etiquetaFelicidades = new JLabel("¡Felicidades!");
@@ -83,9 +84,11 @@ public class PantallaVictoria extends JPanel {
         etiquetaFelicidades.setHorizontalAlignment(JLabel.CENTER);
         imagenFondo.add(etiquetaFelicidades); 
     }
+    
     public void setNombreGanador(String nombre) {
     	etiquetaFelicidades.setText("¡Felicidades "+nombre+"!");
     }
+    
     public void agregarEtiquetaGanar() {
         Font fuente = cargarFuente();
         etiquetaGanar = new JLabel("Has ganado");
@@ -95,6 +98,7 @@ public class PantallaVictoria extends JPanel {
         etiquetaGanar.setHorizontalAlignment(JLabel.CENTER);
         imagenFondo.add(etiquetaGanar); 
     }
+    
     public void asignarImagenBoton(JButton b, String s) {
         ImageIcon iconoBoton = new ImageIcon(this.getClass().getResource(s));
         Image imagenEscalada = iconoBoton.getImage().getScaledInstance(200, 50, Image.SCALE_SMOOTH);

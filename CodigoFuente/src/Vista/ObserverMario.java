@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import Logica.*;
 
 public class ObserverMario extends ObserverGrafica{
+	
 	private static final long serialVersionUID = 1L;
 	private PantallaPartida panelPartida;
 	private EntidadMario marioObservado;

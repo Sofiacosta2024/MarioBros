@@ -60,10 +60,10 @@ public class Ranking {
 	                Puntuacion temporal = ranking.get(j);
 	                ranking.set(j, ranking.get(j + 1));
 	                ranking.set(j + 1, temporal);
-	            }
-	        }
-	    obtenerMejoresPuntajes();
-	}
+	              }
+	          }
+	         obtenerMejoresPuntajes();
+	     }
 	}
 	
 	private void obtenerMejoresPuntajes() {
@@ -81,9 +81,9 @@ public class Ranking {
 	            bw.write(jugador.getNombre() + " " + jugador.getPuntaje());
 	            bw.newLine();
 	        }
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+	     }	 catch (IOException e) {
+	    		e.printStackTrace();
+	    	  }
 	}
 	
 	public void agregarJugador(String nombre,int puntaje) {
@@ -101,7 +101,7 @@ public class Ranking {
 	            break;
 	        }
 	    }
-		}
+	}
 	    if (!jugadorExiste) {
 	        ranking.add(nuevoJugador);
 	    }

@@ -1,7 +1,8 @@
 package Enemigo;
+
 import Mario.*;
 import Colisionador.ColisionadorVisitorMario;
-import Fabrica.Sprite;
+
 public class Goomba extends Enemigo{
 	
 	public Goomba(int x, int y, int velocidad) {
@@ -11,13 +12,14 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void atacar(Mario mario) {
-		if(!muerto)
+		if(!muerto) {
 			mario.decrementarVida();
+		}
 	}
 	
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		if(!muerto)
+		if(!muerto) {
 			visitor.visitarGoomba(this);
+		}
 	}
-	
 }

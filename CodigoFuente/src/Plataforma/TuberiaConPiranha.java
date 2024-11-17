@@ -3,7 +3,6 @@ package Plataforma;
 import Colisionador.ColisionadorVisitorEnemigo;
 import Colisionador.ColisionadorVisitorMario;
 import Enemigo.PiranhaPlant;
-import Fabrica.Sprite;
 
 public class TuberiaConPiranha extends Tuberia{
 

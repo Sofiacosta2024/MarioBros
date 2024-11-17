@@ -21,10 +21,12 @@ public abstract class Enemigo extends Entidad{
 		super(x, y, velocidad, anchoHitBox,altoHitBox);
 		direccionMovimiento = IZQUIERDA;
 		sobrePlataforma = false;
-		if(posicionY > posSuelo)
+		if(posicionY > posSuelo) {
 			sobreSuelo = false;
-		else
-			sobreSuelo = true;
+		   }
+		else {
+			   sobreSuelo = true;
+			 }
 		gravedad = 1.0f;
 		muerto = false;
 	}
@@ -44,6 +46,7 @@ public abstract class Enemigo extends Entidad{
 			if(!sobreSuelo && !sobrePlataforma) {
 				caer();
 			}
+			
 			if(direccionMovimiento == IZQUIERDA) {
 				posicionX = posicionX - velocidad;
 			}
@@ -51,9 +54,11 @@ public abstract class Enemigo extends Entidad{
 				if(direccionMovimiento == DERECHA) {
 					posicionX = posicionX + velocidad;
 				}
+			
 			if(posicionX <= -65) {
 				retirar();
 			}
+			
 			actualizarAreaColision();
 			observador.actualizarPosicionTamano();
 		}
@@ -84,13 +89,15 @@ public abstract class Enemigo extends Entidad{
 	}
 
 	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-		if(!muerto)
+		if(!muerto) {
 			visitor.visitarPlataformaOEnemigo(this);
+		}
 	}
 
 	public void aceptarVisita(ColisionadorVisitorBolaFuego visitor) {
-		if(!muerto)
+		if(!muerto) {
 			visitor.visitarEnemigo(this);
+		}
 	}
 
 	public void retirar() {
@@ -99,17 +106,20 @@ public abstract class Enemigo extends Entidad{
 	}
 	
 	public void notificarObservador() {
-		if(!muerto)
+		if(!muerto) {
 			observador.actualizar();
+		}
 	}
 
 	public void setEstadoInicial() {
 		super.setEstadoInicial();
 		sobrePlataforma = false;
-		if(posicionY > posSuelo)
+		if(posicionY > posSuelo) {
 			sobreSuelo = false;
-		else
-			sobreSuelo = true;
+		}
+		else {
+			  sobreSuelo = true;
+		     }
 		muerto = false;
 		notificarObservador();
 	}

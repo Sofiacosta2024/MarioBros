@@ -1,4 +1,5 @@
 package Enemigo;
+
 import Colisionador.ColisionadorVisitorEnemigo;
 import Colisionador.ColisionadorVisitorMario;
 import Fabrica.Sprite;
@@ -39,8 +40,9 @@ public class KoopaTroopa extends Enemigo{
 	}
 
 	public void atacar(Mario mario) {
-		if(!muerto)
+		if(!muerto) {
 			mario.decrementarVida();
+		}
 	}
 
 	public void mover() {
@@ -62,13 +64,15 @@ public class KoopaTroopa extends Enemigo{
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		if(!muerto && !enEnfriamiento)
+		if(!muerto && !enEnfriamiento) {
 			visitor.visitarKoopa(this);
+		}
 	}
 
 	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-		if(!muerto && !enEnfriamiento)
+		if(!muerto && !enEnfriamiento) {
 			visitor.visitarKoopaTroopa(this);
+		}
 	}
 
 	public void atacado() {

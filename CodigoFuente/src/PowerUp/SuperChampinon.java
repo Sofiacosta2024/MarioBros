@@ -1,7 +1,6 @@
 package PowerUp;
 
 import Colisionador.ColisionadorVisitorMario;
-import Fabrica.Sprite;
 import Mario.EstadoSuperMario;
 import Mario.Mario;
 import Sonido.Sonido;
@@ -27,7 +26,8 @@ public class SuperChampinon extends PowerUp {
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		if(esColisionable)
+		if(esColisionable) {
 			visitor.visitarSuperChampinon(this);
+		}
 	}
 }

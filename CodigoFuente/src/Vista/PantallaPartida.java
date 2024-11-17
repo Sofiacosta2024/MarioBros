@@ -22,6 +22,7 @@ import Logica.EntidadMario;
 import Logica.VistaDeJuego;
 
 public class PantallaPartida extends JPanel {
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPartida;
 	private JPanel panelInformacion;
@@ -232,6 +233,7 @@ public class PantallaPartida extends JPanel {
 		labelNivel = new JLabel("00");
 		decorarLabelsInformacion();	
 	}	
+	
 	public void decorarLabelsInformacion() {
 		labelPuntaje.setForeground(Color.WHITE);
 		labelTimer.setForeground(Color.WHITE);

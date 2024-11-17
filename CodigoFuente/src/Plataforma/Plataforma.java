@@ -52,8 +52,9 @@ public abstract class Plataforma extends Entidad {
 	}
 
 	public void aceptarVisita(ColisionadorVisitorBolaFuego visitor) {
-		if(esColisionable)
+		if(esColisionable) {
 			visitor.visitarPlataforma(this);
+		}
 	}
 	
 	public void setEstadoInicial() {
@@ -63,8 +64,9 @@ public abstract class Plataforma extends Entidad {
 	}
 
 	public void notificarObservador() {
-		if(esColisionable)
+		if(esColisionable) {
 			observador.actualizar();
+		}
 	}
 
 	public void setColisionable(boolean colisionable) {

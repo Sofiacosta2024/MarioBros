@@ -1,7 +1,7 @@
 package Enemigo;
+
 import Colisionador.ColisionadorVisitorEnemigo;
 import Colisionador.ColisionadorVisitorMario;
-import Fabrica.Sprite;
 import Mario.Mario;
 
 public class Spiny extends Enemigo{
@@ -34,18 +34,21 @@ public class Spiny extends Enemigo{
 	}
 
 	public void atacar(Mario mario) {
-		if(!muerto)
+		if(!muerto) {
 			mario.decrementarVida();
+		}
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		if(!muerto)
+		if(!muerto) {
 			visitor.visitarSpiny(this);
+		}
 	}
 
 	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-		if(!muerto)
+		if(!muerto) {
 			visitor.visitarSpiny(this);
+		}
 	}
 
 	public void setLakituLanzador(Lakitu lakitu) {

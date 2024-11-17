@@ -50,6 +50,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 		moverIzquierda = false;
 		contSalto=0;
 	}
+	
 	public void activarDerecha() {
 		moverDerecha = true;
 		moverIzquierda = false;
@@ -80,6 +81,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 			posicionX += 5;
 			actualizarAreaColision();
 		}
+		
 		if( puedeIzquierda && moverIzquierda) {
 			desplazamientoX -= 50;
 			puedeDerecha = true;
@@ -89,9 +91,11 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 				actualizarAreaColision();
 			}
 		}
+		
 		if(direccion == SALTO) {
 			desplazamientoY -= velocidadSalto;
 		}
+		
 		if(direccion == QUIETO) {
 			detenerMario();
 		}
@@ -169,11 +173,13 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 			direccionMovimiento = DERECHA;
 			direccionMovimientoAnterior = direccionMovimiento;
 		}
+		
 		if(desplazamientoX<0) {
 			direccionMovimiento = IZQUIERDA;
 			direccionMovimientoAnterior = direccionMovimiento;
 
 		}
+		
 		if(desplazamientoY < 0) {
 			direccionMovimiento = SALTO;
 			direccionMovimientoAnterior = direccionMovimiento;
@@ -341,8 +347,11 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 
 	public void setPuntaje(int puntaje) {
 		this.puntaje = puntaje;
-		if(this.puntaje < 0)
+		
+		if(this.puntaje < 0) {
 			this.puntaje = 0;
+		}
+		
 		juego.actualizarPuntaje();
 	}
 

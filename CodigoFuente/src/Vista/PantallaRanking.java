@@ -1,4 +1,5 @@
 package Vista;
+
 import java.awt.BorderLayout;
 import Logica.*;
 import java.awt.Color;
@@ -6,13 +7,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +17,7 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import javax.swing.Icon;
+
 public class PantallaRanking extends JPanel{
 
 	private static final long serialVersionUID = 1L;
@@ -140,6 +137,7 @@ public class PantallaRanking extends JPanel{
 		labelMejores.setFont(fuente.deriveFont(24f));
 		labelJugadores.setFont(fuente.deriveFont(24f));
 	}
+	
 	public Font cargarFuente() {
 		File fuenteFile = new File("src/Fuente/fuentejuego.ttf");
 		try {

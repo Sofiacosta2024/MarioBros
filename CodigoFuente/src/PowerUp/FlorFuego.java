@@ -1,7 +1,6 @@
 package PowerUp;
 
 import Colisionador.ColisionadorVisitorMario;
-import Fabrica.Sprite;
 import Mario.EstadoFlorFuego;
 import Mario.Mario;
 import Sonido.Sonido;
@@ -23,7 +22,8 @@ public class FlorFuego extends PowerUp {
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		if(esColisionable)
+		if(esColisionable) {
 			visitor.visitarFlorFuego(this);
+		}
 	}
 }

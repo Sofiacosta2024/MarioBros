@@ -1,10 +1,8 @@
 package Enemigo;
 
 import javax.swing.Timer;
-
 import Colisionador.ColisionadorVisitorEnemigo;
 import Colisionador.ColisionadorVisitorMario;
-import Fabrica.Sprite;
 import Mario.Mario;
 
 public class PiranhaPlant extends Enemigo{
@@ -26,18 +24,21 @@ public class PiranhaPlant extends Enemigo{
 	}
 
 	public void atacar(Mario mario) {
-		if(!muerto)
+		if(!muerto) {
 			mario.decrementarVida();
+		}
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		if(!muerto)
+		if(!muerto) {
 			visitor.visitarPiranha(this);
+		}
 	}
 
 	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-		if(!muerto)
+		if(!muerto) {
 			visitor.visitarPiranhaPlant(this);
+		}
 	}
 
 	private void alternarVisibilidad() {
@@ -46,12 +47,12 @@ public class PiranhaPlant extends Enemigo{
 
 	public void mover() {
 		if (visible && posicionY < limiteSuperiorY) {
-			setPosicionY(posicionY + velocidad); // Subir
+			setPosicionY(posicionY + velocidad); 
 			actualizarAreaColision();
 			observador.actualizarPosicionTamano();
 		} else
 			if (!visible && posicionY > posicionInicialY) {
-				setPosicionY((posicionY - 10) - velocidad); // Bajar
+				setPosicionY((posicionY - 10) - velocidad); 
 				actualizarAreaColision();
 				observador.actualizarPosicionTamano();
 		}

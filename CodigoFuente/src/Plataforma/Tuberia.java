@@ -1,9 +1,8 @@
 package Plataforma;
 
 import java.awt.Rectangle;
-
 import Colisionador.ColisionadorVisitorMario;
-import Fabrica.Sprite;
+
 
 public class Tuberia extends Plataforma {
 	

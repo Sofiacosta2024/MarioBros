@@ -1,6 +1,7 @@
 package Mario;
 
 import Fabrica.Sprite;
+
 public class EstadoFlorFuego extends EstadoSuperMario{
 	
 	public EstadoFlorFuego() {

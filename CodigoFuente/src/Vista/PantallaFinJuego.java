@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PantallaFinJuego extends JPanel {
+	
 	private static final long serialVersionUID = 1L;
 	private ControladorDeVistas controladorVistas;
 	private JLabel imagenFondo;

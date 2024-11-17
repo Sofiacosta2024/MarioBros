@@ -31,14 +31,16 @@ public class Vacio extends Plataforma{
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		if(esColisionable)
+		if(esColisionable) {
 			visitor.visitarVacio(this);
+		}
 
 	}
 
 	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-		if(esColisionable)
+		if(esColisionable) {
 			visitor.visitarVacio(this);
+		}
 	}
 
 	public void retirar() {

@@ -14,6 +14,7 @@ public class EstadoCaminando extends EstadoKoopaTroopa{
 		koopaTroopa.setEstado(new EstadoProyectil(koopaTroopa));
 		koopaTroopa.notificarObservador();
 	}
+	
 	public void mover(int velocidad) {
 		if(koopaTroopa.getMovimiento() == koopaTroopa.IZQUIERDA) {
 			koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() - velocidad);
@@ -22,12 +23,6 @@ public class EstadoCaminando extends EstadoKoopaTroopa{
 			if(koopaTroopa.getMovimiento() == koopaTroopa.DERECHA) {
 				koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() + velocidad);
 			}
-		/*if(posicionX <= -65) {
-			retirar();
-		}
-		koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() + velocidad);
-		//koopaTroopa.setPosicionY(koopaTroopa.getPosicionY() + nuevaY);
-		 * */
 	}
 	
 	public void interactuarEnemigos(Enemigo enemigo) {
@@ -38,6 +33,6 @@ public class EstadoCaminando extends EstadoKoopaTroopa{
 		else {
 			   enemigo.setMovimiento(enemigo.IZQUIERDA);
 			   enemigo.mover();
+		     }
 		}
-	}
 }

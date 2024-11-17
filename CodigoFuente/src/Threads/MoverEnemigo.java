@@ -40,6 +40,7 @@ public class MoverEnemigo extends Thread{
 			tiempoActual = System.currentTimeMillis(); 
 			deltat +=  (tiempoActual - ultimaEjecucion)/tiempoEntreFrames;  
 			ultimaEjecucion = tiempoActual;
+			
 			if(deltat >= 1) { 
 				actualizarMovimiento();
 				deltat--;

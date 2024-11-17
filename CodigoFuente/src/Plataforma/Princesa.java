@@ -1,7 +1,6 @@
 package Plataforma;
 
 import Colisionador.ColisionadorVisitorMario;
-import Fabrica.Sprite;
 
 public class Princesa extends Plataforma{
 
@@ -13,6 +12,7 @@ public class Princesa extends Plataforma{
 	}
 
 	public void retirar() {		
+	
 	}
 
 }

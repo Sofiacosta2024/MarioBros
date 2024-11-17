@@ -37,6 +37,7 @@ public class PantallaIngresoNombre extends JPanel {
         agregarCampoNombre();
         agregarBotonEnviar();
     }
+    
     public void agregarLabelIngresoNombre() {
         labelIngresoNombre = new JLabel("Ingrese su nombre para entrar al ranking");
         labelIngresoNombre.setFont(fuente);
@@ -44,6 +45,7 @@ public class PantallaIngresoNombre extends JPanel {
         labelIngresoNombre.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150*2, ConstantesVistas.PANEL_ALTO - 450, 800, 30);
         imagenFondo.add(labelIngresoNombre);
     }
+    
     public void agregarFondo() {
         imagenFondo = new JLabel();
         ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource("/Imagenes/Fondos/inicio.jpg")); 
@@ -89,6 +91,7 @@ public class PantallaIngresoNombre extends JPanel {
             }
         });
     }
+    
     private void mostrarMensaje(String mensaje) {
         JPanel panel = new JPanel();
         JLabel label = new JLabel(mensaje);
@@ -98,6 +101,7 @@ public class PantallaIngresoNombre extends JPanel {
         panel.setBackground(Color.BLACK);
         JOptionPane.showMessageDialog(null, panel);
     }
+    
 	private Font cargarFuente() {
 		File fuenteFile = new File("src/Fuente/fuentejuego.ttf");
 		try {

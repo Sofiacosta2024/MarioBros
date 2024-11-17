@@ -11,7 +11,6 @@ public class EstadoProyectil extends EstadoKoopaTroopa{
 	public void mover(int velocidad) {
 		koopaTroopa.movilidad();
 		koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() + velocidad*3);
-		//koopaTroopa.setPosicionY(koopaTroopa.getPosicionY());
 		koopaTroopa.actualizarAreaColision();
         koopaTroopa.getObserver().actualizarPosicionTamano();
 	    }
@@ -34,8 +33,7 @@ public class EstadoProyectil extends EstadoKoopaTroopa{
 			else {
 				  enemigo.setMovimiento(enemigo.IZQUIERDA);
 				  enemigo.mover();
-			}
-		}
-	}
-
+				  }
+		    }
+	 }
 }

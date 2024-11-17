@@ -2,7 +2,6 @@ package Logica;
 
 import Sonido.*;
 import java.awt.Rectangle;
-
 import Colisionador.ColisionadorVisitorMario;
 import Fabrica.*;
 import Vista.*;

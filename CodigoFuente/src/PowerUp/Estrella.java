@@ -1,7 +1,6 @@
 package PowerUp;
 
 import Colisionador.ColisionadorVisitorMario;
-import Fabrica.Sprite;
 import Mario.EstadoInvencible;
 import Mario.Mario;
 import Sonido.Sonido;

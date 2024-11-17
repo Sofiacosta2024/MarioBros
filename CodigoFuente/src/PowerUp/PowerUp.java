@@ -19,8 +19,9 @@ public abstract class PowerUp extends Entidad {
     }
 	
 	public void notificarObservador() {
-		if(esColisionable)
+		if(esColisionable) {
 			observador.actualizar();
+		}
 	}
 	
 	public void setEstadoInicial() {

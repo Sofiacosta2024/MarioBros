@@ -1,4 +1,5 @@
 package Enemigo;
+
 import java.util.ArrayList;
 import Colisionador.ColisionadorVisitorEnemigo;
 import Colisionador.ColisionadorVisitorMario;
@@ -6,8 +7,8 @@ import Fabrica.Sprite;
 import Logica.*;
 import Mario.Mario;
 import Vista.Observer;
-import Vista.ObserverGrafica;
 import Sonido.*;
+
 public class Lakitu extends Enemigo {
 
 	protected Juego juego;
@@ -61,13 +62,15 @@ public class Lakitu extends Enemigo {
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		if(!muerto)
+		if(!muerto) {
 			visitor.visitarLakitu(this);
+		}
 	}
 
 	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-		if(!muerto)
+		if(!muerto) {
 			visitor.visitarLakitu(this);
+		}
 	}
 
 	public ArrayList<Spiny> getSpinyssLanzados() {
