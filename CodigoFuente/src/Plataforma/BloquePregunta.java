@@ -44,7 +44,9 @@ public class BloquePregunta extends BloqueSolido {
 
 	public void setEstadoInicial() {
 		super.setEstadoInicial();
+		hayPowerUp = true;
 		setSprite(bloqueConPowerUp);
+		notificarObservador();
 	}
 
 	public void setColisionable(boolean colisionable) {

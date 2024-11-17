@@ -31,6 +31,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 		anterior = estado;
 		vidas = 3;
 		enSuelo = true;
+		esColisionable = true;
 		velocidadSalto = 30; 
 		this.velocidad = velocidad;
 		puedeDerecha = true;
@@ -241,6 +242,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 		if(esColisionable) {
 			Sonido.obtenerInstancia().reproducirSonidoMorir();
 			vidas--;
+			juego.actualizarVidas();
 			if(vidas==0) {
 				juego.finalizarPartida();
 			}
