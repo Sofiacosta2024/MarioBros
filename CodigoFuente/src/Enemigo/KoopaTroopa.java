@@ -22,10 +22,11 @@ public class KoopaTroopa extends Enemigo{
 		detener = false;
 		contadorColisiones = 0;
 		spritesKoopa = sprites;
+		enEnfriamiento = false;
 	}
 
 	public void morir(Mario mario) {
-		if(!muerto && !enEnfriamiento) {
+		if(!muerto) {
 			atacado();
 			mario.setPuntaje(mario.getPuntaje() + this.getPuntaje());
 		}
@@ -54,7 +55,7 @@ public class KoopaTroopa extends Enemigo{
 	}
 
 	public void movilidad() {
-		if(!muerto && !enEnfriamiento) {
+		if(!muerto && ! estaEnEnfriamiento()) {
 			if(contadorColisiones <= 1) {
 				detener = !detener;
 				activarEnfriamiento();
@@ -64,19 +65,19 @@ public class KoopaTroopa extends Enemigo{
 	}
 
 	public void aceptarVisita(ColisionadorVisitorMario visitor) {
-		if(!muerto && !enEnfriamiento) {
+		if(!muerto && !estaEnEnfriamiento()) {
 			visitor.visitarKoopa(this);
 		}
 	}
 
 	public void aceptarVisita(ColisionadorVisitorEnemigo visitor) {
-		if(!muerto && !enEnfriamiento) {
+		if(!muerto && !estaEnEnfriamiento()) {
 			visitor.visitarKoopaTroopa(this);
 		}
 	}
 
 	public void atacado() {
-		if(!muerto && !enEnfriamiento) {
+		if(!muerto && !estaEnEnfriamiento()) {
 			Sonido.obtenerInstancia().reproducirSonidoMuereKoopa();
 			estado.afectado(this, spritesKoopa);
 		}

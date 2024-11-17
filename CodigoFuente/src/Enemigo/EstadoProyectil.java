@@ -10,10 +10,17 @@ public class EstadoProyectil extends EstadoKoopaTroopa{
 	
 	public void mover(int velocidad) {
 		koopaTroopa.movilidad();
-		koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() + velocidad*3);
+		if(koopaTroopa.getMovimiento() == koopaTroopa.DERECHA) {
+			koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() + velocidad*3);
+		}
+		else
+			if(koopaTroopa.getMovimiento() == koopaTroopa.IZQUIERDA) {
+				koopaTroopa.setPosicionX(koopaTroopa.getPosicionX() - velocidad*3);
+			}
+		
 		koopaTroopa.actualizarAreaColision();
         koopaTroopa.getObserver().actualizarPosicionTamano();
-	    }
+    }
 
 	public void afectado(KoopaTroopa koopaTroopa, Sprite[] spritesKoopa) {
 		koopaTroopa.retirar();

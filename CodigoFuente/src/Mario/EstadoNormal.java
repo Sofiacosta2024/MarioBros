@@ -17,7 +17,7 @@ public class EstadoNormal extends EstadoMario {
 		if(mario.colisionable()) {
 			enemigo.atacar(mario);
 			mario.setColisionable(false);
-			mario.setPuntaje(mario.getPuntaje() - enemigo.puntajeMatarAMario());
+			mario.setPuntaje(mario.getPuntaje() + enemigo.puntajeMatarAMario());
 			new Thread(() -> {
 				try {
 					Thread.sleep(550); 

@@ -71,6 +71,8 @@ public class ColisionadorVisitorEnemigo {
 
 	public void visitarTuberiaPiranha(TuberiaConPiranha  tuberiaConPiranha) {
 		if(entidadColisionable!= tuberiaConPiranha.getPiranha()) {
+			System.out.println("Visitar tubería piranha");
+			System.out.println(entidadColisionable.getMovimiento());
 				if(entidadColisionable.getMovimiento() == entidadColisionable.IZQUIERDA) {
 					entidadColisionable.setMovimiento(entidadColisionable.DERECHA);
 					entidadColisionable.mover();

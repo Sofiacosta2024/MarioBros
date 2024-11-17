@@ -33,7 +33,7 @@ public class ColisionadorVisitorMario{
 	public void visitarKoopa(KoopaTroopa koopa) {
 		direccionColision = detectarDireccion(koopa);
 		if(direccionColision.equals("ARRIBA")) {
-			koopa.atacado();
+			koopa.morir(entidadColisionable);
 		}
 		else 
 			if(direccionColision.equals("IZQUIERDA") || direccionColision.equals("DERECHA")){

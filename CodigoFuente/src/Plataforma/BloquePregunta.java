@@ -16,6 +16,7 @@ public class BloquePregunta extends BloqueSolido {
 	public BloquePregunta(int x, int y, PowerUp powerUp, int velocidad, Sprite[] spritesBloquePregunta, Sprite[] spritesBloqueSolido) {
 		super(x,y, velocidad);
 		this.powerUp = powerUp;
+		powerUp.setColisionable(false);
 		hayPowerUp = true;
 		mostrarPowerUp = -1;
 		bloqueConPowerUp = spritesBloquePregunta[0];
@@ -27,6 +28,7 @@ public class BloquePregunta extends BloqueSolido {
 			super.interactuar(mario, direccionColision);
 			if(direccionColision.equals("ABAJO") && hayPowerUp) {
 				if(System.currentTimeMillis() - mostrarPowerUp >= 10000) {
+					powerUp.setColisionable(true);
 					powerUp.setPosicionY(posicionY + 40);
 					powerUp.actualizarAreaColision();
 					powerUp.notificarObservador();
