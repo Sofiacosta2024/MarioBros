@@ -21,6 +21,7 @@ public class Estrella extends PowerUp {
 			mario.setAlto(32);
 			mario.setAncho(24);
 			mario.actualizarAreaColision();
+			retirar();
 			mario.setPuntaje(mario.getPuntaje() + mario.getEstadoMario().puntajeEstrella());
 			mario.iniciarRegresionEstadoEstrella();
 		}

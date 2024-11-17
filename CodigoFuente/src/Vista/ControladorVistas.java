@@ -53,6 +53,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	public Observer registrarEntidadLogica(EntidadLogica entidadLogica) {
 		Observer observerEntidad = panelPartida.incorporarEntidad(entidadLogica);
 		listaObservers.add(observerEntidad);
+		observerEntidad.actualizar();
 		refrescar();
 		return observerEntidad;
 	}
@@ -60,6 +61,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	public Observer registrarEntidadLogicaSpinyLanzado(Spiny spiny) {
 		Observer observerEntidad = panelPartida.incorporarEntidad(spiny);
 		listaObservers.add(observerEntidad);
+		observerEntidad.actualizar();
 		refrescar();
 		return observerEntidad;
 	}
@@ -67,6 +69,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	public Observer registrarEntidadMario(EntidadMario entidadMario) {
 		Observer observerEntidad = panelPartida.incorporarEntidadMario(entidadMario);
 		listaObservers.add(observerEntidad);
+		observerEntidad.actualizar();
 		refrescar();
 		return observerEntidad;
 	}
@@ -234,9 +237,6 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 	
 	protected void refrescar() {	
-		for(Observer observers : new ArrayList<>(listaObservers)) {
-	        observers.actualizar();
-	    }
 		ventana.revalidate();
 		ventana.repaint();
 	}
