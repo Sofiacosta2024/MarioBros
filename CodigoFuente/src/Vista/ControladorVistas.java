@@ -165,7 +165,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void accionarPantallaVictoria() {
-		mostrarPantallaModoJuego();
+		mostrarPantallaIngresoNombre();
 	}
 	
 	public void iniciarTemporizadorPantallaPartida() {
@@ -223,11 +223,6 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	public void setPuntajeLabel(int puntaje) {
 		panelVictoria.setPuntajeLabel(puntaje);
 	}
-	
-	public void setNombreJugadorGanador(String nombre) {
-		panelVictoria.setNombreGanador(nombre);
-	}
-	
 	public void detenerActualizacionPantallaPartida() {
 		panelPartida.detenerActualizacion();
 	}

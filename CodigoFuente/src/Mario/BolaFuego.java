@@ -23,7 +23,8 @@ public class BolaFuego extends Entidad {
 	}
 	
 	public void notificarObservador() {
-		observador.actualizar();
+		if(esColisionable)
+			observador.actualizar();
 	}
 	
 	public void retirar() {

@@ -131,7 +131,6 @@ public class Juego implements VistaDeJuego {
 		else {
 			player.reproducirSonidoGanar();
 			controladorVistas.setPuntajeLabel(nivelActual.getMario().getPuntaje());
-			controladorVistas.setNombreJugadorGanador(nivelActual.getMario().getNombre());
 			controladorVistas.mostrarPantallaVictoria();
 			juegoTerminado = true;
 		}

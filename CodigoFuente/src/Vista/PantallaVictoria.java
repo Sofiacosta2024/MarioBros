@@ -83,12 +83,7 @@ public class PantallaVictoria extends JPanel {
         etiquetaFelicidades.setBounds(300, 50, 500, 100); 
         etiquetaFelicidades.setHorizontalAlignment(JLabel.CENTER);
         imagenFondo.add(etiquetaFelicidades); 
-    }
-    
-    public void setNombreGanador(String nombre) {
-    	etiquetaFelicidades.setText("¡Felicidades "+nombre+"!");
-    }
-    
+    }    
     public void agregarEtiquetaGanar() {
         Font fuente = cargarFuente();
         etiquetaGanar = new JLabel("Has ganado");
