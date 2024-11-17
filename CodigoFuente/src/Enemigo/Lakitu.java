@@ -52,12 +52,11 @@ public class Lakitu extends Enemigo {
 		Spiny spiny = new Spiny(this.getPosicionX(), this.getPosicionY(), velocidad);
 		spiny.setSprite(spinySprite);
 		spiny.setLakituLanzador(this);
+		juego.getNivelActual().agregarSpinyLanzado(spiny);
 		Observer observadorEntidad = juego.getControladorVista().registrarEntidadLogicaSpinyLanzado(spiny);
 		spiny.setObserver(observadorEntidad);
-		juego.getNivelActual().agregarSpinyLanzado(spiny);
 		spinyssLanzados.add(spiny); 
 		spiny.notificarObservador();
-
 		Sonido.obtenerInstancia().reproducirSonidoLakituLanzaSpinyss();
 	}
 

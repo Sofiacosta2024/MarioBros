@@ -14,7 +14,7 @@ public class Spiny extends Enemigo{
 	}
 
 	public void mover() {
-		if(!muerto && !enEnfriamiento) {
+		if(!muerto) {
 			if(!sobreSuelo && !sobrePlataforma) {
 				caer();
 			}
