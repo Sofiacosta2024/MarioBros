@@ -14,6 +14,7 @@ public class Vacio extends Plataforma{
 	public void interactuar(Mario mario, Juego juego) {
 		if(esColisionable) {
 			mario.decrementarVida();
+			mario.setColisionable(false);
 			juego.getNivelActual().getMario().setPuntaje(juego.getNivelActual().getMario().getPuntaje() + puntajeMarioVacio());
 			juego.actualizarPuntaje();
 			juego.actualizarVidas();

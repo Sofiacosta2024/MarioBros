@@ -101,6 +101,7 @@ public class Juego implements VistaDeJuego {
 		}
 		for(Spiny spiny: nivelActual.getSpinyssLanzados()) {
 			spiny.setEstadoInicial();
+			spiny.retirar();
 		}
 		for(BolaFuego bola: nivelActual.getProyectiles()) {
 			bola.retirar();

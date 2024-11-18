@@ -17,12 +17,12 @@ public class EstadoSuperMario extends EstadoMario {
 	public void recibirDaño(Mario mario, Enemigo enemigo) {
 		mario.setEstadoMario(new EstadoNormal());
 		mario.setCambioEstado(true);
-		actualizarSpriteMario(mario);
+		mario.actualizarSprite(mario.getDireccionMovimiento());
 		mario.getObserver().actualizarPosicionTamano();
 		mario.setColisionable(false);
 		new Thread(() -> {
 	        try {
-	            Thread.sleep(4000); 
+	            Thread.sleep(3000); 
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
 	        }

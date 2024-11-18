@@ -28,8 +28,8 @@ public class BloquePregunta extends BloqueSolido {
 			super.interactuar(mario, direccionColision);
 			if(direccionColision.equals("ABAJO") && hayPowerUp) {
 				if(System.currentTimeMillis() - mostrarPowerUp >= 10000) {
-					powerUp.setColisionable(true);
 					powerUp.setPosicionY(posicionY + 40);
+					powerUp.setColisionable(true);
 					powerUp.actualizarAreaColision();
 					powerUp.notificarObservador();
 					setSprite(bloqueVacio);

@@ -39,15 +39,6 @@ public abstract class EstadoMario {
 		mario.setCambioEstado(true);
 	}
 	
-	public void actualizarSpriteMario(Mario mario) {
-		if(mario.getDireccionMovimiento() == mario.DERECHA) {
-			mario.setSprite(mario.getEstadoMario().getSpriteDetenidoDerecha(mario.getSpritesMario()));
-		}
-		if(mario.getDireccionMovimiento() == mario.IZQUIERDA) {
-			mario.setSprite(mario.getEstadoMario().getSpriteDetenidoIzquierda(mario.getSpritesMario()));
-		}
-	}
-	
 	public void interactuarConLadrillo(Mario mario, LadrilloSolido ladrilloSolido, String direccionColision) {
 
 	}

@@ -109,8 +109,8 @@ public class ColisionadorVisitorMario{
 	}
 
 	public void visitarVacio(Vacio vacio) {
-		entidadColisionable.morirPorVacio();
-		vacio.interactuar(entidadColisionable, juego);
+		entidadColisionable.morirPorVacio(vacio);
+		//vacio.interactuar(entidadColisionable, juego);
 	}
 
 	public void visitarChampinonVerde(ChampinonVerde champinon) {

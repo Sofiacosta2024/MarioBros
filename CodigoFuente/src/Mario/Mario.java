@@ -3,6 +3,7 @@ package Mario;
 import Sonido.*;
 import Fabrica.Sprite;
 import Logica.*;
+import Plataforma.Vacio;
 import Vista.*;
 import Colisionador.ColisionadorVisitorMario;
 import Threads.TemporizadorEstadoEstrella;
@@ -162,13 +163,6 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 		puedeDerecha=true;
 	}
 
-	public void morirPorVacio() {
-		Sonido.obtenerInstancia().reproducirSonidoCaeAlVacio();
-		enSuelo=false;
-		cayendoVacio=true;
-		setCambioEstado(true);
-	}
-
 	public void direccionMario(int desplazamientoX, int desplazamientoY) {
 		if(desplazamientoX > 0) {
 			direccionMovimiento = DERECHA;
@@ -227,6 +221,16 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 		}
 		return sprite;
 	}
+	
+	public void morirPorVacio(Vacio vacio) {
+		if(esColisionable) {
+		Sonido.obtenerInstancia().reproducirSonidoCaeAlVacio();
+		enSuelo=false;
+		cayendoVacio=true;
+		setCambioEstado(true);
+		vacio.interactuar(this, juego);
+		}
+	}
 
 	public void lanzarBolaFuego() {
 		if(estado.lanzarBolaFuego()) {
@@ -251,6 +255,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 	public void setEstadoInicial() {
 		super.setEstadoInicial();
 		estado = new EstadoNormal();
+		actualizarSprite(direccionMovimiento);
 		puedeDerecha=true;
 		puedeIzquierda=true;
 		cayendoVacio=false;
