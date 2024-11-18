@@ -236,8 +236,8 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 		if(estado.lanzarBolaFuego()) {
 			Sprite spriteBola = spritesBolaFuego[0];
 			BolaFuego bolaFuego = new BolaFuego(posicionX + 45, posicionY + 15,5,spriteBola,sentidoMovimientoMario,direccionMovimientoAnterior);
-			juego.getNivelActual().agregarProyectil(bolaFuego);
 			juego.registrarObserverProyectiles(bolaFuego);
+			juego.getNivelActual().agregarProyectil(bolaFuego);
 			bolaFuego.setEnMovimiento(true);
 		}
 	}
@@ -252,6 +252,7 @@ public class Mario extends Entidad implements EntidadMario,EntidadMovimientoMari
 			}
 		}
 	}
+	
 	public void setEstadoInicial() {
 		super.setEstadoInicial();
 		estado = new EstadoNormal();

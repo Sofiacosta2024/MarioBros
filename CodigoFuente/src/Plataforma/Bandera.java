@@ -17,8 +17,6 @@ public class Bandera extends Plataforma{
 	public void interactuar(Juego juego, Mario mario) {
 		if(esColisionable) {
 			mario.detenerMario();
-			mario.setPuedeMoverseALaDerecha(false);
-			mario.setPuedeMoverseALaIzquierda(false);
 			juego.jugadorPasaDeNivel();
 			esColisionable = false;
 		}
