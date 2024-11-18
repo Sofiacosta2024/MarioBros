@@ -21,13 +21,4 @@ public class BuzzyBeetle extends Enemigo{
 			visitor.visitarBuzzy(this);
 		}
 	}
-	
-	public int getPosicionX() {
-		return posicionX;
-	}
-	
-	public int getPosicionY() {
-		return posicionY;
-	}
-
 }
