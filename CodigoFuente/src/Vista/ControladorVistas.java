@@ -143,6 +143,7 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void accionarPantallaAlIngresarNombre() {
+		guardarRanking();
 		reiniciarPantallas();
 		juego.salirDelJuego();
 		reiniciarListaDeObservers();
@@ -150,7 +151,6 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void accionarPantallaFinDeJuegoSalir() {
-		guardarRanking();
 		mostrarPantallaIngresoNombre();
 	}
 
@@ -165,7 +165,6 @@ public class ControladorVistas implements ControladorDeVistas,ControladorEntreJu
 	}
 
 	public void accionarPantallaVictoria() {
-		guardarRanking();
 		mostrarPantallaIngresoNombre();
 	}
 	
